@@ -1,15 +1,14 @@
 import React, { ChangeEvent, useState, useCallback } from 'react';
-import { TextField, Button } from '@material-ui/core';
+import { Typography, TextField, Button } from '@material-ui/core';
 import { useAsync } from 'react-async';
-
-import { Job } from '../../domain';
 
 import { useJobEditorFormStyles } from './job-editor-form.styles';
 
 export interface JobEditorFormProps {
-  values?: Job;
+  organizationName: string;
+  values?: JobEditorFormValues;
   messages: JobEditorFormMessages;
-  submit: (values: Job) => Promise<unknown>;
+  submit: (values: JobEditorFormValues) => Promise<unknown>;
   onSuccess: (result: unknown) => void;
   onFailure?: (error: Error) => void;
 }
@@ -21,18 +20,22 @@ export interface JobEditorFormMessages {
   submit: string;
 }
 
-const defaultValues = {
-  id: '',
-  organizationId: '',
+export interface JobEditorFormValues {
+  title: string;
+  shortDescription: string;
+  longDescription: string;
+}
+
+const defaultValues: JobEditorFormValues = {
   title: '',
   shortDescription: '',
   longDescription: '',
 };
 
 export function JobEditorForm(props: JobEditorFormProps) {
-  const [values, setValues] = useState<Job>(props.values || defaultValues);
+  const [values, setValues] = useState<JobEditorFormValues>(props.values || defaultValues);
 
-  const changeHandler = (field: keyof Job) => {
+  const changeHandler = (field: keyof JobEditorFormValues) => {
     return (e: ChangeEvent<HTMLInputElement>) => {
       setValues(prev => ({ ...prev, [field]: e.target.value }));
     }
@@ -55,12 +58,16 @@ export function JobEditorForm(props: JobEditorFormProps) {
 
   return (
     <div className={classes.root}>
+      <Typography>
+        {props.organizationName}
+      </Typography>
+
       <TextField
         label={props.messages.title}
         value={values.title}
         onChange={changeHandler('title')}
       />
-  
+
       <TextField
         label={props.messages.shortDescription}
         value={values.shortDescription}

@@ -6,12 +6,10 @@ import { Organization as BaseOrganization } from '../../domain';
 
 import { useOrganizationEditorFormStyles } from './organization-editor-form.styles';
 
-export type Organization = Omit<BaseOrganization, 'id'>;
-
 export interface OrganizationEditorFormProps {
-  values?: Organization;
+  values?: OrganizationEditorFormValues;
   messages: OrganizationEditorFormMessages;
-  submit: (values: Organization) => Promise<unknown>;
+  submit: (values: OrganizationEditorFormValues) => Promise<unknown>;
   onSuccess: (result: unknown) => void;
   onFailure?: (error: Error) => void;
 }
@@ -24,7 +22,14 @@ export interface OrganizationEditorFormMessages {
   submit: string;
 }
 
-const defaultValues = {
+export interface OrganizationEditorFormValues {
+  name: string;
+  shortDescription: string;
+  longDescription: string;
+  website: string;
+}
+
+const defaultValues: OrganizationEditorFormValues = {
   name: '',
   shortDescription: '',
   longDescription: '',
@@ -32,9 +37,9 @@ const defaultValues = {
 };
 
 export function OrganizationEditorForm(props: OrganizationEditorFormProps) {
-  const [values, setValues] = useState<Organization>(props.values || defaultValues);
+  const [values, setValues] = useState<OrganizationEditorFormValues>(props.values || defaultValues);
 
-  const changeHandler = (field: keyof Organization) => {
+  const changeHandler = (field: keyof OrganizationEditorFormValues) => {
     return (e: ChangeEvent<HTMLInputElement>) => {
       setValues(prev => ({ ...prev, [field]: e.target.value }));
     }

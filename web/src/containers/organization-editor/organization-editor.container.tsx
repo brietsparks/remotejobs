@@ -1,13 +1,13 @@
-import { OrganizationEditorForm, OrganizationEditorFormMessages } from '../../components';
-
-import { Organization } from '../../domain';
+import { OrganizationEditorForm, OrganizationEditorFormValues, OrganizationEditorFormMessages } from '../../components';
 
 export interface OrganizationEditorContainerProps {
-  values?: Organization;
+  values?: OrganizationEditorFormValues;
   onSuccess: () => void;
-  submit: () => Promise<unknown>;
+  submit: (values: OrganizationEditorContainerValues) => Promise<unknown>;
   messages: Partial<OrganizationEditorFormMessages>;
 }
+
+export type OrganizationEditorContainerValues = OrganizationEditorFormValues;
 
 export function OrganizationEditorContainer(props: OrganizationEditorContainerProps) {
   return (

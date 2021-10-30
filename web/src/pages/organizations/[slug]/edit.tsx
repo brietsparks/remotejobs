@@ -13,8 +13,8 @@ export default function EditOrganizationPage(props: EditOrganizationPageProps) {
 
   return (
     <EditOrganizationPageContainer
+      id="id"
       values={{
-        id: 'id',
         name: 'name',
         shortDescription: 'shortDescription',
         longDescription: 'longDescription',
@@ -22,7 +22,7 @@ export default function EditOrganizationPage(props: EditOrganizationPageProps) {
       }}
       onSuccess={handleSuccess}
     />
-  )
+  );
 }
 
 export const getServerSideProps: GetServerSideProps<EditOrganizationPageProps> = async () => {

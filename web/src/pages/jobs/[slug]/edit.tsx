@@ -13,9 +13,9 @@ export default function EditJobPage(props: EditJobPageProps) {
 
   return (
     <EditJobPageContainer
+      id="id"
+      organizationName="Organization Name"
       values={{
-        id: 'id',
-        organizationId: 'organizationId',
         title: 'title',
         shortDescription: 'shortDescription',
         longDescription: 'longDescription',

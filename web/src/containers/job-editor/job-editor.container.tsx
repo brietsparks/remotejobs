@@ -1,17 +1,19 @@
-import { JobEditorForm, JobEditorFormMessages } from '../../components';
+import { JobEditorForm, JobEditorFormMessages, JobEditorFormValues } from '../../components';
 
-import { Job } from '../../domain';
+export type JobEditorContainerValues = JobEditorFormValues;
 
 export interface JobEditorContainerProps {
-  values?: Job;
+  organizationName: string;
+  values?: JobEditorContainerValues;
+  submit: (values: JobEditorContainerValues) => Promise<unknown>;
   onSuccess: () => void;
-  submit: () => Promise<unknown>;
   messages: Partial<JobEditorFormMessages>;
 }
 
 export function JobEditorContainer(props: JobEditorContainerProps) {
   return (
     <JobEditorForm
+      organizationName={props.organizationName}
       values={props.values}
       onSuccess={props.onSuccess}
       submit={props.submit}
@@ -23,5 +25,5 @@ export function JobEditorContainer(props: JobEditorContainerProps) {
         ...props.messages
       }}
     />
-  )
+  );
 }

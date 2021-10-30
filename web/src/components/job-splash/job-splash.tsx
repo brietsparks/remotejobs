@@ -6,7 +6,11 @@ import { Job } from '../../domain';
 import { useJobSplashStyles } from './job-splash.styles';
 
 export interface JobSplashProps {
-  job: Job;
+  data: JobSplashData;
+}
+
+export type JobSplashData = Job & {
+  organizationName: string;
 }
 
 export function JobSplash(props: JobSplashProps) {
@@ -15,15 +19,19 @@ export function JobSplash(props: JobSplashProps) {
   return (
     <div className={classes.root}>
       <Typography>
-        {props.job.title}
+        {props.data.title}
       </Typography>
 
       <Typography>
-        {props.job.shortDescription}
+        {props.data.organizationName}
       </Typography>
 
       <Typography>
-        {props.job.longDescription}
+        {props.data.shortDescription}
+      </Typography>
+
+      <Typography>
+        {props.data.longDescription}
       </Typography>
     </div>
   )

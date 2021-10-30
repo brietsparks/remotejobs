@@ -8,7 +8,7 @@ export interface JobPageProps {
 export default function JobPage(props: JobPageProps) {
   return (
     <JobPageContainer
-      values={{
+      data={{
         id: 'id',
         title: 'title',
         organizationId: 'organizationId',

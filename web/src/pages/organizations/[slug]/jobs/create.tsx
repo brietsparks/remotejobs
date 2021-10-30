@@ -13,6 +13,8 @@ export default function CreateJobPage(props: CreateJobPageProps) {
 
   return (
     <CreateJobPageContainer
+      organizationId="organizationId"
+      organizationName="organizationName"
       onSuccess={handleSuccess}
     />
   )
