@@ -14,6 +14,7 @@ export default function JobPage(props: JobPageProps) {
         organizationId: 'organizationId',
         shortDescription: 'shortDescription',
         longDescription: 'longDescription',
+        organizationName: 'organizationName'
       }}
     />
   )

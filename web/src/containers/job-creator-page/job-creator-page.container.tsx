@@ -1,12 +1,12 @@
 import { JobEditorContainer, JobEditorContainerValues } from '../job-editor';
 
-export interface CreateJobPageProps {
+export interface JobCreatorPageProps {
   organizationId: string;
   organizationName: string;
   onSuccess: () => void;
 }
 
-export function CreateJobPageContainer(props: CreateJobPageProps) {
+export function JobCreatorPageContainer(props: JobCreatorPageProps) {
   const submit = async (values: JobEditorContainerValues) => {
     console.log({
       organizationId: props.organizationId,

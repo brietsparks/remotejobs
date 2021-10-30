@@ -1,10 +1,10 @@
 import { OrganizationEditorContainer, OrganizationEditorContainerValues } from '../organization-editor';
 
-export interface CreateOrganizationPageProps {
+export interface OrganizationCreatorPageProps {
   onSuccess: () => void;
 }
 
-export function CreateOrganizationPageContainer(props: CreateOrganizationPageProps) {
+export function OrganizationCreatorPageContainer(props: OrganizationCreatorPageProps) {
   const submit = async (values: OrganizationEditorContainerValues) => {
     console.log({ values });
   }

@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 
-import { EditJobPageContainer } from '../../../containers';
+import { JobEditorPageContainer } from '../../../containers';
 
 export interface EditJobPageProps {
 }
@@ -12,7 +12,7 @@ export default function EditJobPage(props: EditJobPageProps) {
   const handleSuccess = () => router.push('/home');
 
   return (
-    <EditJobPageContainer
+    <JobEditorPageContainer
       id="id"
       organizationName="Organization Name"
       values={{

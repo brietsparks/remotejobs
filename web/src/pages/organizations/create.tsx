@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 
-import { CreateOrganizationPageContainer } from '../../containers';
+import { OrganizationCreatorPageContainer } from '../../containers';
 
 export interface CreateOrganizationPageProps {
 }
@@ -12,7 +12,7 @@ export default function CreateOrganizationPage(props: CreateOrganizationPageProp
   const handleSuccess = () => router.push('/home');
 
   return (
-    <CreateOrganizationPageContainer
+    <OrganizationCreatorPageContainer
       onSuccess={handleSuccess}
     />
   )

@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 
-import { EditOrganizationPageContainer } from '../../../containers';
+import { OrganizationEditorPageContainer } from '../../../containers';
 
 export interface EditOrganizationPageProps {
 }
@@ -12,7 +12,7 @@ export default function EditOrganizationPage(props: EditOrganizationPageProps) {
   const handleSuccess = () => router.push('/home');
 
   return (
-    <EditOrganizationPageContainer
+    <OrganizationEditorPageContainer
       id="id"
       values={{
         name: 'name',

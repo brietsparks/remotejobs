@@ -1,12 +1,12 @@
 import { OrganizationEditorContainer, OrganizationEditorContainerValues } from '../organization-editor';
 
-export interface EditOrganizationPageProps {
+export interface OrganizationEditorPageProps {
   id: string;
   values: OrganizationEditorContainerValues;
   onSuccess: () => void;
 }
 
-export function EditOrganizationPageContainer(props: EditOrganizationPageProps) {
+export function OrganizationEditorPageContainer(props: OrganizationEditorPageProps) {
   const submit = async (values: OrganizationEditorContainerValues) => {
     console.log({
       id: props.id,

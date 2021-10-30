@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 
-import { CreateJobPageContainer } from '../../../../containers';
+import { JobCreatorPageContainer } from '../../../../containers';
 
 export interface CreateJobPageProps {
 }
@@ -12,7 +12,7 @@ export default function CreateJobPage(props: CreateJobPageProps) {
   const handleSuccess = () => router.push('/home');
 
   return (
-    <CreateJobPageContainer
+    <JobCreatorPageContainer
       organizationId="organizationId"
       organizationName="organizationName"
       onSuccess={handleSuccess}
