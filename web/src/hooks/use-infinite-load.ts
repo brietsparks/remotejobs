@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react';
 import { useAsync } from 'react-async';
 
-export interface InfiniteLoadProps<T> {
-  initialItems?: T[];
+import { CursorPaginationResult } from '../util';
+
+export type InfiniteLoadProps<T> =
+  Partial<CursorPaginationResult<T>> & {
   getItems: (cursor: string) => Promise<InfiniteLoadResult<T>>;
-  initialCursor?: string;
-  hasMore?: boolean;
 }
 
 export interface InfiniteLoadResult<T> {
@@ -15,8 +15,8 @@ export interface InfiniteLoadResult<T> {
 }
 
 export function useInfiniteLoad<T>({ getItems, ...props }: InfiniteLoadProps<T>) {
-  const [items, setItems] = useState<T[]>(props.initialItems || []);
-  const [cursor, setCursor] = useState<string|undefined>(props.initialCursor);
+  const [items, setItems] = useState<T[]>(props.items || []);
+  const [cursor, setCursor] = useState<string|undefined>(props.cursor);
   const [hasMore, setHasMore] = useState<boolean>(props.hasMore !== false);
 
   const handleResolve = useCallback((data: InfiniteLoadResult<T>) => {

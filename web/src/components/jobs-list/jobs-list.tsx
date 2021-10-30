@@ -31,8 +31,8 @@ export interface JobsListPaths {
 
 export function JobsList(props: JobsListProps) {
   const { items: jobs, isPending, hasMore, loadMore } = useInfiniteLoad<JobListItem>({
-    initialItems: props.jobs,
-    initialCursor: props.cursor,
+    items: props.jobs,
+    cursor: props.cursor,
     getItems: props.getJobs
   });
 

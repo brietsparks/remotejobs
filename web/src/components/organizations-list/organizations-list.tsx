@@ -9,12 +9,13 @@ import { OrganizationPreview, OrganizationPreviewData, OrganizationPreviewMessag
 import { useOrganizationsListStyles } from './organizations-list.styles';
 
 export interface OrganizationsListProps {
-  organizations?: OrganizationListItem[];
-  cursor?: string;
+  data?: OrganizationsListData;
   getOrganizations: (cursor: string) => Promise<CursorPaginationResult<OrganizationListItem>>;
   messages: OrganizationsListMessages;
   paths: OrganizationsListPaths
 }
+
+export type OrganizationsListData = Partial<CursorPaginationResult<OrganizationListItem>>;
 
 export type OrganizationListItem = OrganizationPreviewData & {
   id: string;
@@ -29,8 +30,7 @@ export interface OrganizationsListPaths {
 
 export function OrganizationsList(props: OrganizationsListProps) {
   const { items: organizations, isPending, hasMore, loadMore } = useInfiniteLoad<OrganizationListItem>({
-    initialItems: props.organizations,
-    initialCursor: props.cursor,
+    ...props.data,
     getItems: props.getOrganizations
   });
 

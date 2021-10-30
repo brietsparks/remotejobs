@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next';
 
-import { OrganizationsPageContainer } from '../../containers';
+import { OrganizationsPageContainer, mockData } from '../../containers';
 
 export interface OrganizationsPageProps {
 
@@ -12,7 +12,17 @@ export default function OrganizationsPage(props: OrganizationsPageProps) {
   };
 
   return (
-    <OrganizationsPageContainer paths={paths} />
+    <OrganizationsPageContainer
+      data={{
+        items: [
+          mockData(), mockData(), mockData(), mockData(),
+          mockData(), mockData(), mockData(), mockData()
+        ],
+        hasMore: true,
+        cursor: ''
+      }}
+      paths={paths}
+    />
   )
 }
 
