@@ -29,7 +29,6 @@ export function useInfiniteLoad<T>({ getItems, ...props }: InfiniteLoadProps<T>)
   const { data: lastBatch, isPending, run } = useAsync({ deferFn: getItems, onResolve: handleResolve, });
 
   const loadMore = useCallback(() => {
-    console.log('useInfiniteLoad loadMore');
     run(cursor);
   }, [cursor, run]);
 

@@ -6,7 +6,7 @@ import { Organization } from '../../domain';
 import { useOrganizationSplashStyles } from './organization-splash.styles';
 
 export interface OrganizationSplashProps {
-  values: Organization;
+  organization: Organization;
 }
 
 export function OrganizationSplash(props: OrganizationSplashProps) {
@@ -15,19 +15,19 @@ export function OrganizationSplash(props: OrganizationSplashProps) {
   return (
     <div className={classes.root}>
       <Typography>
-        {props.values.name}
+        {props.organization.name}
       </Typography>
 
       <Typography>
-        {props.values.website}
+        {props.organization.website}
       </Typography>
 
       <Typography>
-        {props.values.shortDescription}
+        {props.organization.shortDescription}
       </Typography>
 
       <Typography>
-        {props.values.longDescription}
+        {props.organization.longDescription}
       </Typography>
     </div>
   )

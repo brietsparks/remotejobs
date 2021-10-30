@@ -10,7 +10,7 @@ export interface OrganizationPageContainerProps {
 export function OrganizationPageContainer(props: OrganizationPageContainerProps) {
   return (
     <OrganizationSplash
-      values={props.values}
+      organization={props.values}
     />
   )
 }
