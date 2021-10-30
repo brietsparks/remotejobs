@@ -2,10 +2,9 @@ import React, { useEffect } from 'react';
 import { CircularProgress } from '@material-ui/core';
 import { useInView } from 'react-intersection-observer';
 
-import { Job } from '../../domain';
 import { useInfiniteLoad } from '../../hooks';
 import { CursorPaginationResult } from '../../util';
-import { JobPreview, JobPreviewMessages } from '../job-preview';
+import { JobPreview, JobPreviewMessages, JobPreviewData } from '../job-preview';
 
 import { useJobsListStyles } from './jobs-list.styles';
 
@@ -17,7 +16,9 @@ export interface JobsListProps {
   onClickJob: (id: string) => void;
 }
 
-export type JobListItem = Omit<Job, 'longDescription'>;
+export type JobListItem = JobPreviewData & {
+  id: string;
+};
 
 export type JobsListMessages = JobPreviewMessages;
 
@@ -43,12 +44,12 @@ export function JobsList(props: JobsListProps) {
 
   return (
     <div>
-      {jobs.map((job) => (
-        <div key={job.id}>
+      {jobs.map((data) => (
+        <div key={data.id}>
           <JobPreview
-            job={job}
+            data={data}
             messages={jobPreviewMessages}
-            onClick={() => props.onClickJob(job.id)}
+            onClick={() => props.onClickJob(data.id)}
           />
         </div>
       ))}

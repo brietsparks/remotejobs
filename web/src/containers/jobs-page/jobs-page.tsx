@@ -21,6 +21,7 @@ async function getJobs(): Promise<CursorPaginationResult<JobListItem>> {
   const mockData = () => {
     return {
       id: Math.random().toString(),
+      organizationName: 'organizationName',
       organizationId: 'organizationId',
       title: 'name',
       shortDescription: 'shortDescription',

@@ -2,10 +2,9 @@ import React, { useEffect } from 'react';
 import { CircularProgress } from '@material-ui/core';
 import { useInView } from 'react-intersection-observer';
 
-import { Organization } from '../../domain';
 import { useInfiniteLoad } from '../../hooks';
 import { CursorPaginationResult } from '../../util';
-import { OrganizationPreview, OrganizationPreviewMessages } from '../organization-preview';
+import { OrganizationPreview, OrganizationPreviewData, OrganizationPreviewMessages } from '../organization-preview';
 
 import { useOrganizationsListStyles } from './organizations-list.styles';
 
@@ -17,8 +16,8 @@ export interface OrganizationsListProps {
   onClickOrganization: (id: string) => void;
 }
 
-export type OrganizationListItem =
-  Omit<Organization, 'longDescription'> & {
+export type OrganizationListItem = OrganizationPreviewData & {
+  id: string;
   jobsCount: number;
 };
 
@@ -46,13 +45,12 @@ export function OrganizationsList(props: OrganizationsListProps) {
 
   return (
     <div>
-      {organizations.map(({ jobsCount, ...organization }) => (
-        <div key={organization.id}>
+      {organizations.map((data) => (
+        <div key={data.id}>
           <OrganizationPreview
-            organization={organization}
-            jobsCount={jobsCount}
+            data={data}
             messages={organizationPreviewMessages}
-            onClick={() => props.onClickOrganization(organization.id)}
+            onClick={() => props.onClickOrganization(data.id)}
           />
         </div>
       ))}

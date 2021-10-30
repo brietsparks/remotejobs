@@ -1,13 +1,17 @@
+import React from 'react';
 import { Typography, Button } from '@material-ui/core';
 
-import { Organization } from '../../domain';
-import React from 'react';
-
 export interface OrganizationPreviewProps {
-  organization: Omit<Organization, 'longDescription'>;
-  jobsCount?: number;
+  data: OrganizationPreviewData;
   onClick?: () => void;
   messages: OrganizationPreviewMessages;
+}
+
+export interface OrganizationPreviewData {
+  name: string;
+  shortDescription: string;
+  website: string;
+  jobsCount?: number;
 }
 
 export interface OrganizationPreviewMessages {
@@ -19,19 +23,19 @@ export function OrganizationPreview(props: OrganizationPreviewProps) {
   return (
     <div>
       <Typography>
-        {props.organization.name}
+        {props.data.name}
       </Typography>
 
       <Typography>
-        {props.organization.website}
+        {props.data.website}
       </Typography>
 
       <Typography>
-        {props.organization.shortDescription}
+        {props.data.shortDescription}
       </Typography>
 
-      {props.jobsCount && (
-        <Typography>{props.messages.jobsCount(props.jobsCount)}</Typography>
+      {props.data.jobsCount && (
+        <Typography>{props.messages.jobsCount(props.data.jobsCount)}</Typography>
       )}
 
       <Button onClick={props.onClick}>{props.messages.view}</Button>
