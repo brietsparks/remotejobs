@@ -13,14 +13,20 @@ export interface JobsListProps {
   cursor?: string;
   getJobs: (cursor: string) => Promise<CursorPaginationResult<JobListItem>>;
   messages: JobsListMessages;
-  onClickJob: (id: string) => void;
+  paths: JobsListPaths;
 }
 
 export type JobListItem = JobPreviewData & {
   id: string;
+  organizationId: string;
 };
 
 export type JobsListMessages = JobPreviewMessages;
+
+export interface JobsListPaths {
+  organization: (id: string) => string;
+  job: (id: string) => string;
+}
 
 export function JobsList(props: JobsListProps) {
   const { items: jobs, isPending, hasMore, loadMore } = useInfiniteLoad<JobListItem>({
@@ -49,7 +55,10 @@ export function JobsList(props: JobsListProps) {
           <JobPreview
             data={data}
             messages={jobPreviewMessages}
-            onClick={() => props.onClickJob(data.id)}
+            paths={{
+              organization: props.paths.organization(data.organizationId),
+              job: props.paths.job(data.id)
+            }}
           />
         </div>
       ))}

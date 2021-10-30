@@ -1,21 +1,25 @@
 import React from 'react';
-import { Typography, Button } from '@material-ui/core';
+import { Typography, Link } from '@material-ui/core';
 
 export interface OrganizationPreviewProps {
   data: OrganizationPreviewData;
   onClick?: () => void;
   messages: OrganizationPreviewMessages;
+  paths: OrganizationPreviewPaths;
 }
 
 export interface OrganizationPreviewData {
   name: string;
   shortDescription: string;
-  website: string;
   jobsCount?: number;
 }
 
 export interface OrganizationPreviewMessages {
   jobsCount: (count: number) => string;
+  view: string;
+}
+
+export interface OrganizationPreviewPaths {
   view: string;
 }
 
@@ -27,10 +31,6 @@ export function OrganizationPreview(props: OrganizationPreviewProps) {
       </Typography>
 
       <Typography>
-        {props.data.website}
-      </Typography>
-
-      <Typography>
         {props.data.shortDescription}
       </Typography>
 
@@ -38,7 +38,11 @@ export function OrganizationPreview(props: OrganizationPreviewProps) {
         <Typography>{props.messages.jobsCount(props.data.jobsCount)}</Typography>
       )}
 
-      <Button onClick={props.onClick}>{props.messages.view}</Button>
+      <Typography>
+        <Link href={props.paths.view}>
+          {props.messages.view}
+        </Link>
+      </Typography>
     </div>
   );
 }

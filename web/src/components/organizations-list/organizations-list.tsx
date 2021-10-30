@@ -13,7 +13,7 @@ export interface OrganizationsListProps {
   cursor?: string;
   getOrganizations: (cursor: string) => Promise<CursorPaginationResult<OrganizationListItem>>;
   messages: OrganizationsListMessages;
-  onClickOrganization: (id: string) => void;
+  paths: OrganizationsListPaths
 }
 
 export type OrganizationListItem = OrganizationPreviewData & {
@@ -22,6 +22,10 @@ export type OrganizationListItem = OrganizationPreviewData & {
 };
 
 export type OrganizationsListMessages = OrganizationPreviewMessages;
+
+export interface OrganizationsListPaths {
+  view: (id: string) => string;
+}
 
 export function OrganizationsList(props: OrganizationsListProps) {
   const { items: organizations, isPending, hasMore, loadMore } = useInfiniteLoad<OrganizationListItem>({
@@ -50,7 +54,9 @@ export function OrganizationsList(props: OrganizationsListProps) {
           <OrganizationPreview
             data={data}
             messages={organizationPreviewMessages}
-            onClick={() => props.onClickOrganization(data.id)}
+            paths={{
+              view: props.paths.view(data.id)
+            }}
           />
         </div>
       ))}

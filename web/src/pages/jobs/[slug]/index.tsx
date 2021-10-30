@@ -6,6 +6,10 @@ export interface JobPageProps {
 }
 
 export default function JobPage(props: JobPageProps) {
+  const paths = {
+    organization: `/organizations/organizationId`
+  };
+
   return (
     <JobPageContainer
       data={{
@@ -16,6 +20,7 @@ export default function JobPage(props: JobPageProps) {
         longDescription: 'longDescription',
         organizationName: 'organizationName'
       }}
+      paths={paths}
     />
   )
 }

@@ -1,11 +1,13 @@
 import React from 'react';
 
-import { OrganizationsList, OrganizationListItem } from '../../components';
+import { OrganizationsList, OrganizationListItem, OrganizationsListPaths } from '../../components';
 import { CursorPaginationResult } from '../../util';
 
 export interface OrganizationsPageProps {
-  onClickOrganization: (id: string) => void;
+  paths: OrganizationsPagePaths;
 }
+
+export type OrganizationsPagePaths = OrganizationsListPaths;
 
 export function OrganizationsPageContainer(props: OrganizationsPageProps) {
   return (
@@ -15,7 +17,7 @@ export function OrganizationsPageContainer(props: OrganizationsPageProps) {
         view: 'View',
         jobsCount: (count) => `${count} jobs`
       }}
-      onClickOrganization={props.onClickOrganization}
+      paths={props.paths}
     />
   )
 }

@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next';
-import { useRouter } from 'next/router';
 
 import { JobsPageContainer } from '../../containers';
 
@@ -8,14 +7,13 @@ export interface JobsPageProps {
 }
 
 export default function JobsPage(props: JobsPageProps) {
-  const router = useRouter();
-
-  const handleClickJob = (id: string) => router.push(`/jobs/${id}`);
+  const paths = {
+    job: (id: string) => `/jobs/${id}`,
+    organization: (id: string) => `/organizations/${id}`
+  };
 
   return (
-    <JobsPageContainer
-      onClickJob={handleClickJob}
-    />
+    <JobsPageContainer paths={paths} />
   )
 }
 

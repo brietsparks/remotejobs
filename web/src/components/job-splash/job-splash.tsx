@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import { Typography, Link } from '@material-ui/core';
 
 import { Job } from '../../domain';
 
@@ -7,10 +7,15 @@ import { useJobSplashStyles } from './job-splash.styles';
 
 export interface JobSplashProps {
   data: JobSplashData;
+  paths: JobSplashPaths;
 }
 
 export type JobSplashData = Job & {
   organizationName: string;
+}
+
+export interface JobSplashPaths {
+  organization: string;
 }
 
 export function JobSplash(props: JobSplashProps) {
@@ -23,7 +28,9 @@ export function JobSplash(props: JobSplashProps) {
       </Typography>
 
       <Typography>
-        {props.data.organizationName}
+        <Link href={props.paths.organization}>
+          {props.data.organizationName}
+        </Link>
       </Typography>
 
       <Typography>

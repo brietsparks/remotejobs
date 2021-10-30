@@ -1,10 +1,11 @@
 import React from 'react';
-import { Typography, Button } from '@material-ui/core';
+import { Typography, Link } from '@material-ui/core';
 
 export interface JobPreviewProps {
   data: JobPreviewData;
   onClick?: () => void;
   messages: JobPreviewMessages;
+  paths: JobPreviewPaths;
 }
 
 export interface JobPreviewData {
@@ -17,6 +18,11 @@ export interface JobPreviewMessages {
   view: string;
 }
 
+export interface JobPreviewPaths {
+  organization: string;
+  job: string;
+}
+
 export function JobPreview(props: JobPreviewProps) {
   return (
     <div>
@@ -25,14 +31,20 @@ export function JobPreview(props: JobPreviewProps) {
       </Typography>
 
       <Typography>
-        {props.data.organizationName}
+        <Link href={props.paths.organization}>
+          {props.data.organizationName}
+        </Link>
       </Typography>
 
       <Typography>
         {props.data.shortDescription}
       </Typography>
 
-      <Button onClick={props.onClick}>{props.messages.view}</Button>
+      <Typography>
+        <Link href={props.paths.job}>
+          {props.messages.view}
+        </Link>
+      </Typography>
     </div>
   );
 }

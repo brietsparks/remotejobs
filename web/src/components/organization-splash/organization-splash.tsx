@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import { Typography, Link } from '@material-ui/core';
 
 import { Organization } from '../../domain';
 
@@ -19,7 +19,9 @@ export function OrganizationSplash(props: OrganizationSplashProps) {
       </Typography>
 
       <Typography>
-        {props.organization.website}
+        <Link href={props.organization.website}>
+          {props.organization.website}
+        </Link>
       </Typography>
 
       <Typography>

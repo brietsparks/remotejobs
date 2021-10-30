@@ -1,18 +1,20 @@
 import React from 'react';
 
-import { JobsList, JobListItem } from '../../components';
+import { JobsList, JobListItem, JobsListPaths } from '../../components';
 import { CursorPaginationResult } from '../../util';
 
 export interface JobsPageProps {
-  onClickJob: (id: string) => void;
+  paths: JobsPagePaths
 }
+
+export type JobsPagePaths = JobsListPaths;
 
 export function JobsPageContainer(props: JobsPageProps) {
   return (
     <JobsList
       getJobs={getJobs}
       messages={{ view: 'View', }}
-      onClickJob={props.onClickJob}
+      paths={props.paths}
     />
   )
 }
