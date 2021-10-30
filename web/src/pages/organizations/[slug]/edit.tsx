@@ -14,6 +14,7 @@ export default function EditOrganizationPage(props: EditOrganizationPageProps) {
   return (
     <EditOrganizationPageContainer
       values={{
+        id: 'id',
         name: 'name',
         shortDescription: 'shortDescription',
         longDescription: 'longDescription',

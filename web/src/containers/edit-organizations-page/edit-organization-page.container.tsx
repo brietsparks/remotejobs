@@ -1,6 +1,5 @@
-import { OrganizationEditorContainer } from '../organization-editor';
-
 import { Organization } from '../../domain';
+import { OrganizationEditorContainer } from '../organization-editor';
 
 export interface EditOrganizationPageProps {
   values: Organization;

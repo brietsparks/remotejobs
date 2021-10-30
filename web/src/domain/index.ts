@@ -5,3 +5,11 @@ export type Organization = {
   longDescription: string;
   website: string;
 }
+
+export type Job = {
+  id: string;
+  organizationId: string;
+  title: string;
+  shortDescription: string;
+  longDescription: string;
+}

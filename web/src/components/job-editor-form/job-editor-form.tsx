@@ -2,39 +2,37 @@ import React, { ChangeEvent, useState, useCallback } from 'react';
 import { TextField, Button } from '@material-ui/core';
 import { useAsync } from 'react-async';
 
-import { Organization as BaseOrganization } from '../../domain';
+import { Job } from '../../domain';
 
-import { useOrganizationEditorFormStyles } from './organization-editor-form.styles';
+import { useJobEditorFormStyles } from './job-editor-form.styles';
 
-export type Organization = Omit<BaseOrganization, 'id'>;
-
-export interface OrganizationEditorFormProps {
-  values?: Organization;
-  messages: OrganizationEditorFormMessages;
-  submit: (values: Organization) => Promise<unknown>;
+export interface JobEditorFormProps {
+  values?: Job;
+  messages: JobEditorFormMessages;
+  submit: (values: Job) => Promise<unknown>;
   onSuccess: (result: unknown) => void;
   onFailure?: (error: Error) => void;
 }
 
-export interface OrganizationEditorFormMessages {
-  name: string;
-  website: string;
+export interface JobEditorFormMessages {
+  title: string;
   shortDescription: string;
   longDescription: string;
   submit: string;
 }
 
 const defaultValues = {
-  name: '',
+  id: '',
+  organizationId: '',
+  title: '',
   shortDescription: '',
   longDescription: '',
-  website: ''
 };
 
-export function OrganizationEditorForm(props: OrganizationEditorFormProps) {
-  const [values, setValues] = useState<Organization>(props.values || defaultValues);
+export function JobEditorForm(props: JobEditorFormProps) {
+  const [values, setValues] = useState<Job>(props.values || defaultValues);
 
-  const changeHandler = (field: keyof Organization) => {
+  const changeHandler = (field: keyof Job) => {
     return (e: ChangeEvent<HTMLInputElement>) => {
       setValues(prev => ({ ...prev, [field]: e.target.value }));
     }
@@ -48,28 +46,21 @@ export function OrganizationEditorForm(props: OrganizationEditorFormProps) {
   });
 
   const isValid = !!(
-    values.name &&
+    values.title &&
     values.shortDescription &&
-    values.longDescription &&
-    values.website
+    values.longDescription
   );
 
-  const classes = useOrganizationEditorFormStyles();
+  const classes = useJobEditorFormStyles();
 
   return (
     <div className={classes.root}>
       <TextField
-        label={props.messages.name}
-        value={values.name}
-        onChange={changeHandler('name')}
+        label={props.messages.title}
+        value={values.title}
+        onChange={changeHandler('title')}
       />
-
-      <TextField
-        label={props.messages.website}
-        value={values.website}
-        onChange={changeHandler('website')}
-      />
-
+  
       <TextField
         label={props.messages.shortDescription}
         value={values.shortDescription}

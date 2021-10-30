@@ -10,6 +10,7 @@ export default function OrganizationPage(props: OrganizationPageProps) {
   return (
     <OrganizationPageContainer
       values={{
+        id: 'id',
         name: 'name',
         shortDescription: 'shortDescription',
         longDescription: 'longDescription',
