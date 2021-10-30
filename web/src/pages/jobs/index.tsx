@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next';
 
-import { JobsPageContainer } from '../../containers';
+import { JobsListContainer } from '../../containers';
 
 export interface JobsPageProps {
 
@@ -13,7 +13,10 @@ export default function JobsPage(props: JobsPageProps) {
   };
 
   return (
-    <JobsPageContainer paths={paths} />
+    <JobsListContainer
+      paths={paths}
+      showOrganizationName={true}
+    />
   )
 }
 

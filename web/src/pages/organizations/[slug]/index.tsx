@@ -6,16 +6,21 @@ export interface OrganizationPageProps {
 }
 
 export default function OrganizationPage(props: OrganizationPageProps) {
+  const paths = {
+    organization: (id: string) => `/organizations/${id}`,
+    job: (id: string) => `/jobs/${id}`
+  };
 
   return (
     <OrganizationPageContainer
-      values={{
+      data={{
         id: 'id',
         name: 'name',
         shortDescription: 'shortDescription',
         longDescription: 'longDescription',
         website: 'www.url.com'
       }}
+      paths={paths}
     />
   )
 }

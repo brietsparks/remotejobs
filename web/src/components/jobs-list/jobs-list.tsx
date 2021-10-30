@@ -14,6 +14,7 @@ export interface JobsListProps {
   getJobs: (cursor: string) => Promise<CursorPaginationResult<JobListItem>>;
   messages: JobsListMessages;
   paths: JobsListPaths;
+  showOrganizationName: boolean;
 }
 
 export type JobListItem = JobPreviewData & {
@@ -59,6 +60,7 @@ export function JobsList(props: JobsListProps) {
               organization: props.paths.organization(data.organizationId),
               job: props.paths.job(data.id)
             }}
+            showOrganizationName={props.showOrganizationName}
           />
         </div>
       ))}

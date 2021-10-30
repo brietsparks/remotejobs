@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Typography, Link } from '@material-ui/core';
 
 import { Organization } from '../../domain';
@@ -6,7 +6,13 @@ import { Organization } from '../../domain';
 import { useOrganizationSplashStyles } from './organization-splash.styles';
 
 export interface OrganizationSplashProps {
-  organization: Organization;
+  data: Organization;
+  jobsList?: ReactNode;
+  messages: OrganizationSplashMessages;
+}
+
+export interface OrganizationSplashMessages {
+  jobs: string
 }
 
 export function OrganizationSplash(props: OrganizationSplashProps) {
@@ -15,22 +21,29 @@ export function OrganizationSplash(props: OrganizationSplashProps) {
   return (
     <div className={classes.root}>
       <Typography>
-        {props.organization.name}
+        {props.data.name}
       </Typography>
 
       <Typography>
-        <Link href={props.organization.website}>
-          {props.organization.website}
+        <Link href={props.data.website}>
+          {props.data.website}
         </Link>
       </Typography>
 
       <Typography>
-        {props.organization.shortDescription}
+        {props.data.shortDescription}
       </Typography>
 
       <Typography>
-        {props.organization.longDescription}
+        {props.data.longDescription}
       </Typography>
+
+      {props.jobsList && (
+        <div>
+          <Typography>{props.messages.jobs}</Typography>
+          {props.jobsList}
+        </div>
+      )}
     </div>
   )
 }

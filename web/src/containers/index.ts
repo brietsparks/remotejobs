@@ -5,4 +5,4 @@ export * from './organizations-page';
 export * from './job-creator-page';
 export * from './job-editor-page';
 export * from './job-page';
-export * from './jobs-page';
+export * from './jobs-list';

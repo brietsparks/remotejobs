@@ -3,18 +3,20 @@ import React from 'react';
 import { JobsList, JobListItem, JobsListPaths } from '../../components';
 import { CursorPaginationResult } from '../../util';
 
-export interface JobsPageProps {
-  paths: JobsPagePaths
+export interface JobsListContainerProps {
+  paths: JobsListContainerPaths
+  showOrganizationName: boolean;
 }
 
-export type JobsPagePaths = JobsListPaths;
+export type JobsListContainerPaths = JobsListPaths;
 
-export function JobsPageContainer(props: JobsPageProps) {
+export function JobsListContainer(props: JobsListContainerProps) {
   return (
     <JobsList
       getJobs={getJobs}
       messages={{ view: 'View', }}
       paths={props.paths}
+      showOrganizationName={props.showOrganizationName}
     />
   )
 }

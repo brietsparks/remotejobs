@@ -1,1 +1,1 @@
-export * from './job-page';
+export * from './job-page.container';
