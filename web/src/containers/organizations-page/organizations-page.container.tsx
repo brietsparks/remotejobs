@@ -21,7 +21,7 @@ export function OrganizationsPageContainer(props: OrganizationsPageProps) {
 }
 
 async function getOrganizations(): Promise<CursorPaginationResult<OrganizationListItem>> {
-  const mockData = (): OrganizationListItem => {
+  const mockData = () => {
     return {
       id: Math.random().toString(),
       name: 'name',
