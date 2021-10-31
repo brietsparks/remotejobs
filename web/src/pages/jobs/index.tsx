@@ -1,9 +1,8 @@
 import { GetServerSideProps } from 'next';
 
-import { JobsListContainer } from '../../containers';
+import { JobsListContainer, JobsListContainerData, mockJobData } from '../../containers';
 
 export interface JobsPageProps {
-
 }
 
 export default function JobsPage(props: JobsPageProps) {
@@ -14,6 +13,14 @@ export default function JobsPage(props: JobsPageProps) {
 
   return (
     <JobsListContainer
+      data={{
+        items: [
+          mockJobData(), mockJobData(), mockJobData(), mockJobData(),
+          mockJobData(), mockJobData(), mockJobData(), mockJobData()
+        ],
+        hasMore: true,
+        cursor: ''
+      }}
       paths={paths}
       showOrganizationName={true}
     />

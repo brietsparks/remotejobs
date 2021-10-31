@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Organization } from '../../domain';
 import { OrganizationSplash } from '../../components';
-import { JobsListContainer, JobsListContainerPaths } from '../jobs-list';
+import { JobsListContainer, JobsListContainerPaths, mockJobData } from '../jobs-list';
 
 export interface OrganizationPageContainerProps {
   data: Organization
@@ -14,6 +14,14 @@ export type OrganizationPageContainerPaths = JobsListContainerPaths;
 export function OrganizationPageContainer(props: OrganizationPageContainerProps) {
   const jobsList = (
     <JobsListContainer
+      data={{
+        items: [
+          mockJobData(), mockJobData(), mockJobData(), mockJobData(),
+          mockJobData(), mockJobData(), mockJobData(), mockJobData()
+        ],
+        hasMore: true,
+        cursor: ''
+      }}
       paths={props.paths}
       showOrganizationName={false}
     />

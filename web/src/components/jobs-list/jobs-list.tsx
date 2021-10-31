@@ -9,15 +9,16 @@ import { JobPreview, JobPreviewMessages, JobPreviewData } from '../job-preview';
 import { useJobsListStyles } from './jobs-list.styles';
 
 export interface JobsListProps {
-  jobs?: JobListItem[];
-  cursor?: string;
-  getJobs: (cursor: string) => Promise<CursorPaginationResult<JobListItem>>;
+  data?: JobsListData;
+  getJobs: (cursor: string) => Promise<CursorPaginationResult<JobsListItem>>;
   messages: JobsListMessages;
   paths: JobsListPaths;
   showOrganizationName: boolean;
 }
 
-export type JobListItem = JobPreviewData & {
+export type JobsListData = Partial<CursorPaginationResult<JobsListItem>>;
+
+export type JobsListItem = JobPreviewData & {
   id: string;
   organizationId: string;
 };
@@ -30,9 +31,9 @@ export interface JobsListPaths {
 }
 
 export function JobsList(props: JobsListProps) {
-  const { items: jobs, isPending, hasMore, loadMore } = useInfiniteLoad<JobListItem>({
-    items: props.jobs,
-    cursor: props.cursor,
+  const { items: jobs, isPending, hasMore, loadMore } = useInfiniteLoad<JobsListItem>({
+    items: props.data?.items,
+    cursor: props.data?.cursor,
     getItems: props.getJobs
   });
 

@@ -1,12 +1,14 @@
 import React from 'react';
 
-import { OrganizationsList, OrganizationsListData, OrganizationListItem, OrganizationsListPaths } from '../../components';
+import { OrganizationsList, OrganizationsListData, OrganizationsListItem, OrganizationsListPaths } from '../../components';
 import { CursorPaginationResult } from '../../util';
 
 export interface OrganizationsPageProps {
-  data? : OrganizationsListData;
+  data? : OrganizationsPageData;
   paths: OrganizationsPagePaths;
 }
+
+export type OrganizationsPageData = OrganizationsListData;
 
 export type OrganizationsPagePaths = OrganizationsListPaths;
 
@@ -24,13 +26,13 @@ export function OrganizationsPageContainer(props: OrganizationsPageProps) {
   )
 }
 
-async function getOrganizations(): Promise<CursorPaginationResult<OrganizationListItem>> {
+async function getOrganizations(): Promise<CursorPaginationResult<OrganizationsListItem>> {
   return new Promise(resolve => {
     setTimeout(() => {
       resolve({
         items: [
-          mockData(), mockData(), mockData(), mockData(),
-          mockData(), mockData(), mockData(), mockData()
+          mockOrganizationData(), mockOrganizationData(), mockOrganizationData(), mockOrganizationData(),
+          mockOrganizationData(), mockOrganizationData(), mockOrganizationData(), mockOrganizationData()
         ],
         hasMore: true,
         cursor: ''
@@ -39,7 +41,7 @@ async function getOrganizations(): Promise<CursorPaginationResult<OrganizationLi
   });
 }
 
-export const mockData = () => {
+export const mockOrganizationData = () => {
   return {
     id: Math.random().toString(),
     name: 'name',

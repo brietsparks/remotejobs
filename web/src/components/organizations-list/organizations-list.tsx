@@ -10,14 +10,14 @@ import { useOrganizationsListStyles } from './organizations-list.styles';
 
 export interface OrganizationsListProps {
   data?: OrganizationsListData;
-  getOrganizations: (cursor: string) => Promise<CursorPaginationResult<OrganizationListItem>>;
+  getOrganizations: (cursor: string) => Promise<CursorPaginationResult<OrganizationsListItem>>;
   messages: OrganizationsListMessages;
   paths: OrganizationsListPaths
 }
 
-export type OrganizationsListData = Partial<CursorPaginationResult<OrganizationListItem>>;
+export type OrganizationsListData = Partial<CursorPaginationResult<OrganizationsListItem>>;
 
-export type OrganizationListItem = OrganizationPreviewData & {
+export type OrganizationsListItem = OrganizationPreviewData & {
   id: string;
   jobsCount: number;
 };
@@ -29,7 +29,7 @@ export interface OrganizationsListPaths {
 }
 
 export function OrganizationsList(props: OrganizationsListProps) {
-  const { items: organizations, isPending, hasMore, loadMore } = useInfiniteLoad<OrganizationListItem>({
+  const { items: organizations, isPending, hasMore, loadMore } = useInfiniteLoad<OrganizationsListItem>({
     ...props.data,
     getItems: props.getOrganizations
   });
