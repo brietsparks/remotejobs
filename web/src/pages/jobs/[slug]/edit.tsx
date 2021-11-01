@@ -1,5 +1,6 @@
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { JobEditorPageContainer } from '../../../containers';
 
@@ -25,8 +26,10 @@ export default function EditJobPage(props: EditJobPageProps) {
 )
 }
 
-export const getServerSideProps: GetServerSideProps<EditJobPageProps> = async () => {
+export const getServerSideProps: GetServerSideProps<EditJobPageProps> = async ({ locale }) => {
   return {
-    props: {}
+    props: {
+      ...(await serverSideTranslations(locale as string, ['common']))
+    }
   }
 }

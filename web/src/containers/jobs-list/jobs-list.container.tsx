@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'next-i18next';
 
 import { JobsList, JobsListData, JobsListItem, JobsListPaths } from '../../components';
 import { CursorPaginationResult } from '../../util';
@@ -14,11 +15,17 @@ export type JobsListContainerData = JobsListData;
 export type JobsListContainerPaths = JobsListPaths;
 
 export function JobsListContainer(props: JobsListContainerProps) {
+  const { t } = useTranslation();
+
+  const messages = {
+    view: t('viewJob')
+  };
+
   return (
     <JobsList
       data={props.data}
       getJobs={getJobs}
-      messages={{ view: 'View', }}
+      messages={messages}
       paths={props.paths}
       showOrganizationName={props.showOrganizationName}
     />

@@ -2,8 +2,6 @@ import React, { ChangeEvent, useState, useCallback } from 'react';
 import { TextField, Button } from '@material-ui/core';
 import { useAsync } from 'react-async';
 
-import { Organization as BaseOrganization } from '../../domain';
-
 import { useOrganizationEditorFormStyles } from './organization-editor-form.styles';
 
 export interface OrganizationEditorFormProps {

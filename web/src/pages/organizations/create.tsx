@@ -1,5 +1,6 @@
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { OrganizationCreatorPageContainer } from '../../containers';
 
@@ -18,8 +19,10 @@ export default function CreateOrganizationPage(props: CreateOrganizationPageProp
   )
 }
 
-export const getServerSideProps: GetServerSideProps<CreateOrganizationPageProps> = async () => {
+export const getServerSideProps: GetServerSideProps<CreateOrganizationPageProps> = async ({ locale }) => {
   return {
-    props: {}
+    props: {
+      ...(await serverSideTranslations(locale as string, ['common']))
+    }
   }
 }

@@ -1,0 +1,17 @@
+{
+  "viewJob": "View",
+  "createJob": "Create Job",
+  "saveJob": "Save",
+  "jobTitle": "Title",
+  "jobShortDescription": "Short Description",
+  "jobLongDescription": "Long Description",
+  "jobsCount": "{{ count }} jobs",
+  "jobsAtOrganization": "Jobs at {{ organization }}",
+  "viewOrganization": "View",
+  "saveOrganization": "Save",
+  "createOrganization": "Create Organization",
+  "organizationName":  "Organization Name",
+  "organizationWebsite": "Website URL",
+  "organizationShortDescription":  "Short Description",
+  "organizationLongDescription": "Long Description"
+}

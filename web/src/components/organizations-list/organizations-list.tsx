@@ -22,7 +22,10 @@ export type OrganizationsListItem = OrganizationPreviewData & {
   jobsCount: number;
 };
 
-export type OrganizationsListMessages = OrganizationPreviewMessages;
+export type OrganizationsListMessages = {
+  jobsCount: (count: number) => string|undefined;
+  view: string;
+};
 
 export interface OrganizationsListPaths {
   view: (id: string) => string;
@@ -45,15 +48,16 @@ export function OrganizationsList(props: OrganizationsListProps) {
 
   const classes = useOrganizationsListStyles();
 
-  const { ...organizationPreviewMessages } = props.messages;
-
   return (
     <div>
       {organizations.map((data) => (
         <div key={data.id}>
           <OrganizationPreview
             data={data}
-            messages={organizationPreviewMessages}
+            messages={{
+              jobsCount: props.messages.jobsCount(data.jobsCount),
+              view: props.messages.view
+            }}
             paths={{
               view: props.paths.view(data.id)
             }}

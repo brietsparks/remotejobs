@@ -11,11 +11,10 @@ export interface OrganizationPreviewProps {
 export interface OrganizationPreviewData {
   name: string;
   shortDescription: string;
-  jobsCount?: number;
 }
 
 export interface OrganizationPreviewMessages {
-  jobsCount: (count: number) => string;
+  jobsCount?: string;
   view: string;
 }
 
@@ -34,8 +33,8 @@ export function OrganizationPreview(props: OrganizationPreviewProps) {
         {props.data.shortDescription}
       </Typography>
 
-      {props.data.jobsCount && (
-        <Typography>{props.messages.jobsCount(props.data.jobsCount)}</Typography>
+      {props.messages.jobsCount && (
+        <Typography>{props.messages.jobsCount}</Typography>
       )}
 
       <Typography>

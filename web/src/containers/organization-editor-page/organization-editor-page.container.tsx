@@ -1,3 +1,6 @@
+import React from 'react';
+import { useTranslation } from 'next-i18next';
+
 import { OrganizationEditorContainer, OrganizationEditorContainerValues } from '../organization-editor';
 
 export interface OrganizationEditorPageProps {
@@ -7,6 +10,8 @@ export interface OrganizationEditorPageProps {
 }
 
 export function OrganizationEditorPageContainer(props: OrganizationEditorPageProps) {
+  const { t } = useTranslation();
+
   const submit = async (values: OrganizationEditorContainerValues) => {
     console.log({
       id: props.id,
@@ -14,12 +19,16 @@ export function OrganizationEditorPageContainer(props: OrganizationEditorPagePro
     });
   };
 
+  const messages = {
+    submit: t('saveOrganization')
+  };
+
   return (
     <OrganizationEditorContainer
       values={props.values}
       onSuccess={props.onSuccess}
       submit={submit}
-      messages={{ submit: 'Save' }}
+      messages={messages}
     />
   )
 }

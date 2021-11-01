@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'next-i18next';
 
 import { Organization } from '../../domain';
 import { OrganizationSplash } from '../../components';
@@ -12,6 +13,8 @@ export interface OrganizationPageContainerProps {
 export type OrganizationPageContainerPaths = JobsListContainerPaths;
 
 export function OrganizationPageContainer(props: OrganizationPageContainerProps) {
+  const { t } = useTranslation();
+
   const jobsList = (
     <JobsListContainer
       data={{
@@ -28,7 +31,7 @@ export function OrganizationPageContainer(props: OrganizationPageContainerProps)
   );
 
   const messages = {
-    jobs: `Jobs at ${props.data.name}`
+    jobs: t('jobsAtOrganization', { organization: props.data.name })
   };
 
   return (

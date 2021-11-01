@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { JobsListContainer, JobsListContainerData, mockJobData } from '../../containers';
 
@@ -27,8 +28,10 @@ export default function JobsPage(props: JobsPageProps) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps<JobsPageProps> = async () => {
+export const getServerSideProps: GetServerSideProps<JobsPageProps> = async ({ locale }) => {
   return {
-    props: {}
+    props: {
+      ...(await serverSideTranslations(locale as string, ['common']))
+    }
   }
 }

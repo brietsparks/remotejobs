@@ -1,3 +1,6 @@
+import React from 'react';
+import { useTranslation } from 'next-i18next';
+
 import { JobEditorForm, JobEditorFormMessages, JobEditorFormValues } from '../../components';
 
 export type JobEditorContainerValues = JobEditorFormValues;
@@ -11,19 +14,23 @@ export interface JobEditorContainerProps {
 }
 
 export function JobEditorContainer(props: JobEditorContainerProps) {
+  const { t } = useTranslation();
+
+  const messages = {
+    title: t('jobTitle'),
+    shortDescription: t('jobShortDescription'),
+    longDescription: t('jobLongDescription'),
+    submit: t('saveJob'),
+    ...props.messages
+  };
+
   return (
     <JobEditorForm
       organizationName={props.organizationName}
       values={props.values}
       onSuccess={props.onSuccess}
       submit={props.submit}
-      messages={{
-        title: 'Title',
-        shortDescription: 'Short Description',
-        longDescription: 'Long Description',
-        submit: props.messages.submit || 'Submit',
-        ...props.messages
-      }}
+      messages={messages}
     />
   );
 }
