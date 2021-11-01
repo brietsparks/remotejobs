@@ -62,24 +62,28 @@ export function OrganizationEditorForm(props: OrganizationEditorFormProps) {
   return (
     <div className={classes.root}>
       <TextField
+        id="organization-name-input"
         label={props.messages.name}
         value={values.name}
         onChange={changeHandler('name')}
       />
 
       <TextField
+        id="organization-website-input"
         label={props.messages.website}
         value={values.website}
         onChange={changeHandler('website')}
       />
 
       <TextField
+        id="organization-short-description-input"
         label={props.messages.shortDescription}
         value={values.shortDescription}
         onChange={changeHandler('shortDescription')}
       />
 
       <TextField
+        id="organization-long-description-input"
         label={props.messages.longDescription}
         value={values.longDescription}
         onChange={changeHandler('longDescription')}

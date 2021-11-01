@@ -63,18 +63,21 @@ export function JobEditorForm(props: JobEditorFormProps) {
       </Typography>
 
       <TextField
+        id="job-title-input"
         label={props.messages.title}
         value={values.title}
         onChange={changeHandler('title')}
       />
 
       <TextField
+        id="job-short-description-input"
         label={props.messages.shortDescription}
         value={values.shortDescription}
         onChange={changeHandler('shortDescription')}
       />
 
       <TextField
+        id="job-long-description-input"
         label={props.messages.longDescription}
         value={values.longDescription}
         onChange={changeHandler('longDescription')}
