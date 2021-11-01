@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'next-i18next';
 
 import { Organization } from '../../domain';
-import { OrganizationSplash } from '../../components';
+import { OrganizationSplash, OrganizationSplashMessages } from '../../components';
 import { JobsListContainer, JobsListContainerPaths, mockJobData } from '../jobs-list';
 
 export interface OrganizationPageContainerProps {
@@ -30,8 +30,12 @@ export function OrganizationPageContainer(props: OrganizationPageContainerProps)
     />
   );
 
-  const messages = {
-    jobs: t('jobsAtOrganization', { organization: props.data.name })
+  const messages: OrganizationSplashMessages = {
+    longDescriptionHeading: t('organizationLongDescriptionHeading'),
+    jobs: t('jobsAtOrganization', { organization: props.data.name }),
+    nameLabel: t('organizationName'),
+    websiteLabel: t('organizationWebsite'),
+    shortDescriptionLabel: t('organizationShortDescription')
   };
 
   return (

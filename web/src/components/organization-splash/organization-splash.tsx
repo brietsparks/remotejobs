@@ -12,7 +12,11 @@ export interface OrganizationSplashProps {
 }
 
 export interface OrganizationSplashMessages {
-  jobs: string
+  jobs: string;
+  longDescriptionHeading: string;
+  nameLabel: string;
+  websiteLabel: string;
+  shortDescriptionLabel: string;
 }
 
 export function OrganizationSplash(props: OrganizationSplashProps) {
@@ -20,27 +24,31 @@ export function OrganizationSplash(props: OrganizationSplashProps) {
 
   return (
     <div className={classes.root}>
-      <Typography>
+      <Typography component="h1" aria-label={props.messages.nameLabel}>
         {props.data.name}
       </Typography>
 
-      <Typography>
+      <Typography aria-label={props.messages.websiteLabel}>
         <Link href={props.data.website}>
           {props.data.website}
         </Link>
       </Typography>
 
-      <Typography>
+      <Typography aria-label={props.messages.shortDescriptionLabel}>
         {props.data.shortDescription}
       </Typography>
 
-      <Typography>
-        {props.data.longDescription}
-      </Typography>
+      <div aria-labelledby="long-description-heading">
+        <Typography component="h2" id="long-description-heading">{props.messages.longDescriptionHeading}</Typography>
+        <Typography>
+          {props.data.longDescription}
+        </Typography>
+      </div>
 
       {props.jobsList && (
-        <div>
-          <Typography>{props.messages.jobs}</Typography>
+        <div aria-labelledby="jobs-list-heading">
+          <Typography component="h2" id="jobs-list-heading">{props.messages.jobs}</Typography>
+
           {props.jobsList}
         </div>
       )}

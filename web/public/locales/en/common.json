@@ -13,5 +13,6 @@
   "organizationName":  "Organization Name",
   "organizationWebsite": "Website URL",
   "organizationShortDescription":  "Short Description",
-  "organizationLongDescription": "Long Description"
+  "organizationLongDescription": "Long Description",
+  "organizationLongDescriptionHeading": "About"
 }
