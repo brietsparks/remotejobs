@@ -56,28 +56,39 @@ export function JobEditorForm(props: JobEditorFormProps) {
 
   const classes = useJobEditorFormStyles();
 
+  const requiredProps = {
+    required: true,
+    inputProps: { 'aria-required': true }
+  };
+
   return (
-    <div className={classes.root}>
+    <div className={classes.root} role="form">
       <Typography>
         {props.organizationName}
       </Typography>
 
       <TextField
+        id="job-title-input"
         label={props.messages.title}
         value={values.title}
         onChange={changeHandler('title')}
+        {...requiredProps}
       />
 
       <TextField
+        id="job-short-description-input"
         label={props.messages.shortDescription}
         value={values.shortDescription}
         onChange={changeHandler('shortDescription')}
+        {...requiredProps}
       />
 
       <TextField
+        id="job-long-description-input"
         label={props.messages.longDescription}
         value={values.longDescription}
         onChange={changeHandler('longDescription')}
+        {...requiredProps}
       />
 
       <Button

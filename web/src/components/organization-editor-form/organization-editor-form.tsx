@@ -59,27 +59,39 @@ export function OrganizationEditorForm(props: OrganizationEditorFormProps) {
 
   const classes = useOrganizationEditorFormStyles();
 
+  const requiredProps = {
+    required: true,
+    inputProps: { 'aria-required': true }
+  };
+
   return (
-    <div className={classes.root}>
+    <div className={classes.root} role="form">
       <TextField
+        id="organization-name-input"
         label={props.messages.name}
         value={values.name}
         onChange={changeHandler('name')}
+        {...requiredProps}
       />
 
       <TextField
+        id="organization-website-input"
         label={props.messages.website}
         value={values.website}
         onChange={changeHandler('website')}
+        {...requiredProps}
       />
 
       <TextField
+        id="organization-short-description-input"
         label={props.messages.shortDescription}
         value={values.shortDescription}
         onChange={changeHandler('shortDescription')}
+        {...requiredProps}
       />
 
       <TextField
+        id="organization-long-description-input"
         label={props.messages.longDescription}
         value={values.longDescription}
         onChange={changeHandler('longDescription')}
