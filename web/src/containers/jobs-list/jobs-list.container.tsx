@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
 
-import { JobsList, JobsListData, JobsListItem, JobsListPaths } from '../../components';
+import { JobsList, JobsListData, JobsListItem, JobsListPaths, JobsListMessages } from '../../components';
 import { CursorPaginationResult } from '../../util';
 
 export interface JobsListContainerProps {
@@ -17,8 +17,12 @@ export type JobsListContainerPaths = JobsListPaths;
 export function JobsListContainer(props: JobsListContainerProps) {
   const { t } = useTranslation();
 
-  const messages = {
-    view: t('viewJob')
+  const messages: JobsListMessages = {
+    view: t('viewJob'),
+    titleLabel: t('jobTitle'),
+    shortDescriptionLabel: t('jobShortDescription'),
+    organizationNameLabel: t('organizationName'),
+    viewLabel: ({ title, organizationName }) => t('viewJobLabel', { title, organizationName })
   };
 
   return (

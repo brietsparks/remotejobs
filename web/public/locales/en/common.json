@@ -1,10 +1,11 @@
 {
   "viewJob": "View",
+  "viewJobLabel": "View {{ title }} at {{ organizationName }}",
   "createJob": "Create Job",
   "saveJob": "Save",
-  "jobTitle": "Title",
-  "jobShortDescription": "Short Description",
-  "jobLongDescription": "Long Description",
+  "jobTitle": "Job Title",
+  "jobShortDescription": "Job Summary",
+  "jobLongDescription": "Job Description",
   "jobsCount": "{{ count }} jobs",
   "jobsAtOrganization": "Jobs at {{ organization }}",
   "viewOrganization": "View",
@@ -12,7 +13,7 @@
   "createOrganization": "Create Organization",
   "organizationName":  "Organization Name",
   "organizationWebsite": "Website URL",
-  "organizationShortDescription":  "Short Description",
-  "organizationLongDescription": "Long Description",
+  "organizationShortDescription":  "Organization Summary",
+  "organizationLongDescription": "Organization Description",
   "organizationLongDescriptionHeading": "About"
 }

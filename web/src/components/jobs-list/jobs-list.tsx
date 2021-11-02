@@ -48,23 +48,25 @@ export function JobsList(props: JobsListProps) {
 
   const classes = useJobsListStyles();
 
-  const { ...jobPreviewMessages } = props.messages;
+  const jobPreviewMessages = props.messages;
 
   return (
     <div>
-      {jobs.map((data) => (
-        <div key={data.id}>
-          <JobPreview
-            data={data}
-            messages={jobPreviewMessages}
-            paths={{
-              organization: props.paths.organization(data.organizationId),
-              job: props.paths.job(data.id)
-            }}
-            showOrganizationName={props.showOrganizationName}
-          />
-        </div>
-      ))}
+      <ol>
+        {jobs.map((data) => (
+          <li key={data.id}>
+            <JobPreview
+              data={data}
+              messages={jobPreviewMessages}
+              paths={{
+                organization: props.paths.organization(data.organizationId),
+                job: props.paths.job(data.id)
+              }}
+              showOrganizationName={props.showOrganizationName}
+            />
+          </li>
+        ))}
+      </ol>
 
       {isPending && (
         <div className={classes.spinnerContainer}>
