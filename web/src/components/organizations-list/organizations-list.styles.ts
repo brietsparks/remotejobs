@@ -5,10 +5,11 @@ export const useOrganizationsListStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     gap: theme.spacing(3),
-    alignItems: 'center',
+    maxWidth: 400,
+    margin: '0 auto'
   },
   item: {
-    width: 320
+    width: '100%'
   },
   spinnerContainer: {
     height: 75,

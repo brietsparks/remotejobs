@@ -3,6 +3,7 @@ import { useTranslation } from 'next-i18next';
 
 import { JobsList, JobsListData, JobsListItem, JobsListPaths } from '../../components';
 import { CursorPaginationResult } from '../../util';
+import faker from 'faker';
 
 export interface JobsListContainerProps {
   data?: JobsListContainerData;
@@ -50,9 +51,9 @@ async function getJobs(): Promise<CursorPaginationResult<JobsListItem>> {
 export const mockJobData = () => {
   return {
     id: Math.random().toString(),
-    organizationName: 'organizationName',
+    organizationName: faker.company.companyName(),
     organizationId: 'organizationId',
-    title: 'name',
-    shortDescription: 'shortDescription',
+    title: faker.name.jobTitle(),
+    shortDescription: faker.lorem.sentence(),
   }
 }

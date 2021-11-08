@@ -30,7 +30,7 @@ export function OrganizationPreview(props: OrganizationPreviewProps) {
   return (
     <Card variant="elevation">
       <CardContent>
-        <Typography variant="h2" className={classes.name}>
+        <Typography component="h2" className={classes.name}>
           {props.data.name}
         </Typography>
 

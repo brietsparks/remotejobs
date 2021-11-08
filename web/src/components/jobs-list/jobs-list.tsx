@@ -51,9 +51,9 @@ export function JobsList(props: JobsListProps) {
   const { ...jobPreviewMessages } = props.messages;
 
   return (
-    <div>
+    <div className={classes.root}>
       {jobs.map((data) => (
-        <div key={data.id}>
+        <div key={data.id} className={classes.item}>
           <JobPreview
             data={data}
             messages={jobPreviewMessages}

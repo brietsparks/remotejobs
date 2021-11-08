@@ -1,5 +1,7 @@
 import React from 'react';
-import { Typography, Link } from '@material-ui/core';
+import { Card, CardContent, CardActions, Typography, Link } from '@material-ui/core';
+
+import { useJobPreviewStyles } from './job-preview.styles';
 
 export interface JobPreviewProps {
   data: JobPreviewData;
@@ -7,6 +9,7 @@ export interface JobPreviewProps {
   messages: JobPreviewMessages;
   paths: JobPreviewPaths;
   showOrganizationName: boolean;
+  titleComponent?: 'h2' | 'h3';
 }
 
 export interface JobPreviewData {
@@ -25,29 +28,35 @@ export interface JobPreviewPaths {
 }
 
 export function JobPreview(props: JobPreviewProps) {
+  const classes = useJobPreviewStyles();
+
   return (
-    <div>
-      <Typography>
-        {props.data.title}
-      </Typography>
-
-      {props.showOrganizationName && (
-        <Typography>
-          <Link href={props.paths.organization}>
-            {props.data.organizationName}
-          </Link>
+    <Card variant="elevation">
+      <CardContent>
+        <Typography component={props.titleComponent || 'h2'} className={classes.title}>
+          {props.data.title}
         </Typography>
-      )}
 
-      <Typography>
-        {props.data.shortDescription}
-      </Typography>
+        {props.showOrganizationName && (
+          <Typography>
+            <Link href={props.paths.organization}>
+              {props.data.organizationName}
+            </Link>
+          </Typography>
+        )}
 
-      <Typography>
-        <Link href={props.paths.job}>
-          {props.messages.view}
-        </Link>
-      </Typography>
-    </div>
+        <Typography>
+          {props.data.shortDescription}
+        </Typography>
+
+        <CardActions className={classes.actions}>
+          <Typography>
+            <Link href={props.paths.job}>
+              {props.messages.view}
+            </Link>
+          </Typography>
+        </CardActions>
+      </CardContent>
+    </Card>
   );
 }
