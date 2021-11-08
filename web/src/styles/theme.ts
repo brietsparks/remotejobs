@@ -8,7 +8,7 @@ const borderRadius = 4;
 // @ts-ignore
 export const appTheme = createTheme({
   palette: {
-    primary: { main: '#333' },
+    primary: { main: '#007bff' },
     secondary: red,
   },
   typography: {
@@ -51,20 +51,6 @@ export const appTheme = createTheme({
         borderRadius: borderRadius * 2
       }
     },
-    MuiChip: {
-      root: {
-        transition: undefined,
-      },
-      deleteIcon: {
-        width: undefined,
-        height: undefined,
-      },
-      clickable: {
-        '&:active': {
-          boxShadow: 'none'
-        }
-      }
-    }
   },
   props: {
     MuiButtonBase: {
@@ -92,9 +78,6 @@ export const appTheme = createTheme({
       InputLabelProps: {
         shrink: true,
       },
-    },
-    MuiPaper: {
-      square: true,
     },
     MuiFormControl: {
       variant: 'outlined',

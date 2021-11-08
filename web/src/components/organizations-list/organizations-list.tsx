@@ -19,11 +19,11 @@ export type OrganizationsListData = Partial<CursorPaginationResult<Organizations
 
 export type OrganizationsListItem = OrganizationPreviewData & {
   id: string;
-  jobsCount: number;
+  jobsCount?: number;
 };
 
 export type OrganizationsListMessages = {
-  jobsCount: (count: number) => string|undefined;
+  jobsCount: (count?: number) => string|undefined;
   view: string;
 };
 
@@ -49,9 +49,9 @@ export function OrganizationsList(props: OrganizationsListProps) {
   const classes = useOrganizationsListStyles();
 
   return (
-    <div>
+    <div className={classes.root}>
       {organizations.map((data) => (
-        <div key={data.id}>
+        <div key={data.id} className={classes.item}>
           <OrganizationPreview
             data={data}
             messages={{

@@ -7,7 +7,7 @@
   "jobLongDescription": "Long Description",
   "jobsCount": "{{ count }} jobs",
   "jobsAtOrganization": "Jobs at {{ organization }}",
-  "viewOrganization": "View",
+  "viewOrganization": "More Info",
   "saveOrganization": "Save",
   "createOrganization": "Create Organization",
   "organizationName":  "Organization Name",

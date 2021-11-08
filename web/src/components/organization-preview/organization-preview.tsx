@@ -1,5 +1,7 @@
 import React from 'react';
-import { Typography, Link } from '@material-ui/core';
+import { Card, CardContent, CardActions, Typography, Link } from '@material-ui/core';
+
+import { useOrganizationPreviewStyles } from './organization-preview.styles';
 
 export interface OrganizationPreviewProps {
   data: OrganizationPreviewData;
@@ -23,25 +25,27 @@ export interface OrganizationPreviewPaths {
 }
 
 export function OrganizationPreview(props: OrganizationPreviewProps) {
+  const classes = useOrganizationPreviewStyles();
+
   return (
-    <div>
-      <Typography>
-        {props.data.name}
-      </Typography>
+    <Card variant="elevation">
+      <CardContent>
+        <Typography variant="h2" className={classes.name}>
+          {props.data.name}
+        </Typography>
 
-      <Typography>
-        {props.data.shortDescription}
-      </Typography>
+        <Typography>
+          {props.data.shortDescription}
+        </Typography>
 
-      {props.messages.jobsCount && (
-        <Typography>{props.messages.jobsCount}</Typography>
-      )}
-
-      <Typography>
-        <Link href={props.paths.view}>
-          {props.messages.view}
-        </Link>
-      </Typography>
-    </div>
+        <CardActions className={classes.actions}>
+          <Typography>
+            <Link href={props.paths.view}>
+              {props.messages.view}
+            </Link>
+          </Typography>
+        </CardActions>
+      </CardContent>
+    </Card>
   );
 }

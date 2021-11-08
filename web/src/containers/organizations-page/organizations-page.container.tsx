@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
+import faker from 'faker';
 
 import { OrganizationsList, OrganizationsListData, OrganizationsListItem, OrganizationsListPaths } from '../../components';
 import { CursorPaginationResult } from '../../util';
@@ -49,9 +50,8 @@ async function getOrganizations(): Promise<CursorPaginationResult<OrganizationsL
 export const mockOrganizationData = () => {
   return {
     id: Math.random().toString(),
-    name: 'name',
-    website: 'www.url.com',
-    shortDescription: 'shortDescription',
-    jobsCount: 3,
+    name: faker.company.companyName(),
+    website: faker.internet.url(),
+    shortDescription: `${faker.company.catchPhrase()}`,
   }
 }
