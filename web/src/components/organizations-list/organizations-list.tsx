@@ -19,11 +19,11 @@ export type OrganizationsListData = Partial<CursorPaginationResult<Organizations
 
 export type OrganizationsListItem = OrganizationPreviewData & {
   id: string;
-  jobsCount?: number;
+  jobsCount: number;
 };
 
 export type OrganizationsListMessages = {
-  jobsCount: (count?: number) => string|undefined;
+  jobsCount: (count: number) => string|undefined;
   view: string;
 };
 

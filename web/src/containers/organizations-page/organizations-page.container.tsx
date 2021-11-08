@@ -53,5 +53,6 @@ export const mockOrganizationData = () => {
     name: faker.company.companyName(),
     website: faker.internet.url(),
     shortDescription: `${faker.company.catchPhrase()}`,
+    jobsCount: 0
   }
 }
