@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next';
 
 import { JobPageContainer } from '../../../containers';
+import { mockJobData } from '../../../mocks';
 
 export interface JobPageProps {
 }
@@ -12,14 +13,7 @@ export default function JobPage(props: JobPageProps) {
 
   return (
     <JobPageContainer
-      data={{
-        id: 'id',
-        title: 'title',
-        organizationId: 'organizationId',
-        shortDescription: 'shortDescription',
-        longDescription: 'longDescription',
-        organizationName: 'organizationName'
-      }}
+      data={mockJobData()}
       paths={paths}
     />
   )

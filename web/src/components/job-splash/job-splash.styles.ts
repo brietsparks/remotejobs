@@ -5,5 +5,8 @@ export const useJobSplashStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     gap: theme.spacing(4)
+  },
+  title: {
+    fontSize: '2rem'
   }
 }));

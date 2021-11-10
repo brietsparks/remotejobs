@@ -1,7 +1,8 @@
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { OrganizationsPageContainer, mockOrganizationData } from '../../containers';
+import { OrganizationsPageContainer} from '../../containers';
+import { mockOrganizationData } from '../../mocks';
 
 export interface OrganizationsPageProps {
 }

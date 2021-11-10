@@ -1,9 +1,14 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
-import faker from 'faker';
 
-import { OrganizationsList, OrganizationsListData, OrganizationsListItem, OrganizationsListPaths } from '../../components';
+import {
+  OrganizationsList,
+  OrganizationsListData,
+  OrganizationsListItem,
+  OrganizationsListPaths
+} from '../../components';
 import { CursorPaginationResult } from '../../util';
+import { mockOrganizationData } from '../../mocks';
 
 export interface OrganizationsPageProps {
   data? : OrganizationsPageData;
@@ -47,12 +52,3 @@ async function getOrganizations(): Promise<CursorPaginationResult<OrganizationsL
   });
 }
 
-export const mockOrganizationData = () => {
-  return {
-    id: Math.random().toString(),
-    name: faker.company.companyName(),
-    website: faker.internet.url(),
-    shortDescription: `${faker.company.catchPhrase()}`,
-    jobsCount: 0
-  }
-}

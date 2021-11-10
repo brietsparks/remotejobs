@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
-import { Typography, Link } from '@material-ui/core';
+import { Container, Typography, Link } from '@material-ui/core';
+import { OpenInNew as OpenInNewIcon } from '@material-ui/icons';
 
 import { Organization } from '../../domain';
 
@@ -19,20 +20,20 @@ export function OrganizationSplash(props: OrganizationSplashProps) {
   const classes = useOrganizationSplashStyles();
 
   return (
-    <div className={classes.root}>
-      <Typography>
-        {props.data.name}
-      </Typography>
-
-      <Typography>
-        <Link href={props.data.website}>
-          {props.data.website}
-        </Link>
-      </Typography>
-
-      <Typography>
-        {props.data.shortDescription}
-      </Typography>
+    <Container maxWidth="sm" className={classes.root}>
+      <header className={classes.header}>
+        <Typography component="h1" className={classes.name}>
+          {props.data.name}
+        </Typography>
+        <Typography className={classes.shortDescription}>
+          {props.data.shortDescription}
+        </Typography>
+        <Typography>
+          <Link href={props.data.website} target="_blank">
+            {props.data.website} <OpenInNewIcon fontSize="small" className={classes.linkIcon} />
+          </Link>
+        </Typography>
+      </header>
 
       <Typography>
         {props.data.longDescription}
@@ -40,10 +41,16 @@ export function OrganizationSplash(props: OrganizationSplashProps) {
 
       {props.jobsList && (
         <div>
-          <Typography>{props.messages.jobs}</Typography>
+          <Typography
+            component="h2"
+            className={classes.jobsHeading}
+          >
+            {props.messages.jobs}
+          </Typography>
+
           {props.jobsList}
         </div>
       )}
-    </div>
+    </Container>
   )
 }

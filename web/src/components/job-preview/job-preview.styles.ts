@@ -5,7 +5,6 @@ export const useJobPreviewStyles = makeStyles(theme => ({
   },
   title: {
     fontSize: 20,
-    fontWeight: 'bold'
   },
   actions: {
     justifyContent: 'right'

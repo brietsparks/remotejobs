@@ -3,7 +3,8 @@ import { useTranslation } from 'next-i18next';
 
 import { Organization } from '../../domain';
 import { OrganizationSplash } from '../../components';
-import { JobsListContainer, JobsListContainerPaths, mockJobData } from '../jobs-list';
+import { mockJobData } from '../../mocks';
+import { JobsListContainer, JobsListContainerPaths } from '../jobs-list';
 
 export interface OrganizationPageContainerProps {
   data: Organization

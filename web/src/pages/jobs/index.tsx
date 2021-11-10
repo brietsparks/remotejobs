@@ -1,7 +1,8 @@
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { JobsListContainer, JobsListContainerData, mockJobData } from '../../containers';
+import { JobsListContainer } from '../../containers';
+import { mockJobData } from '../../mocks';
 
 export interface JobsPageProps {
 }

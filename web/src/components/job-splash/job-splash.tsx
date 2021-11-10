@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Link } from '@material-ui/core';
+import { Container, Typography, Link } from '@material-ui/core';
 
 import { Job } from '../../domain';
 
@@ -22,16 +22,18 @@ export function JobSplash(props: JobSplashProps) {
   const classes = useJobSplashStyles();
 
   return (
-    <div className={classes.root}>
-      <Typography>
-        {props.data.title}
-      </Typography>
+    <Container maxWidth="sm" className={classes.root}>
+      <header>
+        <Typography component="h1" className={classes.title}>
+          {props.data.title}
+        </Typography>
 
-      <Typography>
-        <Link href={props.paths.organization}>
-          {props.data.organizationName}
-        </Link>
-      </Typography>
+        <Typography>
+          <Link href={props.paths.organization}>
+            {props.data.organizationName}
+          </Link>
+        </Typography>
+      </header>
 
       <Typography>
         {props.data.shortDescription}
@@ -40,6 +42,6 @@ export function JobSplash(props: JobSplashProps) {
       <Typography>
         {props.data.longDescription}
       </Typography>
-    </div>
+    </Container>
   )
 }

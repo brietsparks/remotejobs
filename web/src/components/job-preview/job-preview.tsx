@@ -9,7 +9,6 @@ export interface JobPreviewProps {
   messages: JobPreviewMessages;
   paths: JobPreviewPaths;
   showOrganizationName: boolean;
-  titleComponent?: 'h2' | 'h3';
 }
 
 export interface JobPreviewData {
@@ -33,7 +32,7 @@ export function JobPreview(props: JobPreviewProps) {
   return (
     <Card variant="elevation">
       <CardContent>
-        <Typography component={props.titleComponent || 'h2'} className={classes.title}>
+        <Typography component="h3" className={classes.title}>
           {props.data.title}
         </Typography>
 
