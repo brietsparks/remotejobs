@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'next-i18next';
 
 import { Organization } from '../../domain';
-import { OrganizationSplash } from '../../components';
+import { OrganizationDetails } from '../../components';
 import { mockJobData } from '../../mocks';
 import { JobsListContainer, JobsListContainerPaths } from '../jobs-list';
 
@@ -36,7 +36,7 @@ export function OrganizationPageContainer(props: OrganizationPageContainerProps)
   };
 
   return (
-    <OrganizationSplash
+    <OrganizationDetails
       data={props.data}
       jobsList={jobsList}
       messages={messages}

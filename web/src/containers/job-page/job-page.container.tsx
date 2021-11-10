@@ -1,17 +1,17 @@
 import React from 'react';
 
-import { JobSplash, JobSplashData, JobSplashPaths } from '../../components';
+import { JobDetails, JobDetailsData, JobDetailsPaths } from '../../components';
 
 export interface JobPageContainerProps {
-  data: JobSplashData;
+  data: JobDetailsData;
   paths: JobPageContainerPaths;
 }
 
-export type JobPageContainerPaths = JobSplashPaths;
+export type JobPageContainerPaths = JobDetailsPaths;
 
 export function JobPageContainer(props: JobPageContainerProps) {
   return (
-    <JobSplash
+    <JobDetails
       data={props.data}
       paths={props.paths}
     />

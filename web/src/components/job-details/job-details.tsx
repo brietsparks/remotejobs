@@ -3,23 +3,23 @@ import { Container, Typography, Link } from '@material-ui/core';
 
 import { Job } from '../../domain';
 
-import { useJobSplashStyles } from './job-splash.styles';
+import { useJobDetailsStyles } from './job-details.styles';
 
-export interface JobSplashProps {
-  data: JobSplashData;
-  paths: JobSplashPaths;
+export interface JobDetailsProps {
+  data: JobDetailsData;
+  paths: JobDetailsPaths;
 }
 
-export type JobSplashData = Job & {
+export type JobDetailsData = Job & {
   organizationName: string;
 }
 
-export interface JobSplashPaths {
+export interface JobDetailsPaths {
   organization: string;
 }
 
-export function JobSplash(props: JobSplashProps) {
-  const classes = useJobSplashStyles();
+export function JobDetails(props: JobDetailsProps) {
+  const classes = useJobDetailsStyles();
 
   return (
     <Container maxWidth="sm" className={classes.root}>

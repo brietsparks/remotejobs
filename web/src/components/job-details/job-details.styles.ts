@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useJobSplashStyles = makeStyles(theme => ({
+export const useJobDetailsStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',

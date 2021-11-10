@@ -4,20 +4,20 @@ import { OpenInNew as OpenInNewIcon } from '@material-ui/icons';
 
 import { Organization } from '../../domain';
 
-import { useOrganizationSplashStyles } from './organization-splash.styles';
+import { useOrganizationDetailsStyles } from './organization-details.styles';
 
-export interface OrganizationSplashProps {
+export interface OrganizationDetailsProps {
   data: Organization;
   jobsList?: ReactNode;
-  messages: OrganizationSplashMessages;
+  messages: OrganizationDetailsMessages;
 }
 
-export interface OrganizationSplashMessages {
+export interface OrganizationDetailsMessages {
   jobs: string
 }
 
-export function OrganizationSplash(props: OrganizationSplashProps) {
-  const classes = useOrganizationSplashStyles();
+export function OrganizationDetails(props: OrganizationDetailsProps) {
+  const classes = useOrganizationDetailsStyles();
 
   return (
     <Container maxWidth="sm" className={classes.root}>

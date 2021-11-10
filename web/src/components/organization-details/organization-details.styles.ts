@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useOrganizationSplashStyles = makeStyles(theme => ({
+export const useOrganizationDetailsStyles = makeStyles(theme => ({
   root: {
   },
   header: {
