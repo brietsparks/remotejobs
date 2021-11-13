@@ -1,4 +1,7 @@
 {
+  "about": "About",
+  "jobs": "Jobs",
+  "organizations": "Organizations",
   "viewJob": "View Job",
   "createJob": "Create Job",
   "saveJob": "Save",

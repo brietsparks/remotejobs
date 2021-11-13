@@ -4,6 +4,7 @@ import { useTranslation } from 'next-i18next';
 import { Organization } from '../../domain';
 import { OrganizationDetails } from '../../components';
 import { mockJobData } from '../../mocks';
+import { LayoutContainer, LayoutContainerPaths } from '../layout';
 import { JobsListContainer, JobsListContainerPaths } from '../jobs-list';
 
 export interface OrganizationPageContainerProps {
@@ -11,7 +12,7 @@ export interface OrganizationPageContainerProps {
   paths: OrganizationPageContainerPaths;
 }
 
-export type OrganizationPageContainerPaths = JobsListContainerPaths;
+export type OrganizationPageContainerPaths = JobsListContainerPaths & LayoutContainerPaths;
 
 export function OrganizationPageContainer(props: OrganizationPageContainerProps) {
   const { t } = useTranslation();
@@ -36,10 +37,12 @@ export function OrganizationPageContainer(props: OrganizationPageContainerProps)
   };
 
   return (
-    <OrganizationDetails
-      data={props.data}
-      jobsList={jobsList}
-      messages={messages}
-    />
+    <LayoutContainer paths={props.paths}>
+      <OrganizationDetails
+        data={props.data}
+        jobsList={jobsList}
+        messages={messages}
+      />
+    </LayoutContainer>
   );
 }

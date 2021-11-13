@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { JobEditorPageContainer } from '../../../containers';
+import { navPaths } from '../../paths';
 
 export interface EditJobPageProps {
 }
@@ -22,6 +23,7 @@ export default function EditJobPage(props: EditJobPageProps) {
         longDescription: 'longDescription',
       }}
       onSuccess={handleSuccess}
+      paths={navPaths}
   />
 )
 }

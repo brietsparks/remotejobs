@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState, useCallback } from 'react';
-import { TextField, Button } from '@material-ui/core';
+import { Container, TextField, Button } from '@material-ui/core';
 import { useAsync } from 'react-async';
 
 import { useOrganizationEditorFormStyles } from './organization-editor-form.styles';
@@ -65,7 +65,7 @@ export function OrganizationEditorForm(props: OrganizationEditorFormProps) {
   };
 
   return (
-    <div className={classes.root} role="form">
+    <Container className={classes.root} role="form">
       <TextField
         id="organization-name-input"
         label={props.messages.name}
@@ -100,9 +100,11 @@ export function OrganizationEditorForm(props: OrganizationEditorFormProps) {
       <Button
         onClick={submit}
         disabled={!isValid || isPending}
+        color="primary"
+        variant="contained"
       >
         {props.messages.submit}
       </Button>
-    </div>
+    </Container>
   )
 }

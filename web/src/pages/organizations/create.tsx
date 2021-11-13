@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { OrganizationCreatorPageContainer } from '../../containers';
+import { navPaths } from '../paths';
 
 export interface CreateOrganizationPageProps {
 }
@@ -15,6 +16,7 @@ export default function CreateOrganizationPage(props: CreateOrganizationPageProp
   return (
     <OrganizationCreatorPageContainer
       onSuccess={handleSuccess}
+      paths={navPaths}
     />
   )
 }

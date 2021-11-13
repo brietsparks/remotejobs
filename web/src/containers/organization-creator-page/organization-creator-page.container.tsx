@@ -1,13 +1,17 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
 
+import { LayoutContainer, LayoutContainerPaths } from '../layout';
 import { OrganizationEditorContainer, OrganizationEditorContainerValues } from '../organization-editor';
 
-export interface OrganizationCreatorPageProps {
+export interface OrganizationCreatorPageContainerProps {
   onSuccess: () => void;
+  paths: OrganizationCreatorPageContainerPaths
 }
 
-export function OrganizationCreatorPageContainer(props: OrganizationCreatorPageProps) {
+export type OrganizationCreatorPageContainerPaths = LayoutContainerPaths;
+
+export function OrganizationCreatorPageContainer(props: OrganizationCreatorPageContainerProps) {
   const { t } = useTranslation();
 
   const submit = async (values: OrganizationEditorContainerValues) => {
@@ -19,10 +23,12 @@ export function OrganizationCreatorPageContainer(props: OrganizationCreatorPageP
   };
 
   return (
-    <OrganizationEditorContainer
-      onSuccess={props.onSuccess}
-      submit={submit}
-      messages={messages}
-    />
+    <LayoutContainer paths={props.paths}>
+      <OrganizationEditorContainer
+        onSuccess={props.onSuccess}
+        submit={submit}
+        messages={messages}
+      />
+    </LayoutContainer>
   );
 }

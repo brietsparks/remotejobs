@@ -3,13 +3,15 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { OrganizationsPageContainer} from '../../containers';
 import { mockOrganizationData } from '../../mocks';
+import { navPaths } from '../paths';
 
 export interface OrganizationsPageProps {
 }
 
 export default function OrganizationsPage(props: OrganizationsPageProps) {
   const paths = {
-    view: (id: string) => `/organizations/${id}`
+    view: (id: string) => `/organizations/${id}`,
+    ...navPaths
   };
 
   return (

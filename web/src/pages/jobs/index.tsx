@@ -1,8 +1,9 @@
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { JobsListContainer } from '../../containers';
+import { JobsPageContainer } from '../../containers';
 import { mockJobData } from '../../mocks';
+import { navPaths } from '../paths';
 
 export interface JobsPageProps {
 }
@@ -10,11 +11,12 @@ export interface JobsPageProps {
 export default function JobsPage(props: JobsPageProps) {
   const paths = {
     job: (id: string) => `/jobs/${id}`,
-    organization: (id: string) => `/organizations/${id}`
+    organization: (id: string) => `/organizations/${id}`,
+    ...navPaths
   };
 
   return (
-    <JobsListContainer
+    <JobsPageContainer
       data={{
         items: [
           mockJobData(), mockJobData(), mockJobData(), mockJobData(),
@@ -24,7 +26,6 @@ export default function JobsPage(props: JobsPageProps) {
         cursor: ''
       }}
       paths={paths}
-      showOrganizationName={true}
     />
   )
 }

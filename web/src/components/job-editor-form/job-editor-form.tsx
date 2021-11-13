@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState, useCallback } from 'react';
-import { Typography, TextField, Button } from '@material-ui/core';
+import { Container, Typography, TextField, Button } from '@material-ui/core';
 import { useAsync } from 'react-async';
 
 import { useJobEditorFormStyles } from './job-editor-form.styles';
@@ -62,7 +62,7 @@ export function JobEditorForm(props: JobEditorFormProps) {
   };
 
   return (
-    <div className={classes.root} role="form">
+    <Container className={classes.root} role="form">
       <Typography>
         {props.organizationName}
       </Typography>
@@ -97,6 +97,6 @@ export function JobEditorForm(props: JobEditorFormProps) {
       >
         {props.messages.submit}
       </Button>
-    </div>
+    </Container>
   )
 }

@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { OrganizationEditorPageContainer } from '../../../containers';
+import { navPaths } from '../../paths';
 
 export interface EditOrganizationPageProps {
 }
@@ -22,6 +23,7 @@ export default function EditOrganizationPage(props: EditOrganizationPageProps) {
         website: 'www.url.com'
       }}
       onSuccess={handleSuccess}
+      paths={navPaths}
     />
   );
 }

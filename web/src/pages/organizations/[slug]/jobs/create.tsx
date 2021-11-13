@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { JobCreatorPageContainer } from '../../../../containers';
+import { navPaths } from '../../../paths';
 
 export interface CreateJobPageProps {
 }
@@ -17,6 +18,7 @@ export default function CreateJobPage(props: CreateJobPageProps) {
       organizationId="organizationId"
       organizationName="organizationName"
       onSuccess={handleSuccess}
+      paths={navPaths}
     />
   )
 }

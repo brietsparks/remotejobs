@@ -9,15 +9,16 @@ import {
 } from '../../components';
 import { CursorPaginationResult } from '../../util';
 import { mockOrganizationData } from '../../mocks';
+import { LayoutContainer, LayoutContainerPaths } from '../layout';
 
 export interface OrganizationsPageProps {
-  data? : OrganizationsPageData;
+  data?: OrganizationsPageData;
   paths: OrganizationsPagePaths;
 }
 
 export type OrganizationsPageData = OrganizationsListData;
 
-export type OrganizationsPagePaths = OrganizationsListPaths;
+export type OrganizationsPagePaths = OrganizationsListPaths & LayoutContainerPaths;
 
 export function OrganizationsPageContainer(props: OrganizationsPageProps) {
   const { t } = useTranslation();
@@ -28,12 +29,14 @@ export function OrganizationsPageContainer(props: OrganizationsPageProps) {
   };
 
   return (
-    <OrganizationsList
-      data={props.data}
-      getOrganizations={getOrganizations}
-      messages={messages}
-      paths={props.paths}
-    />
+    <LayoutContainer paths={props.paths}>
+      <OrganizationsList
+        data={props.data}
+        getOrganizations={getOrganizations}
+        messages={messages}
+        paths={props.paths}
+      />
+    </LayoutContainer>
   )
 }
 
