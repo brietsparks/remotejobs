@@ -19,5 +19,12 @@ export const useOrganizationsListStyles = makeStyles(theme => ({
   loadingTrigger: {
     width: '100%',
     height: 1
+  },
+  createLink: {
+    position: 'absolute',
+    right: 0,
+    '&:hover': {
+      textDecoration: 'none'
+    }
   }
 }));

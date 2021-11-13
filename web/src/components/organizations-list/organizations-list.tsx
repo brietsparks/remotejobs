@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { CircularProgress } from '@material-ui/core';
 import { useInView } from 'react-intersection-observer';
+import { Button, Link } from '@material-ui/core';
 
 import { useInfiniteLoad } from '../../hooks';
 import { CursorPaginationResult } from '../../util';
-import { OrganizationPreview, OrganizationPreviewData, OrganizationPreviewMessages } from '../organization-preview';
+import { OrganizationPreview, OrganizationPreviewData } from '../organization-preview';
 
 import { useOrganizationsListStyles } from './organizations-list.styles';
 
@@ -25,10 +26,12 @@ export type OrganizationsListItem = OrganizationPreviewData & {
 export type OrganizationsListMessages = {
   jobsCount: (count: number) => string|undefined;
   view: string;
+  create: string;
 };
 
 export interface OrganizationsListPaths {
   view: (id: string) => string;
+  create: string;
 }
 
 export function OrganizationsList(props: OrganizationsListProps) {
@@ -50,6 +53,16 @@ export function OrganizationsList(props: OrganizationsListProps) {
 
   return (
     <div className={classes.root}>
+      <Button
+        variant="contained"
+        color="primary"
+        component={Link}
+        href={props.paths.create}
+        className={classes.createLink}
+      >
+        {props.messages.create}
+      </Button>
+
       {organizations.map((data) => (
         <div key={data.id} className={classes.item}>
           <OrganizationPreview

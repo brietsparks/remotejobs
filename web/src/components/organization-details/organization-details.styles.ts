@@ -16,8 +16,23 @@ export const useOrganizationDetailsStyles = makeStyles(theme => ({
     verticalAlign: 'text-top',
     marginLeft: 2
   },
+  longDescription: {
+    marginBottom: theme.spacing(4),
+  },
+  jobsHeader: {
+    marginBottom: theme.spacing(4),
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'end',
+  },
   jobsHeading: {
-    marginTop: theme.spacing(4),
-    fontSize: '1.25rem'
+    fontSize: '1.25rem',
+  },
+  createJobLink: {
+    marginLeft: theme.spacing(2),
+    whiteSpace: 'nowrap',
+    '&:hover': {
+      textDecoration: 'none'
+    }
   }
 }));

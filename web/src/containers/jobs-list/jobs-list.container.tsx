@@ -19,7 +19,8 @@ export function JobsListContainer(props: JobsListContainerProps) {
   const { t } = useTranslation();
 
   const messages = {
-    view: t('viewJob')
+    view: t('viewJob'),
+    create: t('createJob')
   };
 
   return (

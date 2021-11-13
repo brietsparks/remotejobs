@@ -12,7 +12,11 @@ export interface OrganizationPageContainerProps {
   paths: OrganizationPageContainerPaths;
 }
 
-export type OrganizationPageContainerPaths = JobsListContainerPaths & LayoutContainerPaths;
+export type OrganizationPageContainerPaths =
+  LayoutContainerPaths &
+  JobsListContainerPaths & {
+  createJob: string;
+};
 
 export function OrganizationPageContainer(props: OrganizationPageContainerProps) {
   const { t } = useTranslation();
@@ -33,7 +37,8 @@ export function OrganizationPageContainer(props: OrganizationPageContainerProps)
   );
 
   const messages = {
-    jobs: t('jobsAtOrganization', { organization: props.data.name })
+    jobs: t('jobsAtOrganization', { organization: props.data.name }),
+    createJob: t('createJob')
   };
 
   return (
@@ -42,6 +47,7 @@ export function OrganizationPageContainer(props: OrganizationPageContainerProps)
         data={props.data}
         jobsList={jobsList}
         messages={messages}
+        paths={props.paths}
       />
     </LayoutContainer>
   );

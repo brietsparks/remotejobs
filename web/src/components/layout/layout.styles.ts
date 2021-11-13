@@ -1,10 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useLayoutStyles = makeStyles(theme => ({
-  container: {
+  navContainer: {
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   navList: {
     display: 'flex',
@@ -15,6 +15,7 @@ export const useLayoutStyles = makeStyles(theme => ({
     gap: theme.spacing(4)
   },
   main: {
-    marginTop: theme.spacing(12)
+    marginTop: theme.spacing(12),
+    position: 'relative',
   },
 }));

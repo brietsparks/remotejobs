@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { CircularProgress } from '@material-ui/core';
+import { Button, Link, CircularProgress } from '@material-ui/core';
 import { useInView } from 'react-intersection-observer';
 
 import { useInfiniteLoad } from '../../hooks';
@@ -26,7 +26,7 @@ export type JobsListItem = JobPreviewData & {
 export type JobsListMessages = JobPreviewMessages;
 
 export interface JobsListPaths {
-  organization: (id: string) => string;
+  organization: (id: string) => string; // todo: change to string
   job: (id: string) => string;
 }
 

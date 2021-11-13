@@ -29,7 +29,7 @@ export function Layout(props: LayoutProps) {
     <div>
       <AppBar position="fixed">
         <Toolbar>
-          <Container className={classes.container}>
+          <Container className={classes.navContainer}>
             <Logo />
             <nav>
               <ul className={classes.navList}>
@@ -42,9 +42,9 @@ export function Layout(props: LayoutProps) {
         </Toolbar>
       </AppBar>
 
-      <main className={classes.main}>
+      <Container component="main" className={classes.main}>
         {props.children}
-      </main>
+      </Container>
     </div>
   )
 }

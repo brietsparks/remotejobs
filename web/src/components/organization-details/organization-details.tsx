@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Container, Typography, Link } from '@material-ui/core';
+import { Container, Typography, Link, Button } from '@material-ui/core';
 import { OpenInNew as OpenInNewIcon } from '@material-ui/icons';
 
 import { Organization } from '../../domain';
@@ -10,10 +10,16 @@ export interface OrganizationDetailsProps {
   data: Organization;
   jobsList?: ReactNode;
   messages: OrganizationDetailsMessages;
+  paths: OrganizationDetailsPaths;
 }
 
 export interface OrganizationDetailsMessages {
-  jobs: string
+  jobs: string;
+  createJob: string;
+}
+
+export interface OrganizationDetailsPaths {
+  createJob: string;
 }
 
 export function OrganizationDetails(props: OrganizationDetailsProps) {
@@ -35,18 +41,30 @@ export function OrganizationDetails(props: OrganizationDetailsProps) {
         </Typography>
       </header>
 
-      <Typography>
+      <Typography className={classes.longDescription}>
         {props.data.longDescription}
       </Typography>
 
       {props.jobsList && (
         <div>
-          <Typography
-            component="h2"
-            className={classes.jobsHeading}
-          >
-            {props.messages.jobs}
-          </Typography>
+          <div className={classes.jobsHeader}>
+            <Typography
+              component="h2"
+              className={classes.jobsHeading}
+            >
+              {props.messages.jobs}
+            </Typography>
+
+            <Button
+              variant="contained"
+              color="primary"
+              component={Link}
+              href={props.paths.createJob}
+              className={classes.createJobLink}
+            >
+              {props.messages.createJob}
+            </Button>
+          </div>
 
           {props.jobsList}
         </div>
