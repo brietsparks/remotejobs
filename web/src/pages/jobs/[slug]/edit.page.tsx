@@ -6,12 +6,18 @@ import { JobEditorPageContainer } from '../../../containers';
 import { navPaths } from '../../paths';
 
 export interface EditJobPageProps {
+  id: string;
 }
 
 export default function EditJobPage(props: EditJobPageProps) {
   const router = useRouter();
 
-  const handleSuccess = () => router.push('/home');
+  const handleSuccess = () => router.push(`/jobs/${props.id}`);
+
+  const paths = {
+    cancel: `/jobs/${props.id}`,
+    ...navPaths
+  }
 
   return (
     <JobEditorPageContainer
@@ -23,15 +29,20 @@ export default function EditJobPage(props: EditJobPageProps) {
         longDescription: 'longDescription',
       }}
       onSuccess={handleSuccess}
-      paths={navPaths}
-  />
-)
+      paths={paths}
+    />
+  );
 }
 
-export const getServerSideProps: GetServerSideProps<EditJobPageProps> = async ({ locale }) => {
+export type EditJobPageUrlParams = {
+  slug: string;
+}
+
+export const getServerSideProps: GetServerSideProps<EditJobPageProps, EditJobPageUrlParams> = async (ctx) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale as string, ['common']))
+      id: ctx.params?.slug as string,
+      ...(await serverSideTranslations(ctx.locale as string, ['common']))
     }
   }
 }

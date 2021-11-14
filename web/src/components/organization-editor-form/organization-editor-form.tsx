@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState, useCallback } from 'react';
-import { Container, TextField, Button } from '@material-ui/core';
+import { Container, Typography, Link, TextField, Button } from '@material-ui/core';
 import { useAsync } from 'react-async';
 
 import { useOrganizationEditorFormStyles } from './organization-editor-form.styles';
@@ -10,6 +10,7 @@ export interface OrganizationEditorFormProps {
   submit: (values: OrganizationEditorFormValues) => Promise<unknown>;
   onSuccess: (result: unknown) => void;
   onFailure?: (error: Error) => void;
+  paths: OrganizationEditorFormPaths;
 }
 
 export interface OrganizationEditorFormMessages {
@@ -18,6 +19,11 @@ export interface OrganizationEditorFormMessages {
   shortDescription: string;
   longDescription: string;
   submit: string;
+  cancel: string;
+}
+
+export interface OrganizationEditorFormPaths {
+  cancel: string;
 }
 
 export interface OrganizationEditorFormValues {
@@ -66,6 +72,10 @@ export function OrganizationEditorForm(props: OrganizationEditorFormProps) {
 
   return (
     <Container className={classes.root} role="form">
+      <Typography>
+        <Link href={props.paths.cancel}>{props.messages.cancel}</Link>
+      </Typography>
+
       <TextField
         id="organization-name-input"
         label={props.messages.name}

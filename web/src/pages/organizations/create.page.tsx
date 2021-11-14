@@ -11,12 +11,17 @@ export interface CreateOrganizationPageProps {
 export default function CreateOrganizationPage(props: CreateOrganizationPageProps) {
   const router = useRouter();
 
-  const handleSuccess = () => router.push('/home');
+  const handleSuccess = () => router.push('/organizations');
+
+  const paths = {
+    cancel: '/organizations',
+    ...navPaths
+  }
 
   return (
     <OrganizationCreatorPageContainer
       onSuccess={handleSuccess}
-      paths={navPaths}
+      paths={paths}
     />
   )
 }

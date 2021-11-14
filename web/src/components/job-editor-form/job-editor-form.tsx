@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState, useCallback } from 'react';
-import { Container, Typography, TextField, Button } from '@material-ui/core';
+import { Container, Typography, Link, TextField, Button } from '@material-ui/core';
 import { useAsync } from 'react-async';
 
 import { useJobEditorFormStyles } from './job-editor-form.styles';
@@ -8,16 +8,22 @@ export interface JobEditorFormProps {
   organizationName: string;
   values?: JobEditorFormValues;
   messages: JobEditorFormMessages;
+  paths: JobEditorFormPaths;
   submit: (values: JobEditorFormValues) => Promise<unknown>;
   onSuccess: (result: unknown) => void;
   onFailure?: (error: Error) => void;
 }
 
 export interface JobEditorFormMessages {
+  cancel: string;
   title: string;
   shortDescription: string;
   longDescription: string;
   submit: string;
+}
+
+export interface JobEditorFormPaths {
+  cancel: string;
 }
 
 export interface JobEditorFormValues {
@@ -63,6 +69,10 @@ export function JobEditorForm(props: JobEditorFormProps) {
 
   return (
     <Container className={classes.root} role="form">
+      <Typography>
+        <Link href={props.paths.cancel}>{props.messages.cancel}</Link>
+      </Typography>
+
       <Typography>
         {props.organizationName}
       </Typography>

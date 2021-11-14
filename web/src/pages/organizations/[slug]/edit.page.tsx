@@ -6,12 +6,18 @@ import { OrganizationEditorPageContainer } from '../../../containers';
 import { navPaths } from '../../paths';
 
 export interface EditOrganizationPageProps {
+  id: string;
 }
 
 export default function EditOrganizationPage(props: EditOrganizationPageProps) {
   const router = useRouter();
 
-  const handleSuccess = () => router.push('/home');
+  const handleSuccess = () => router.push(`/organizations/${props.id}`);
+
+  const paths = {
+    cancel: `/organizations/${props.id}`,
+    ...navPaths
+  }
 
   return (
     <OrganizationEditorPageContainer
@@ -23,15 +29,20 @@ export default function EditOrganizationPage(props: EditOrganizationPageProps) {
         website: 'www.url.com'
       }}
       onSuccess={handleSuccess}
-      paths={navPaths}
+      paths={paths}
     />
   );
 }
 
-export const getServerSideProps: GetServerSideProps<EditOrganizationPageProps> = async ({ locale }) => {
+export type EditOrganizationPageUrlParams = {
+  slug: string;
+}
+
+export const getServerSideProps: GetServerSideProps<EditOrganizationPageProps, EditOrganizationPageUrlParams> = async (ctx) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale as string, ['common']))
+      id: ctx.params?.slug as string,
+      ...(await serverSideTranslations(ctx.locale as string, ['common']))
     }
   }
 }

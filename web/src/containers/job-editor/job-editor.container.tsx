@@ -11,12 +11,18 @@ export interface JobEditorContainerProps {
   submit: (values: JobEditorContainerValues) => Promise<unknown>;
   onSuccess: () => void;
   messages: Partial<JobEditorFormMessages>;
+  paths: JobEditorContainerPaths;
+}
+
+export interface JobEditorContainerPaths {
+  cancel: string;
 }
 
 export function JobEditorContainer(props: JobEditorContainerProps) {
   const { t } = useTranslation();
 
   const messages = {
+    cancel: t('cancel'),
     title: t('jobTitle'),
     shortDescription: t('jobShortDescription'),
     longDescription: t('jobLongDescription'),
@@ -31,6 +37,7 @@ export function JobEditorContainer(props: JobEditorContainerProps) {
       onSuccess={props.onSuccess}
       submit={props.submit}
       messages={messages}
+      paths={props.paths}
     />
   );
 }

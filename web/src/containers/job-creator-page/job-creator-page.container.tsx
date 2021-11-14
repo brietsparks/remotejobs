@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'next-i18next';
 
 import { LayoutContainer, LayoutContainerPaths } from '../layout';
-import { JobEditorContainer, JobEditorContainerValues } from '../job-editor';
+import { JobEditorContainer, JobEditorContainerPaths, JobEditorContainerValues } from '../job-editor';
 
 export interface JobCreatorPageProps {
   organizationId: string;
@@ -11,7 +11,7 @@ export interface JobCreatorPageProps {
   paths: JobCreatorPagePaths;
 }
 
-export type JobCreatorPagePaths = LayoutContainerPaths;
+export type JobCreatorPagePaths = LayoutContainerPaths & JobEditorContainerPaths;
 
 export function JobCreatorPageContainer(props: JobCreatorPageProps) {
   const { t } = useTranslation();
@@ -34,6 +34,7 @@ export function JobCreatorPageContainer(props: JobCreatorPageProps) {
         onSuccess={props.onSuccess}
         submit={submit}
         messages={messages}
+        paths={props.paths}
       />
     </LayoutContainer>
   )

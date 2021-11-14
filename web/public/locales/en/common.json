@@ -6,6 +6,7 @@
   "createJob": "Post Job",
   "editJob": "Edit",
   "saveJob": "Save",
+  "cancel": "Cancel",
   "jobTitle": "Title",
   "jobShortDescription": "Short Description",
   "jobLongDescription": "Long Description",

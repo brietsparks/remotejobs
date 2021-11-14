@@ -1,14 +1,19 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
 
-import { OrganizationEditorForm, OrganizationEditorFormValues, OrganizationEditorFormMessages } from '../../components';
+import { OrganizationEditorForm, OrganizationEditorFormValues, OrganizationEditorFormMessages, OrganizationEditorFormPaths } from '../../components';
 
 export interface OrganizationEditorContainerProps {
   values?: OrganizationEditorFormValues;
   onSuccess: () => void;
   submit: (values: OrganizationEditorContainerValues) => Promise<unknown>;
-  messages: Partial<OrganizationEditorFormMessages>;
+  messages?: OrganizationEditorContainerMessages;
+  paths: OrganizationEditorContainerPaths;
 }
+
+export type OrganizationEditorContainerMessages = Partial<OrganizationEditorFormMessages>;
+
+export type OrganizationEditorContainerPaths = OrganizationEditorFormPaths;
 
 export type OrganizationEditorContainerValues = OrganizationEditorFormValues;
 
@@ -21,6 +26,7 @@ export function OrganizationEditorContainer(props: OrganizationEditorContainerPr
     shortDescription: t('organizationShortDescription'),
     longDescription: t('organizationLongDescription'),
     submit: t('saveJob'),
+    cancel: t('cancel'),
     ...props.messages
   };
 
@@ -30,6 +36,7 @@ export function OrganizationEditorContainer(props: OrganizationEditorContainerPr
       onSuccess={props.onSuccess}
       submit={props.submit}
       messages={messages}
+      paths={props.paths}
     />
   )
 }

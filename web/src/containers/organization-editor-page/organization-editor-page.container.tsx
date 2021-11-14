@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'next-i18next';
 
 import { LayoutContainer, LayoutContainerPaths } from '../layout';
-import { OrganizationEditorContainer, OrganizationEditorContainerValues } from '../organization-editor';
+import { OrganizationEditorContainer, OrganizationEditorContainerPaths, OrganizationEditorContainerValues } from '../organization-editor';
 
 export interface OrganizationEditorPageContainerProps {
   id: string;
@@ -11,7 +11,7 @@ export interface OrganizationEditorPageContainerProps {
   paths: OrganizationEditorPageContainerPaths;
 }
 
-export type OrganizationEditorPageContainerPaths = LayoutContainerPaths;
+export type OrganizationEditorPageContainerPaths = LayoutContainerPaths & OrganizationEditorContainerPaths;
 
 export function OrganizationEditorPageContainer(props: OrganizationEditorPageContainerProps) {
   const { t } = useTranslation();
@@ -34,6 +34,7 @@ export function OrganizationEditorPageContainer(props: OrganizationEditorPageCon
         onSuccess={props.onSuccess}
         submit={submit}
         messages={messages}
+        paths={props.paths}
       />
     </LayoutContainer>
   )
