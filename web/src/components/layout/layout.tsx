@@ -1,11 +1,11 @@
-import React, { ReactNode } from 'react';
+import React, { ReactElement } from 'react';
 import { AppBar, Toolbar, Container, Link } from '@material-ui/core';
 
 import { Logo } from './logo';
 import { useLayoutStyles } from './layout.styles';
 
 export interface LayoutProps {
-  children: ReactNode;
+  children: ReactElement;
   paths: LayoutPaths;
   messages: LayoutMessages;
 }

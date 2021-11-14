@@ -27,7 +27,7 @@ export default function JobPage(props: JobPageProps) {
   )
 }
 
-export interface JobPageUrlParams {
+export type JobPageUrlParams = {
   slug: string;
 }
 

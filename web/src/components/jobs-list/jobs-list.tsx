@@ -61,7 +61,6 @@ export function JobsList(props: JobsListProps) {
               organization: props.paths.organization?.(data.organizationId),
               job: props.paths.job(data.id)
             }}
-            showOrganizationName={props.showOrganizationName}
           />
         </div>
       ))}

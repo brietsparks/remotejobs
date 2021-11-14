@@ -38,7 +38,7 @@ export function OrganizationDetails(props: OrganizationDetailsProps) {
             {props.data.shortDescription}
           </Typography>
           <Typography>
-            <Link href={props.data.website} target="_blank">
+            <Link href="#">
               {props.data.website} <OpenInNewIcon fontSize="small" className={classes.linkIcon} />
             </Link>
           </Typography>
@@ -46,7 +46,6 @@ export function OrganizationDetails(props: OrganizationDetailsProps) {
 
         <div>
           <Button
-            component={Link}
             href={props.paths.edit}
             className={classes.editLink}
             variant="contained"
@@ -74,7 +73,6 @@ export function OrganizationDetails(props: OrganizationDetailsProps) {
             <Button
               variant="contained"
               color="primary"
-              component={Link}
               href={props.paths.createJob}
               className={classes.createJobLink}
             >

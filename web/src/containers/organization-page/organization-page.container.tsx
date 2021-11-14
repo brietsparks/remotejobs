@@ -16,6 +16,7 @@ export type OrganizationPageContainerPaths =
   LayoutContainerPaths &
   JobsListContainerPaths & {
   createJob: string;
+  edit: string;
 };
 
 export function OrganizationPageContainer(props: OrganizationPageContainerProps) {

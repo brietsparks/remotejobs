@@ -44,7 +44,6 @@ export function JobDetails(props: JobDetailsProps) {
 
         <div>
           <Button
-            component={Link}
             href={props.paths.edit}
             className={classes.editLink}
             variant="contained"

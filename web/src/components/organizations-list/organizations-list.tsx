@@ -56,7 +56,6 @@ export function OrganizationsList(props: OrganizationsListProps) {
       <Button
         variant="contained"
         color="primary"
-        component={Link}
         href={props.paths.create}
         className={classes.createLink}
       >

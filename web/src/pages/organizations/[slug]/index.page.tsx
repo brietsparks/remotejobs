@@ -27,14 +27,14 @@ export default function OrganizationPage(props: OrganizationPageProps) {
   );
 }
 
-export interface OrganizationPageUrlParams {
+export type OrganizationPageUrlParams = {
   slug: string;
 }
 
 export const getServerSideProps: GetServerSideProps<OrganizationPageProps, OrganizationPageUrlParams> = async (ctx) => {
   return {
     props: {
-      id: ctx.params.slug as string,
+      id: ctx.params?.slug as string,
       ...(await serverSideTranslations(ctx.locale as string, ['common']))
     }
   };

@@ -41,7 +41,7 @@ export function JobEditorForm(props: JobEditorFormProps) {
     }
   }
 
-  const deferFn = useCallback(() => props.submit(values), [values]);
+  const deferFn = useCallback(() => props.submit(values), [props, values]);
   const { run: submit, isPending, isRejected } = useAsync({
     deferFn,
     onResolve: props.onSuccess,
