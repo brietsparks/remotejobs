@@ -8,7 +8,6 @@ export interface JobPreviewProps {
   onClick?: () => void;
   messages: JobPreviewMessages;
   paths: JobPreviewPaths;
-  showOrganizationName: boolean;
 }
 
 export interface JobPreviewData {
@@ -22,7 +21,7 @@ export interface JobPreviewMessages {
 }
 
 export interface JobPreviewPaths {
-  organization: string;
+  organization?: string;
   job: string;
 }
 
@@ -36,7 +35,7 @@ export function JobPreview(props: JobPreviewProps) {
           {props.data.title}
         </Typography>
 
-        {props.showOrganizationName && (
+        {props.paths.organization && (
           <Typography>
             <Link href={props.paths.organization}>
               {props.data.organizationName}

@@ -6,7 +6,17 @@ export const useJobDetailsStyles = makeStyles(theme => ({
     flexDirection: 'column',
     gap: theme.spacing(4)
   },
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
   title: {
     fontSize: '2rem'
+  },
+  editLink: {
+    marginTop: theme.spacing(1),
+    '&:hover': {
+      textDecoration: 'none'
+    }
   }
 }));

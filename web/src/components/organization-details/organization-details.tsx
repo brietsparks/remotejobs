@@ -14,11 +14,13 @@ export interface OrganizationDetailsProps {
 }
 
 export interface OrganizationDetailsMessages {
+  edit: string;
   jobs: string;
   createJob: string;
 }
 
 export interface OrganizationDetailsPaths {
+  edit: string;
   createJob: string;
 }
 
@@ -28,17 +30,31 @@ export function OrganizationDetails(props: OrganizationDetailsProps) {
   return (
     <Container maxWidth="sm" className={classes.root}>
       <header className={classes.header}>
-        <Typography component="h1" className={classes.name}>
-          {props.data.name}
-        </Typography>
-        <Typography className={classes.shortDescription}>
-          {props.data.shortDescription}
-        </Typography>
-        <Typography>
-          <Link href={props.data.website} target="_blank">
-            {props.data.website} <OpenInNewIcon fontSize="small" className={classes.linkIcon} />
-          </Link>
-        </Typography>
+        <div>
+          <Typography component="h1" className={classes.name}>
+            {props.data.name}
+          </Typography>
+          <Typography className={classes.shortDescription}>
+            {props.data.shortDescription}
+          </Typography>
+          <Typography>
+            <Link href={props.data.website} target="_blank">
+              {props.data.website} <OpenInNewIcon fontSize="small" className={classes.linkIcon} />
+            </Link>
+          </Typography>
+        </div>
+
+        <div>
+          <Button
+            component={Link}
+            href={props.paths.edit}
+            className={classes.editLink}
+            variant="contained"
+            color="primary"
+          >
+            {props.messages.edit}
+          </Button>
+        </div>
       </header>
 
       <Typography className={classes.longDescription}>

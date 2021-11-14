@@ -4,6 +4,7 @@ import { SSRConfig } from 'next-i18next';
 
 import { OrganizationPageContainer } from '../../../containers';
 import { mockOrganizationData } from '../../../mocks';
+import { navPaths } from '../../paths';
 
 export type OrganizationPageProps =
   SSRConfig & {
@@ -12,9 +13,10 @@ export type OrganizationPageProps =
 
 export default function OrganizationPage(props: OrganizationPageProps) {
   const paths = {
-    organization: (id: string) => `/organizations/${id}`,
+    edit: `/organizations/${props.id}/edit`,
     job: (id: string) => `/jobs/${id}`,
-    createJob: `/organizations/${props.id}/jobs/create`
+    createJob: `/organizations/${props.id}/jobs/create`,
+    ...navPaths
   };
 
   return (
@@ -25,11 +27,11 @@ export default function OrganizationPage(props: OrganizationPageProps) {
   );
 }
 
-export interface OrganizationPageParams {
+export interface OrganizationPageUrlParams {
   slug: string;
 }
 
-export const getServerSideProps: GetServerSideProps<OrganizationPageProps, OrganizationPageParams> = async (ctx) => {
+export const getServerSideProps: GetServerSideProps<OrganizationPageProps, OrganizationPageUrlParams> = async (ctx) => {
   return {
     props: {
       id: ctx.params.slug as string,

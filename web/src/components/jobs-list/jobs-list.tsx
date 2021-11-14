@@ -26,7 +26,7 @@ export type JobsListItem = JobPreviewData & {
 export type JobsListMessages = JobPreviewMessages;
 
 export interface JobsListPaths {
-  organization: (id: string) => string; // todo: change to string
+  organization?: (id: string) => string;
   job: (id: string) => string;
 }
 
@@ -58,7 +58,7 @@ export function JobsList(props: JobsListProps) {
             data={data}
             messages={jobPreviewMessages}
             paths={{
-              organization: props.paths.organization(data.organizationId),
+              organization: props.paths.organization?.(data.organizationId),
               job: props.paths.job(data.id)
             }}
             showOrganizationName={props.showOrganizationName}

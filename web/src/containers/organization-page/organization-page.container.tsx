@@ -37,6 +37,7 @@ export function OrganizationPageContainer(props: OrganizationPageContainerProps)
   );
 
   const messages = {
+    edit: t('editOrganization'),
     jobs: t('jobsAtOrganization', { organization: props.data.name }),
     createJob: t('createJob')
   };

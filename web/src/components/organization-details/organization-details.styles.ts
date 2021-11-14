@@ -4,7 +4,15 @@ export const useOrganizationDetailsStyles = makeStyles(theme => ({
   root: {
   },
   header: {
+    display: 'flex',
+    justifyContent: 'space-between',
     marginBottom: theme.spacing(4)
+  },
+  editLink: {
+    marginTop: theme.spacing(1),
+    '&:hover': {
+      textDecoration: 'none'
+    }
   },
   shortDescription: {
   },

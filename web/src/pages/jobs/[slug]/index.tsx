@@ -1,14 +1,22 @@
 import { GetServerSideProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { SSRConfig } from 'next-i18next';
 
 import { JobPageContainer } from '../../../containers';
 import { mockJobData } from '../../../mocks';
+import { navPaths } from '../../paths';
 
-export interface JobPageProps {
+export type JobPageProps =
+  SSRConfig & {
+  id: string;
+  organizationId: string;
 }
 
 export default function JobPage(props: JobPageProps) {
   const paths = {
-    organization: `/organizations/organizationId`
+    edit: `/jobs/${props.id}/edit`,
+    organization: `/organizations/${props.organizationId}`,
+    ...navPaths
   };
 
   return (
@@ -19,8 +27,18 @@ export default function JobPage(props: JobPageProps) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps<JobPageProps> = async () => {
+export interface JobPageUrlParams {
+  slug: string;
+}
+
+export const getServerSideProps: GetServerSideProps<JobPageProps, JobPageUrlParams> = async (ctx ) => {
+  const jobId = 'mock-job-id';
+  const organizationId = 'mock-organization-id';
   return {
-    props: {}
+    props: {
+      id: jobId,
+      organizationId,
+      ...(await serverSideTranslations(ctx.locale as string, ['common']))
+    }
   }
 }
