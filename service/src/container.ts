@@ -1,7 +1,10 @@
-import express from 'express';
 import { knex } from 'knex';
+import express from 'express';
+import { createServer } from 'http';
 
 import { getMigrationsDirectory } from './database';
+import { makeProviders } from './providers';
+import { makeGraphqlRouter } from './graphql';
 
 export interface ContainerParams {
   pgUrl: string
@@ -16,11 +19,12 @@ export function createContainer(params: ContainerParams) {
     }
   });
 
-  const server = express();
+  const providers = makeProviders(db);
 
-  server.get('/health', (req, res) => {
-    res.json({ ok: 1 });
-  });
+  const appRouter = express();
+  const graphqlRouter = makeGraphqlRouter({ providers });
+  graphqlRouter.applyMiddleware({ app: appRouter });
+  const server = createServer(appRouter);
 
   return {
     server,

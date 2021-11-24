@@ -4,7 +4,8 @@ import { createContainer } from './container';
 
 (async function main() {
   configureEnv();
-  const pgUrl = requireVar('PG_URL');
+  const pgUrl = getVar('PG_URL');
+  const port = getVar('PORT', '3001');
 
   const container = createContainer({
     pgUrl
@@ -12,7 +13,9 @@ import { createContainer } from './container';
 
   const action = process.argv[2];
   if (action === 'serve') {
-    container.server.listen(3001, () => 'listening')
+    await container.server.listen(port, () => {
+      console.log(`listening on port ${port}`)
+    })
   }
 
   if (action === 'db:up') {
@@ -26,7 +29,7 @@ import { createContainer } from './container';
   process.exit();
 })();
 
-export function requireVar(name: string, fallback?: string): string {
+export function getVar(name: string, fallback?: string): string {
   const value = process.env[name];
   if (!value) {
     if (!fallback) {
