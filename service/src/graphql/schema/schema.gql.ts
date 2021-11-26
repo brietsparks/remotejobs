@@ -2,7 +2,7 @@ import { gql } from 'apollo-server';
 
 export const typeDefs = gql`
     type Query {
-        getSomething(a: String): String!
+        jobs(params: JobsParams!): JobsResult!
     }
     
     type Mutation {
@@ -31,4 +31,30 @@ export const typeDefs = gql`
     type CreateJobResult {
         id: String!
     }
+    
+    input JobsParams {
+        a: String # placeholder        
+    }
+    
+    type JobsResult {
+        items: [Job]!
+    }
+    
+    type Organization {
+        id: String!
+        name: String!
+        website: String!
+        shortDescription: String!
+        longDescription: String
+    }
+  
+    type Job {
+        id: String!
+        organizationId: String!
+        organization: Organization!
+        title: String!
+        shortDescription: String!
+        longDescription: String
+    }
+    
 `;

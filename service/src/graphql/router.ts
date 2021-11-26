@@ -1,11 +1,11 @@
 import { ApolloServerExpressConfig, ApolloServer } from 'apollo-server-express';
 
 import { Providers } from '../providers';
-import { makeOrganizationsResolvers } from './organizations-resolvers';
-import { makeJobsResolvers } from './jobs-resolvers';
 
-import { ResolverContext } from './context';
-import { typeDefs } from './schema.gql';
+import { RequestContext } from './types';
+import { typeDefs } from './schema';
+import { makeResolvers } from './resolvers';
+import { makeLoaders } from './loaders';
 
 export interface GraphqlRouterParams {
   providers: Providers;
@@ -13,18 +13,11 @@ export interface GraphqlRouterParams {
 }
 
 export function makeGraphqlRouter({ providers, serverConfig }: GraphqlRouterParams) {
-  const organizationsResolvers = makeOrganizationsResolvers();
-  const jobsResolvers = makeJobsResolvers();
+  const loaders = makeLoaders(providers);
+  const resolvers = makeResolvers(providers);
 
-  const resolvers = {
-    Mutation: {
-      ...organizationsResolvers.Mutation,
-      ...jobsResolvers.Mutation
-    }
-  };
-
-  const context: ResolverContext = {
-    providers
+  const context: RequestContext = {
+    loaders
   }
 
   return new ApolloServer({

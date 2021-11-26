@@ -45,6 +45,25 @@ export type CreateOrganizationResult = {
   id: Scalars['String'];
 };
 
+export type Job = {
+  __typename?: 'Job';
+  id: Scalars['String'];
+  longDescription?: Maybe<Scalars['String']>;
+  organization: Organization;
+  organizationId: Scalars['String'];
+  shortDescription: Scalars['String'];
+  title: Scalars['String'];
+};
+
+export type JobsParams = {
+  a?: InputMaybe<Scalars['String']>;
+};
+
+export type JobsResult = {
+  __typename?: 'JobsResult';
+  items: Array<Maybe<Job>>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createJob: CreateJobResult;
@@ -61,14 +80,23 @@ export type MutationCreateOrganizationArgs = {
   params: CreateOrganizationParams;
 };
 
+export type Organization = {
+  __typename?: 'Organization';
+  id: Scalars['String'];
+  longDescription?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  shortDescription: Scalars['String'];
+  website: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
-  getSomething: Scalars['String'];
+  jobs: JobsResult;
 };
 
 
-export type QueryGetSomethingArgs = {
-  a?: InputMaybe<Scalars['String']>;
+export type QueryJobsArgs = {
+  params: JobsParams;
 };
 
 
@@ -147,7 +175,11 @@ export type ResolversTypes = {
   CreateOrganizationParams: CreateOrganizationParams;
   CreateOrganizationResult: ResolverTypeWrapper<CreateOrganizationResult>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
+  Job: ResolverTypeWrapper<Job>;
+  JobsParams: JobsParams;
+  JobsResult: ResolverTypeWrapper<JobsResult>;
   Mutation: ResolverTypeWrapper<{}>;
+  Organization: ResolverTypeWrapper<Organization>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Upload: ResolverTypeWrapper<Scalars['Upload']>;
@@ -161,7 +193,11 @@ export type ResolversParentTypes = {
   CreateOrganizationParams: CreateOrganizationParams;
   CreateOrganizationResult: CreateOrganizationResult;
   Int: Scalars['Int'];
+  Job: Job;
+  JobsParams: JobsParams;
+  JobsResult: JobsResult;
   Mutation: {};
+  Organization: Organization;
   Query: {};
   String: Scalars['String'];
   Upload: Scalars['Upload'];
@@ -184,13 +220,37 @@ export type CreateOrganizationResultResolvers<ContextType = any, ParentType exte
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type JobResolvers<ContextType = any, ParentType extends ResolversParentTypes['Job'] = ResolversParentTypes['Job']> = {
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  longDescription?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  organization?: Resolver<ResolversTypes['Organization'], ParentType, ContextType>;
+  organizationId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  shortDescription?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type JobsResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['JobsResult'] = ResolversParentTypes['JobsResult']> = {
+  items?: Resolver<Array<Maybe<ResolversTypes['Job']>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   createJob?: Resolver<ResolversTypes['CreateJobResult'], ParentType, ContextType, RequireFields<MutationCreateJobArgs, 'params'>>;
   createOrganization?: Resolver<ResolversTypes['CreateOrganizationResult'], ParentType, ContextType, RequireFields<MutationCreateOrganizationArgs, 'params'>>;
 };
 
+export type OrganizationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Organization'] = ResolversParentTypes['Organization']> = {
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  longDescription?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  shortDescription?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  website?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  getSomething?: Resolver<ResolversTypes['String'], ParentType, ContextType, RequireFields<QueryGetSomethingArgs, never>>;
+  jobs?: Resolver<ResolversTypes['JobsResult'], ParentType, ContextType, RequireFields<QueryJobsArgs, 'params'>>;
 };
 
 export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Upload'], any> {
@@ -200,7 +260,10 @@ export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTyp
 export type Resolvers<ContextType = any> = {
   CreateJobResult?: CreateJobResultResolvers<ContextType>;
   CreateOrganizationResult?: CreateOrganizationResultResolvers<ContextType>;
+  Job?: JobResolvers<ContextType>;
+  JobsResult?: JobsResultResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
+  Organization?: OrganizationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Upload?: GraphQLScalarType;
 };

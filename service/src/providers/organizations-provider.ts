@@ -30,4 +30,11 @@ export class OrganizationsProvider {
 
     return { id };
   }
+
+  getOrganizations = async (ids: string[]) => {
+    return this.client
+      .from(organizationsTable.name)
+      .select(organizationsTable.columns)
+      .whereIn(organizationsTable.columns.id, ids);
+  }
 }

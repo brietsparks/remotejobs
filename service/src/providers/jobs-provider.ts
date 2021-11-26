@@ -10,6 +10,10 @@ export interface CreateJobParams {
   longDescription?: string;
 }
 
+export interface GetJobsParams {
+  // todo: pagination params
+}
+
 export class JobsProvider {
   constructor(
     private client: Knex,
@@ -29,5 +33,11 @@ export class JobsProvider {
       });
 
     return { id };
+  }
+
+  getJobs = async (params: GetJobsParams) => {
+    return this.client
+      .from(jobsTable.name)
+      .select(jobsTable.columns);
   }
 }
