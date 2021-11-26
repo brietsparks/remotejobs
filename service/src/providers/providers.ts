@@ -3,6 +3,11 @@ import { Knex } from 'knex';
 import { OrganizationsProvider } from './organizations-provider';
 import { JobsProvider } from './jobs-provider';
 
+export type {
+  OrganizationsProvider,
+  JobsProvider
+};
+
 export interface Providers {
   organizationsProvider: OrganizationsProvider;
   jobsProvider: JobsProvider;

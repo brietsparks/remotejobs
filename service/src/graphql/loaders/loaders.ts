@@ -7,7 +7,7 @@ export interface Loaders {
 }
 
 export function makeLoaders(providers: Providers) {
-  const organizationsLoader = makeOrganizationsLoader(providers);
+  const organizationsLoader = makeOrganizationsLoader(providers.organizationsProvider);
 
   return {
     organizationsLoader

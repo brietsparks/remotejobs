@@ -1,19 +1,19 @@
 import { IFieldResolver, IResolverObject } from 'apollo-server';
 
-import { Providers } from '../../providers';
+import { JobsProvider } from '../../providers';
 import { RequestContext, NestedParams } from '../types';
 import * as schema from '../schema';
 
-export function makeJobsResolvers(providers: Providers) {
+export function makeJobsResolvers(provider: JobsProvider) {
   const createJob: IFieldResolver<unknown, RequestContext, NestedParams<schema.CreateJobParams>> = async (root, { params }, ctx) => {
-    return providers.jobsProvider.createJob({
+    return provider.createJob({
       ...params,
       longDescription: params.longDescription || undefined
     });
   }
 
   const resolveJobs: IFieldResolver<unknown, RequestContext, NestedParams<schema.JobsParams>> = async (root, { params }, ctx) => {
-    const items = await providers.jobsProvider.getJobs(params);
+    const items = await provider.getJobs(params);
     return {
       items
     };

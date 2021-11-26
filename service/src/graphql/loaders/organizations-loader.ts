@@ -1,15 +1,15 @@
 import Dataloader from 'dataloader';
 
-import { Providers } from '../../providers';
+import { OrganizationsProvider } from '../../providers';
 import { Organization } from '../schema';
 
 export interface OrganizationsLoader {
   getOrganization: Dataloader<string, Organization>;
 }
 
-export const makeOrganizationsLoader = (providers: Providers): OrganizationsLoader => {
+export const makeOrganizationsLoader = (provider: OrganizationsProvider): OrganizationsLoader => {
   const getOrganization = async (ids: ReadonlyArray<string>) => {
-    const organizations = await providers.organizationsProvider.getOrganizations(ids as string[]);
+    const organizations = await provider.getOrganizations(ids as string[]);
     return ids.map(id => organizations.find(organization => organization.id === id));
   };
 
