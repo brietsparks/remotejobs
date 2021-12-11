@@ -9,6 +9,16 @@ export const typeDefs = gql`
         createOrganization(params: CreateOrganizationParams!): CreateOrganizationResult!
         createJob(params: CreateJobParams!): CreateJobResult!
     }
+    
+    input CursorPaginationParams {
+        cursor: String
+        limit: Int!
+    }
+
+    type CursorPaginationResult {
+        cursor: String
+        hasMore: Boolean!
+    }
 
     input CreateOrganizationParams {
         name: String!
@@ -31,13 +41,14 @@ export const typeDefs = gql`
     type CreateJobResult {
         id: String!
     }
-    
+
     input JobsParams {
-        a: String # placeholder        
+        pagination: CursorPaginationParams        
     }
     
     type JobsResult {
         items: [Job]!
+        pagination: CursorPaginationResult!
     }
     
     type Organization {
@@ -50,6 +61,7 @@ export const typeDefs = gql`
   
     type Job {
         id: String!
+        creationTimestamp: String!
         organizationId: String!
         organization: Organization!
         title: String!

@@ -45,8 +45,20 @@ export type CreateOrganizationResult = {
   id: Scalars['String'];
 };
 
+export type CursorPaginationParams = {
+  cursor?: InputMaybe<Scalars['String']>;
+  limit: Scalars['Int'];
+};
+
+export type CursorPaginationResult = {
+  __typename?: 'CursorPaginationResult';
+  cursor?: Maybe<Scalars['String']>;
+  hasMore: Scalars['Boolean'];
+};
+
 export type Job = {
   __typename?: 'Job';
+  creationTimestamp: Scalars['String'];
   id: Scalars['String'];
   longDescription?: Maybe<Scalars['String']>;
   organization: Organization;
@@ -56,12 +68,13 @@ export type Job = {
 };
 
 export type JobsParams = {
-  a?: InputMaybe<Scalars['String']>;
+  pagination?: InputMaybe<CursorPaginationParams>;
 };
 
 export type JobsResult = {
   __typename?: 'JobsResult';
   items: Array<Maybe<Job>>;
+  pagination: CursorPaginationResult;
 };
 
 export type Mutation = {
@@ -174,6 +187,8 @@ export type ResolversTypes = {
   CreateJobResult: ResolverTypeWrapper<CreateJobResult>;
   CreateOrganizationParams: CreateOrganizationParams;
   CreateOrganizationResult: ResolverTypeWrapper<CreateOrganizationResult>;
+  CursorPaginationParams: CursorPaginationParams;
+  CursorPaginationResult: ResolverTypeWrapper<CursorPaginationResult>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Job: ResolverTypeWrapper<Job>;
   JobsParams: JobsParams;
@@ -192,6 +207,8 @@ export type ResolversParentTypes = {
   CreateJobResult: CreateJobResult;
   CreateOrganizationParams: CreateOrganizationParams;
   CreateOrganizationResult: CreateOrganizationResult;
+  CursorPaginationParams: CursorPaginationParams;
+  CursorPaginationResult: CursorPaginationResult;
   Int: Scalars['Int'];
   Job: Job;
   JobsParams: JobsParams;
@@ -220,7 +237,14 @@ export type CreateOrganizationResultResolvers<ContextType = any, ParentType exte
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type CursorPaginationResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['CursorPaginationResult'] = ResolversParentTypes['CursorPaginationResult']> = {
+  cursor?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  hasMore?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type JobResolvers<ContextType = any, ParentType extends ResolversParentTypes['Job'] = ResolversParentTypes['Job']> = {
+  creationTimestamp?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   longDescription?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   organization?: Resolver<ResolversTypes['Organization'], ParentType, ContextType>;
@@ -232,6 +256,7 @@ export type JobResolvers<ContextType = any, ParentType extends ResolversParentTy
 
 export type JobsResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['JobsResult'] = ResolversParentTypes['JobsResult']> = {
   items?: Resolver<Array<Maybe<ResolversTypes['Job']>>, ParentType, ContextType>;
+  pagination?: Resolver<ResolversTypes['CursorPaginationResult'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -260,6 +285,7 @@ export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTyp
 export type Resolvers<ContextType = any> = {
   CreateJobResult?: CreateJobResultResolvers<ContextType>;
   CreateOrganizationResult?: CreateOrganizationResultResolvers<ContextType>;
+  CursorPaginationResult?: CursorPaginationResultResolvers<ContextType>;
   Job?: JobResolvers<ContextType>;
   JobsResult?: JobsResultResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;

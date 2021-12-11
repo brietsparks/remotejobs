@@ -13,14 +13,16 @@ export function makeJobsResolvers(provider: JobsProvider) {
   }
 
   const resolveJobs: IFieldResolver<unknown, RequestContext, NestedParams<schema.JobsParams>> = async (root, { params }, ctx) => {
-    const items = await provider.getJobs(params);
-    return {
-      items
-    };
+    return provider.getJobs({
+      pagination: {
+        cursor: params.pagination?.cursor as string,
+        limit: params.pagination?.limit as number
+      }
+    });
   }
 
   const resolveJobOrganization: IFieldResolver<schema.Job, RequestContext> = async (job, { params }, ctx) => {
-    return ctx.loaders.organizationsLoader.getOrganization.load(job.organizationId);
+    return ctx.loaders.organizationsLoader.getOrganizations.load(job.organizationId);
   }
 
   const resolveJobFields: IResolverObject<schema.Job, RequestContext> = {

@@ -10,6 +10,7 @@ export const organizationsTable = table('organizations', {
 
 export const jobsTable = table('jobs', {
   id: 'id',
+  creationTimestamp: 'creation_timestamp',
   organizationId: 'organization_id',
   title: 'title',
   shortDescription: 'short_description',

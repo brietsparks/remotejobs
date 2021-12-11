@@ -3,6 +3,8 @@ import { v4 as uuid } from 'uuid';
 
 import { jobsTable } from '../database';
 
+import { CursorPagination, CursorPaginationParams } from './pagination';
+
 export interface CreateJobParams {
   organizationId: string;
   title: string;
@@ -11,7 +13,7 @@ export interface CreateJobParams {
 }
 
 export interface GetJobsParams {
-  // todo: pagination params
+  pagination: CursorPaginationParams;
 }
 
 export class JobsProvider {
@@ -36,8 +38,14 @@ export class JobsProvider {
   }
 
   getJobs = async (params: GetJobsParams) => {
-    return this.client
+    const query = this.client
       .from(jobsTable.name)
       .select(jobsTable.columns);
+
+    return new CursorPagination(params.pagination, {
+      appField: 'creationTimestamp',
+      dbField: jobsTable.columns.creationTimestamp,
+      normalizeCursor: (cursor: string) => new Date(parseInt(cursor))
+    }).retrievePaginatedItems(query);
   }
 }
