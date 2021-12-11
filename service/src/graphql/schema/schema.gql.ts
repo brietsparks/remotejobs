@@ -2,6 +2,7 @@ import { gql } from 'apollo-server';
 
 export const typeDefs = gql`
     type Query {
+        organizations(params: OrganizationsParams!): OrganizationsResult!
         jobs(params: JobsParams!): JobsResult!
     }
     
@@ -41,6 +42,15 @@ export const typeDefs = gql`
     type CreateJobResult {
         id: String!
     }
+    
+    input OrganizationsParams {
+        pagination: CursorPaginationParams
+    }
+    
+    type OrganizationsResult {
+        items: [Organization]!
+        pagination: CursorPaginationResult!
+    }
 
     input JobsParams {
         pagination: CursorPaginationParams        
@@ -53,6 +63,7 @@ export const typeDefs = gql`
     
     type Organization {
         id: String!
+        creationTimestamp: String!
         name: String!
         website: String!
         shortDescription: String!

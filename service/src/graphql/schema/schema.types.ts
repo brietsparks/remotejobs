@@ -95,6 +95,7 @@ export type MutationCreateOrganizationArgs = {
 
 export type Organization = {
   __typename?: 'Organization';
+  creationTimestamp: Scalars['String'];
   id: Scalars['String'];
   longDescription?: Maybe<Scalars['String']>;
   name: Scalars['String'];
@@ -102,14 +103,30 @@ export type Organization = {
   website: Scalars['String'];
 };
 
+export type OrganizationsParams = {
+  pagination?: InputMaybe<CursorPaginationParams>;
+};
+
+export type OrganizationsResult = {
+  __typename?: 'OrganizationsResult';
+  items: Array<Maybe<Organization>>;
+  pagination: CursorPaginationResult;
+};
+
 export type Query = {
   __typename?: 'Query';
   jobs: JobsResult;
+  organizations: OrganizationsResult;
 };
 
 
 export type QueryJobsArgs = {
   params: JobsParams;
+};
+
+
+export type QueryOrganizationsArgs = {
+  params: OrganizationsParams;
 };
 
 
@@ -195,6 +212,8 @@ export type ResolversTypes = {
   JobsResult: ResolverTypeWrapper<JobsResult>;
   Mutation: ResolverTypeWrapper<{}>;
   Organization: ResolverTypeWrapper<Organization>;
+  OrganizationsParams: OrganizationsParams;
+  OrganizationsResult: ResolverTypeWrapper<OrganizationsResult>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Upload: ResolverTypeWrapper<Scalars['Upload']>;
@@ -215,6 +234,8 @@ export type ResolversParentTypes = {
   JobsResult: JobsResult;
   Mutation: {};
   Organization: Organization;
+  OrganizationsParams: OrganizationsParams;
+  OrganizationsResult: OrganizationsResult;
   Query: {};
   String: Scalars['String'];
   Upload: Scalars['Upload'];
@@ -266,6 +287,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type OrganizationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Organization'] = ResolversParentTypes['Organization']> = {
+  creationTimestamp?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   longDescription?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -274,8 +296,15 @@ export type OrganizationResolvers<ContextType = any, ParentType extends Resolver
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type OrganizationsResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrganizationsResult'] = ResolversParentTypes['OrganizationsResult']> = {
+  items?: Resolver<Array<Maybe<ResolversTypes['Organization']>>, ParentType, ContextType>;
+  pagination?: Resolver<ResolversTypes['CursorPaginationResult'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   jobs?: Resolver<ResolversTypes['JobsResult'], ParentType, ContextType, RequireFields<QueryJobsArgs, 'params'>>;
+  organizations?: Resolver<ResolversTypes['OrganizationsResult'], ParentType, ContextType, RequireFields<QueryOrganizationsArgs, 'params'>>;
 };
 
 export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Upload'], any> {
@@ -290,6 +319,7 @@ export type Resolvers<ContextType = any> = {
   JobsResult?: JobsResultResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Organization?: OrganizationResolvers<ContextType>;
+  OrganizationsResult?: OrganizationsResultResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Upload?: GraphQLScalarType;
 };

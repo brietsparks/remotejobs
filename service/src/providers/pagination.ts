@@ -16,8 +16,7 @@ export interface CursorPaginationResult<T> {
 export interface CursorPaginationOpts {
   appField: string;
   dbField: string;
-  normalizeCursor: (cursor: string) => any;
-  // denormalizeCursor: (cursor: unknown) => string;
+  normalizeCursor?: (cursor: string) => any;
 }
 
 export class CursorPagination<T = unknown> {
@@ -46,7 +45,7 @@ export class CursorPagination<T = unknown> {
       query.where(
         this.opts.dbField,
         comparator,
-        this.opts.normalizeCursor(this.params.cursor)
+        this.normalizeCursor(this.params.cursor)
       );
     }
   }
@@ -82,5 +81,10 @@ export class CursorPagination<T = unknown> {
         cursor: (returnableItems[returnableItems.length - 1] as any)[this.opts.appField]
       }
     };
+  }
+
+  private normalizeCursor(cursor: string) {
+    const normalize = this.opts.normalizeCursor || ((cursor: string) => new Date(parseInt(cursor)));
+    return normalize(cursor);
   }
 }

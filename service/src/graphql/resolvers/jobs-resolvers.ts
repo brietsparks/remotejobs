@@ -5,14 +5,14 @@ import { RequestContext, NestedParams } from '../types';
 import * as schema from '../schema';
 
 export function makeJobsResolvers(provider: JobsProvider) {
-  const createJob: IFieldResolver<unknown, RequestContext, NestedParams<schema.CreateJobParams>> = async (root, { params }, ctx) => {
+  const createJob: IFieldResolver<unknown, RequestContext, NestedParams<schema.CreateJobParams>> = async (root, { params }) => {
     return provider.createJob({
       ...params,
       longDescription: params.longDescription || undefined
     });
   }
 
-  const resolveJobs: IFieldResolver<unknown, RequestContext, NestedParams<schema.JobsParams>> = async (root, { params }, ctx) => {
+  const resolveJobs: IFieldResolver<unknown, RequestContext, NestedParams<schema.JobsParams>> = async (root, { params }) => {
     return provider.getJobs({
       pagination: {
         cursor: params.pagination?.cursor as string,
@@ -22,7 +22,7 @@ export function makeJobsResolvers(provider: JobsProvider) {
   }
 
   const resolveJobOrganization: IFieldResolver<schema.Job, RequestContext> = async (job, { params }, ctx) => {
-    return ctx.loaders.organizationsLoader.getOrganizations.load(job.organizationId);
+    return ctx.loaders.organizationsLoader.getOrganizationsByIds.load(job.organizationId);
   }
 
   const resolveJobFields: IResolverObject<schema.Job, RequestContext> = {

@@ -9,7 +9,8 @@ export function makeResolvers(providers: Providers) {
 
   return {
     Query: {
-      ...jobsResolvers.Query,
+      ...organizationsResolvers.Query,
+      ...jobsResolvers.Query
     },
     Mutation: {
       ...organizationsResolvers.Mutation,

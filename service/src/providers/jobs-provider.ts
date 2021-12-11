@@ -45,7 +45,6 @@ export class JobsProvider {
     return new CursorPagination(params.pagination, {
       appField: 'creationTimestamp',
       dbField: jobsTable.columns.creationTimestamp,
-      normalizeCursor: (cursor: string) => new Date(parseInt(cursor))
     }).retrievePaginatedItems(query);
   }
 }
