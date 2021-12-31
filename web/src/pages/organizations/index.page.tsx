@@ -1,11 +1,11 @@
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { OrganizationsPageContainer} from '../../containers';
-import { mockOrganizationData } from '../../mocks';
+import { OrganizationsPageContainer, getOrganizations, PaginatedOrganizations } from '../../containers';
 import { navPaths } from '../paths';
 
 export interface OrganizationsPageProps {
+  data?: PaginatedOrganizations;
 }
 
 export default function OrganizationsPage(props: OrganizationsPageProps) {
@@ -17,22 +17,18 @@ export default function OrganizationsPage(props: OrganizationsPageProps) {
 
   return (
     <OrganizationsPageContainer
-      data={{
-        items: [
-          mockOrganizationData(), mockOrganizationData(), mockOrganizationData(), mockOrganizationData(),
-          mockOrganizationData(), mockOrganizationData(), mockOrganizationData(), mockOrganizationData()
-        ],
-        hasMore: true,
-        cursor: ''
-      }}
+      data={props.data}
       paths={paths}
     />
   )
 }
 
 export const getServerSideProps: GetServerSideProps<OrganizationsPageProps> = async ({ locale }) => {
+  const data = await getOrganizations();
+
   return {
     props: {
+      data,
       ...(await serverSideTranslations(locale as string, ['common']))
     }
   }

@@ -1,22 +1,17 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
 
-import {
-  OrganizationsList,
-  OrganizationsListData,
-  OrganizationsListItem,
-  OrganizationsListPaths
-} from '../../components';
-import { CursorPaginationResult } from '../../util';
-import { mockOrganizationData } from '../../mocks';
+import { OrganizationsList, PaginatedOrganizations, OrganizationsListPaths } from '../../components';
 import { LayoutContainer, LayoutContainerPaths } from '../layout';
 
+import { getOrganizations } from './organizations-page.api';
+
 export interface OrganizationsPageProps {
-  data?: OrganizationsPageData;
+  data?: PaginatedOrganizations;
   paths: OrganizationsPagePaths;
 }
 
-export type OrganizationsPageData = OrganizationsListData;
+export type { PaginatedOrganizations };
 
 export type OrganizationsPagePaths = OrganizationsListPaths & LayoutContainerPaths;
 
@@ -38,21 +33,6 @@ export function OrganizationsPageContainer(props: OrganizationsPageProps) {
         paths={props.paths}
       />
     </LayoutContainer>
-  )
-}
-
-async function getOrganizations(): Promise<CursorPaginationResult<OrganizationsListItem>> {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve({
-        items: [
-          mockOrganizationData(), mockOrganizationData(), mockOrganizationData(), mockOrganizationData(),
-          mockOrganizationData(), mockOrganizationData(), mockOrganizationData(), mockOrganizationData()
-        ],
-        hasMore: true,
-        cursor: ''
-      })
-    }, 1000)
-  });
+  );
 }
 

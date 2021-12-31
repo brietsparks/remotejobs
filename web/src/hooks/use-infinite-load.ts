@@ -5,28 +5,22 @@ import { CursorPaginationResult } from '../util';
 
 export type InfiniteLoadProps<T> =
   Partial<CursorPaginationResult<T>> & {
-  getItems: (cursor: string) => Promise<InfiniteLoadResult<T>>;
-}
-
-export interface InfiniteLoadResult<T> {
-  items: T[];
-  cursor: string;
-  hasMore: boolean;
+  getItems: (cursor?: string) => Promise<CursorPaginationResult<T>>;
 }
 
 export function useInfiniteLoad<T>({ getItems, ...props }: InfiniteLoadProps<T>) {
   const [items, setItems] = useState<T[]>(props.items || []);
-  const [cursor, setCursor] = useState<string|undefined>(props.cursor);
-  const [hasMore, setHasMore] = useState<boolean>(props.hasMore !== false);
+  const [cursor, setCursor] = useState<string|undefined>(props.pagination?.cursor);
+  const [hasMore, setHasMore] = useState<boolean>(props.pagination?.hasMore !== false);
 
-  const handleResolve = useCallback((data: InfiniteLoadResult<T>) => {
-    setCursor(data.cursor);
+  const handleResolve = useCallback((data: CursorPaginationResult<T>) => {
+    setCursor(data.pagination.cursor);
     setItems(prev => [...prev, ...data.items]);
-    setHasMore(data.hasMore);
+    setHasMore(data.pagination.hasMore);
   }, []);
 
-  // @ts-ignore
-  const { data: lastBatch, isPending, run } = useAsync({ deferFn: getItems, onResolve: handleResolve, });
+  const deferFn = useCallback(() => getItems(cursor), [getItems, cursor]);
+  const { isPending, isRejected, run } = useAsync({ deferFn, onResolve: handleResolve, });
 
   const loadMore = useCallback(() => {
     run(cursor);
@@ -37,6 +31,7 @@ export function useInfiniteLoad<T>({ getItems, ...props }: InfiniteLoadProps<T>)
     items,
     cursor,
     hasMore,
-    isPending
-  }
+    isPending,
+    isRejected
+  };
 }

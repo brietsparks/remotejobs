@@ -1,5 +1,7 @@
 export interface CursorPaginationResult<T> {
   items: T[];
-  cursor: string;
-  hasMore: boolean;
+  pagination: {
+    cursor?: string;
+    hasMore: boolean;
+  }
 }

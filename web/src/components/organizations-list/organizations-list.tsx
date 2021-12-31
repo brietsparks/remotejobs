@@ -10,13 +10,13 @@ import { OrganizationPreview, OrganizationPreviewData } from '../organization-pr
 import { useOrganizationsListStyles } from './organizations-list.styles';
 
 export interface OrganizationsListProps {
-  data?: OrganizationsListData;
-  getOrganizations: (cursor: string) => Promise<CursorPaginationResult<OrganizationsListItem>>;
+  data?: PaginatedOrganizations;
+  getOrganizations: (cursor?: string) => Promise<CursorPaginationResult<OrganizationsListItem>>;
   messages: OrganizationsListMessages;
   paths: OrganizationsListPaths
 }
 
-export type OrganizationsListData = Partial<CursorPaginationResult<OrganizationsListItem>>;
+export type PaginatedOrganizations = CursorPaginationResult<OrganizationsListItem>;
 
 export type OrganizationsListItem = OrganizationPreviewData & {
   id: string;
@@ -35,7 +35,7 @@ export interface OrganizationsListPaths {
 }
 
 export function OrganizationsList(props: OrganizationsListProps) {
-  const { items: organizations, isPending, hasMore, loadMore } = useInfiniteLoad<OrganizationsListItem>({
+  const { items: organizations, isPending, isRejected, hasMore, loadMore } = useInfiniteLoad<OrganizationsListItem>({
     ...props.data,
     getItems: props.getOrganizations
   });
@@ -63,7 +63,7 @@ export function OrganizationsList(props: OrganizationsListProps) {
       </Button>
 
       {organizations.map((data) => (
-        <div key={data.id} className={classes.item}>
+        <div key={`${data.id}.${Math.random()}`} className={classes.item}>
           <OrganizationPreview
             data={data}
             messages={{
@@ -83,7 +83,9 @@ export function OrganizationsList(props: OrganizationsListProps) {
         </div>
       )}
 
-      <div ref={endRef} className={classes.loadingTrigger} />
+      {!isPending && !isRejected && (
+        <div ref={endRef} className={classes.loadingTrigger}/>
+      )}
     </div>
   )
 }
