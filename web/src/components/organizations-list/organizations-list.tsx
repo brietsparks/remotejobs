@@ -63,7 +63,7 @@ export function OrganizationsList(props: OrganizationsListProps) {
       </Button>
 
       {organizations.map((data) => (
-        <div key={`${data.id}.${Math.random()}`} className={classes.item}>
+        <div key={data.id} className={classes.item}>
           <OrganizationPreview
             data={data}
             messages={{

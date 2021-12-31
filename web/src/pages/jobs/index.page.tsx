@@ -1,11 +1,11 @@
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { JobsPageContainer } from '../../containers';
-import { mockJobData } from '../../mocks';
+import { JobsPageContainer, getJobs, PaginatedJobs } from '../../containers';
 import { navPaths } from '../paths';
 
 export interface JobsPageProps {
+  data?: PaginatedJobs;
 }
 
 export default function JobsPage(props: JobsPageProps) {
@@ -17,22 +17,18 @@ export default function JobsPage(props: JobsPageProps) {
 
   return (
     <JobsPageContainer
-      data={{
-        items: [
-          mockJobData(), mockJobData(), mockJobData(), mockJobData(),
-          mockJobData(), mockJobData(), mockJobData(), mockJobData()
-        ],
-        hasMore: true,
-        cursor: ''
-      }}
+      data={props.data}
       paths={paths}
     />
   )
 }
 
 export const getServerSideProps: GetServerSideProps<JobsPageProps> = async ({ locale }) => {
+  const data = await getJobs();
+
   return {
     props: {
+      data,
       ...(await serverSideTranslations(locale as string, ['common']))
     }
   }

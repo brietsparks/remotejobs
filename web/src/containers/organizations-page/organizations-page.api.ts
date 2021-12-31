@@ -19,7 +19,7 @@ export async function getOrganizations(cursor?: string): Promise<CursorPaginatio
     }
   `, {
     params: {
-      pagination: { cursor, limit: 10 }
+      pagination: { cursor, limit: 3 }
     }
   });
 

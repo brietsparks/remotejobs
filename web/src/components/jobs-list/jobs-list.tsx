@@ -9,14 +9,16 @@ import { JobPreview, JobPreviewMessages, JobPreviewData } from '../job-preview';
 import { useJobsListStyles } from './jobs-list.styles';
 
 export interface JobsListProps {
-  data?: JobsListData;
-  getJobs: (cursor: string) => Promise<CursorPaginationResult<JobsListItem>>;
+  data?: PaginatedJobs;
+  getJobs: GetPaginatedJobs;
   messages: JobsListMessages;
   paths: JobsListPaths;
   showOrganizationName: boolean;
 }
 
-export type JobsListData = Partial<CursorPaginationResult<JobsListItem>>;
+export type GetPaginatedJobs = (cursor?: string) => Promise<CursorPaginationResult<JobsListItem>>;
+
+export type PaginatedJobs = Partial<CursorPaginationResult<JobsListItem>>;
 
 export type JobsListItem = JobPreviewData & {
   id: string;
@@ -31,9 +33,8 @@ export interface JobsListPaths {
 }
 
 export function JobsList(props: JobsListProps) {
-  const { items: jobs, isPending, hasMore, loadMore } = useInfiniteLoad<JobsListItem>({
-    items: props.data?.items,
-    cursor: props.data?.cursor,
+  const { items: jobs, isPending, isRejected, hasMore, loadMore } = useInfiniteLoad<JobsListItem>({
+    ...props.data,
     getItems: props.getJobs
   });
 
@@ -71,7 +72,9 @@ export function JobsList(props: JobsListProps) {
         </div>
       )}
 
-      <div ref={endRef} className={classes.loadingTrigger} />
+      {!isPending && !isRejected && (
+        <div ref={endRef} className={classes.loadingTrigger} />
+      )}
     </div>
   )
 }

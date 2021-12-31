@@ -1,17 +1,16 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
 
-import { JobsList, JobsListData, JobsListItem, JobsListPaths } from '../../components';
-import { CursorPaginationResult } from '../../util';
-import { mockJobData } from '../../mocks';
+import { JobsList, PaginatedJobs, JobsListPaths, GetPaginatedJobs } from '../../components';
 
 export interface JobsListContainerProps {
-  data?: JobsListContainerData;
+  getJobs: GetPaginatedJobs;
+  data?: PaginatedJobs;
   paths: JobsListContainerPaths
   showOrganizationName: boolean;
 }
 
-export type JobsListContainerData = JobsListData;
+export type { GetPaginatedJobs, PaginatedJobs };
 
 export type JobsListContainerPaths = JobsListPaths;
 
@@ -26,26 +25,10 @@ export function JobsListContainer(props: JobsListContainerProps) {
   return (
     <JobsList
       data={props.data}
-      getJobs={getJobs}
+      getJobs={props.getJobs}
       messages={messages}
       paths={props.paths}
       showOrganizationName={props.showOrganizationName}
     />
   )
 }
-
-async function getJobs(): Promise<CursorPaginationResult<JobsListItem>> {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve({
-        items: [
-          mockJobData(), mockJobData(), mockJobData(), mockJobData(),
-          mockJobData(), mockJobData(), mockJobData(), mockJobData()
-        ],
-        hasMore: true,
-        cursor: ''
-      })
-    }, 1000)
-  });
-}
-
