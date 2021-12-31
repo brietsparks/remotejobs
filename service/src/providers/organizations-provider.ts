@@ -5,6 +5,15 @@ import { organizationsTable } from '../database';
 
 import { CursorPaginationParams, CursorPagination } from './pagination';
 
+export type Organization = {
+  id: string;
+  creationTimestamp: Date;
+  name: string;
+  shortDescription: string;
+  longDescription: string;
+  website: string;
+}
+
 export interface CreateOrganizationParams {
   name: string;
   website: string;
@@ -42,9 +51,9 @@ export class OrganizationsProvider {
       .from(organizationsTable.name)
       .select(organizationsTable.columns)
 
-    return new CursorPagination(params.pagination, {
-      appField: 'creationTimestamp',
-      dbField: organizationsTable.columns.creationTimestamp,
+    return new CursorPagination<Organization>(params.pagination, {
+      getCursor: org => org.creationTimestamp.getTime().toString(),
+      cursorColumn: organizationsTable.columns.creationTimestamp,
     }).retrievePaginatedItems(query);
   }
 

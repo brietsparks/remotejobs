@@ -68,7 +68,7 @@ export type Job = {
 };
 
 export type JobsParams = {
-  pagination?: InputMaybe<CursorPaginationParams>;
+  pagination: CursorPaginationParams;
 };
 
 export type JobsResult = {
@@ -104,7 +104,7 @@ export type Organization = {
 };
 
 export type OrganizationsParams = {
-  pagination?: InputMaybe<CursorPaginationParams>;
+  pagination: CursorPaginationParams;
 };
 
 export type OrganizationsResult = {

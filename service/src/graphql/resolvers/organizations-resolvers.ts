@@ -1,6 +1,6 @@
 import { IFieldResolver } from 'apollo-server';
 
-import { OrganizationsProvider } from '../../providers';
+import { OrganizationsProvider, CursorPaginationParams } from '../../providers';
 import { RequestContext, NestedParams } from '../types';
 import * as schema from '../schema';
 
@@ -14,10 +14,7 @@ export function makeOrganizationsResolvers(provider: OrganizationsProvider) {
 
   const resolveOrganizations: IFieldResolver<unknown, RequestContext, NestedParams<schema.OrganizationsParams>> = async (root, { params }) => {
     return provider.getOrganizations({
-      pagination: {
-        cursor: params.pagination?.cursor as string,
-        limit: params.pagination?.limit as number
-      }
+      pagination: params.pagination as CursorPaginationParams
     });
   }
 

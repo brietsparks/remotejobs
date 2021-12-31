@@ -5,6 +5,15 @@ import { jobsTable } from '../database';
 
 import { CursorPagination, CursorPaginationParams } from './pagination';
 
+export type Job = {
+  id: string;
+  creationTimestamp: Date;
+  organizationId: string;
+  title: string;
+  shortDescription: string;
+  longDescription: string;
+}
+
 export interface CreateJobParams {
   organizationId: string;
   title: string;
@@ -42,9 +51,9 @@ export class JobsProvider {
       .from(jobsTable.name)
       .select(jobsTable.columns);
 
-    return new CursorPagination(params.pagination, {
-      appField: 'creationTimestamp',
-      dbField: jobsTable.columns.creationTimestamp,
+    return new CursorPagination<Job>(params.pagination, {
+      getCursor: job => job.creationTimestamp.getTime().toString(),
+      cursorColumn: jobsTable.columns.creationTimestamp,
     }).retrievePaginatedItems(query);
   }
 }

@@ -1,6 +1,6 @@
 import { Knex } from 'knex';
 
-export interface CursorPaginationParams<T extends string = string> {
+export interface CursorPaginationParams {
   cursor?: string;
   limit: number;
 }
@@ -13,16 +13,16 @@ export interface CursorPaginationResult<T> {
   }
 }
 
-export interface CursorPaginationOpts {
-  appField: string;
-  dbField: string;
+export interface CursorPaginationOpts<T> {
+  getCursor: (entity: T) => string;
+  cursorColumn: string;
   normalizeCursor?: (cursor: string) => any;
 }
 
-export class CursorPagination<T = unknown> {
+export class CursorPagination<T> {
   constructor(
     private params: CursorPaginationParams,
-    private opts: CursorPaginationOpts
+    private opts: CursorPaginationOpts<T>
   ) {}
 
   async retrievePaginatedItems(query: Knex.QueryBuilder): Promise<CursorPaginationResult<T>> {
@@ -32,25 +32,24 @@ export class CursorPagination<T = unknown> {
   }
 
   applyTo(query: Knex.QueryBuilder) {
-    // assuming all cursors sort descending
-    // might not fit all use-cases
+    // assuming all cursors sort descending; doesn't fit all use-cases in the real world
     const direction = 'desc';
-    const comparator = '<';
+    const comparator = '<=';
 
     query
-      .orderBy(this.opts.dbField, direction)
+      .orderBy(this.opts.cursorColumn, direction)
       .limit(this.params.limit + 1)
 
     if (this.params.cursor) {
       query.where(
-        this.opts.dbField,
+        this.opts.cursorColumn,
         comparator,
         this.normalizeCursor(this.params.cursor)
       );
     }
   }
 
-  getPaginatedItems(retrievedItems: unknown[]): CursorPaginationResult<T> {
+  getPaginatedItems(retrievedItems: T[]): CursorPaginationResult<T> {
     if (retrievedItems.length === 0) {
       return {
         items: [],
@@ -61,24 +60,27 @@ export class CursorPagination<T = unknown> {
       };
     }
 
-    const returnableItems = [...retrievedItems];
-    returnableItems.pop();
-
-    if (!returnableItems.length) {
+    if (retrievedItems.length <= this.params.limit) {
       return {
-        items: [],
-          pagination: {
-            hasMore: false,
-            cursor: this.params.cursor
-          }
+        items: retrievedItems,
+        pagination: {
+          hasMore: false,
+          cursor: this.opts.getCursor(retrievedItems[retrievedItems.length - 1])
+        }
       }
     }
 
+    const hasMore = retrievedItems.length > this.params.limit;
+
+    const returnableItems = [...retrievedItems];
+    returnableItems.pop();
+    const cursor = this.opts.getCursor(returnableItems[returnableItems.length - 1]);
+
     return {
-      items: returnableItems as T[],
+      items: returnableItems,
       pagination: {
-        hasMore: retrievedItems.length > this.params.limit,
-        cursor: (returnableItems[returnableItems.length - 1] as any)[this.opts.appField]
+        hasMore,
+        cursor
       }
     };
   }

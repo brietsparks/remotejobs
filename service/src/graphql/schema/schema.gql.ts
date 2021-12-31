@@ -44,7 +44,7 @@ export const typeDefs = gql`
     }
     
     input OrganizationsParams {
-        pagination: CursorPaginationParams
+        pagination: CursorPaginationParams!
     }
     
     type OrganizationsResult {
@@ -53,7 +53,7 @@ export const typeDefs = gql`
     }
 
     input JobsParams {
-        pagination: CursorPaginationParams        
+        pagination: CursorPaginationParams!        
     }
     
     type JobsResult {

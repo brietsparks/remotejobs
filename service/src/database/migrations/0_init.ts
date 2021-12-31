@@ -4,7 +4,7 @@ export function up(knex: Knex) {
   return knex.schema
     .createTable('organizations', table => {
       table.uuid('id').primary();
-      table.timestamp('creation_timestamp').notNullable().defaultTo(knex.fn.now());
+      table.timestamp('creation_timestamp').notNullable().defaultTo(knex.fn.now());``
       table.string('name').notNullable();
       table.string('website').notNullable();
       table.string('short_description', 100).notNullable();
