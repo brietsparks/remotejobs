@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'next-i18next';
 
 import { LayoutContainer, LayoutContainerPaths } from '../layout';
-import { OrganizationEditorContainer, OrganizationEditorContainerPaths, OrganizationEditorContainerValues } from '../organization-editor';
+import { OrganizationEditorContainer, OrganizationEditorContainerPaths } from '../organization-editor';
 
 import { createOrganization } from './organization-creator-page.api';
 

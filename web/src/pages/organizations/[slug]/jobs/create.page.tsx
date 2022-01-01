@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { JobCreatorPageContainer, getOrganizationName } from '../../../../containers';
+import { JobCreatorPageContainer, getOrganizationName } from '../../../../containers/job-creator-page';
 import { navPaths } from '../../../paths';
 
 export interface CreateJobPageProps {

@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { JobsPageContainer, getJobs, PaginatedJobs } from '../../containers';
+import { JobsPageContainer, getJobs, PaginatedJobs } from '../../containers/jobs-page';
 import { navPaths } from '../paths';
 
 export interface JobsPageProps {

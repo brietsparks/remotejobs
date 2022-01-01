@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { SSRConfig } from 'next-i18next';
 
-import { OrganizationPageContainer, getOrganizationWithJobs, GetOrganizationWithJobsResult, getUpdateOrganizationInitialValues } from '../../../containers';
+import { OrganizationPageContainer, getOrganizationWithJobs, GetOrganizationWithJobsResult } from '../../../containers/organization-page';
 import { navPaths } from '../../paths';
 
 export type OrganizationPageProps =

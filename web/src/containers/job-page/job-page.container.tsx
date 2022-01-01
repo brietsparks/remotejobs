@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
 
-import { JobDetails, JobDetailsData, JobDetailsPaths } from '../../components';
+import { JobDetails, JobDetailsData, JobDetailsPaths } from '../../components/job-details';
 import { LayoutContainer, LayoutContainerPaths } from '../layout';
 
 export interface JobPageContainerProps {

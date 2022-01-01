@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { JobEditorPageContainer, getUpdateJobInitialValues, JobEditorContainerValues } from '../../../containers';
+import { JobEditorPageContainer, getUpdateJobInitialValues, JobEditorContainerValues } from '../../../containers/job-editor-page';
 import { navPaths } from '../../paths';
 
 export interface EditJobPageProps {

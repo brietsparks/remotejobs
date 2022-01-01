@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useTranslation } from 'next-i18next';
 
 import { Organization } from '../../domain';
-import { OrganizationDetails } from '../../components';
+import { OrganizationDetails } from '../../components/organization-details';
 import { LayoutContainer, LayoutContainerPaths } from '../layout';
 import { JobsListContainer, JobsListContainerPaths, PaginatedJobs } from '../jobs-list';
 

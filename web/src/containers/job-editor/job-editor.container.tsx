@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
 
-import { JobEditorForm, JobEditorFormMessages, JobEditorFormValues } from '../../components';
+import { JobEditorForm, JobEditorFormMessages, JobEditorFormValues } from '../../components/job-editor-form';
 
 export type JobEditorContainerValues = JobEditorFormValues;
 

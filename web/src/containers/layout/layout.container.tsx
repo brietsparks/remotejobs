@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { useTranslation } from 'next-i18next';
 
-import { Layout, LayoutPaths } from '../../components';
+import { Layout, LayoutPaths } from '../../components/layout';
 
 export interface LayoutContainerProps {
   children: ReactElement;

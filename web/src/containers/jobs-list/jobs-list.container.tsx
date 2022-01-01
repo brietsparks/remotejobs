@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
 
-import { JobsList, PaginatedJobs, JobsListPaths, GetPaginatedJobs } from '../../components';
+import { JobsList, PaginatedJobs, JobsListPaths, GetPaginatedJobs } from '../../components/jobs-list';
 
 export interface JobsListContainerProps {
   getJobs: GetPaginatedJobs;

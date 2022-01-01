@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
 
-import { OrganizationsList, PaginatedOrganizations, OrganizationsListPaths } from '../../components';
+import { OrganizationsList, PaginatedOrganizations, OrganizationsListPaths } from '../../components/organizations-list';
 import { LayoutContainer, LayoutContainerPaths } from '../layout';
 
 import { getOrganizations } from './organizations-page.api';

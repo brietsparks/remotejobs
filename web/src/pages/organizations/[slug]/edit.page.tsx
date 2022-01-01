@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { OrganizationEditorPageContainer, getUpdateOrganizationInitialValues, OrganizationEditorContainerValues } from '../../../containers';
+import { OrganizationEditorPageContainer, getUpdateOrganizationInitialValues, OrganizationEditorContainerValues } from '../../../containers/organization-editor-page';
 import { navPaths } from '../../paths';
 
 export interface EditOrganizationPageProps {

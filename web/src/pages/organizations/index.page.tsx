@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { OrganizationsPageContainer, getOrganizations, PaginatedOrganizations } from '../../containers';
+import { OrganizationsPageContainer, getOrganizations, PaginatedOrganizations } from '../../containers/organizations-page';
 import { navPaths } from '../paths';
 
 export interface OrganizationsPageProps {

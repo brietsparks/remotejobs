@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
 
-import { OrganizationEditorForm, OrganizationEditorFormValues, OrganizationEditorFormMessages, OrganizationEditorFormPaths } from '../../components';
+import { OrganizationEditorForm, OrganizationEditorFormValues, OrganizationEditorFormMessages, OrganizationEditorFormPaths } from '../../components/organization-editor-form';
 
 export interface OrganizationEditorContainerProps {
   values?: OrganizationEditorFormValues;
