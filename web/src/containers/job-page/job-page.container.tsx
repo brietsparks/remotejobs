@@ -9,6 +9,8 @@ export interface JobPageContainerProps {
   paths: JobPageContainerPaths;
 }
 
+export type { JobDetailsData };
+
 export type JobPageContainerPaths = JobDetailsPaths & LayoutContainerPaths;
 
 export function JobPageContainer(props: JobPageContainerProps) {

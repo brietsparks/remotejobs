@@ -12,7 +12,7 @@ export async function updateOrganization(params: UpdateOrganizationParams) {
   return result.id;
 }
 
-export async function getOrganization(id: string) {
+export async function getUpdateOrganizationInitialValues(id: string) {
   const result = await request(gql`
     query organization($id: String!) {
         organization(id: $id) {

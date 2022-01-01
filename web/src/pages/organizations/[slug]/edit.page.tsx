@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { OrganizationEditorPageContainer, getOrganization, OrganizationEditorContainerValues } from '../../../containers';
+import { OrganizationEditorPageContainer, getUpdateOrganizationInitialValues, OrganizationEditorContainerValues } from '../../../containers';
 import { navPaths } from '../../paths';
 
 export interface EditOrganizationPageProps {
@@ -37,7 +37,7 @@ export type EditOrganizationPageUrlParams = {
 export const getServerSideProps: GetServerSideProps<EditOrganizationPageProps, EditOrganizationPageUrlParams> = async (ctx) => {
   const id = ctx.params?.slug as string;
 
-  const values = await getOrganization(id);
+  const values = await getUpdateOrganizationInitialValues(id);
 
   return {
     props: {

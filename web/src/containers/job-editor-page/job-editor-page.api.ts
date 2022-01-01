@@ -23,7 +23,7 @@ export interface GetJobResult {
   }
 }
 
-export async function getJob(id: string): Promise<GetJobResult> {
+export async function getUpdateJobInitialValues(id: string): Promise<GetJobResult> {
   const result = await request(gql`
       query job($id: String!) {
           job(id: $id) {

@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { JobEditorPageContainer, getJob, JobEditorContainerValues } from '../../../containers';
+import { JobEditorPageContainer, getUpdateJobInitialValues, JobEditorContainerValues } from '../../../containers';
 import { navPaths } from '../../paths';
 
 export interface EditJobPageProps {
@@ -42,7 +42,7 @@ export const getServerSideProps: GetServerSideProps<EditJobPageProps, EditJobPag
   const {
     organization: { name: organizationName },
     ...values
-  } = await getJob(id);
+  } = await getUpdateJobInitialValues(id);
 
   return {
     props: {
