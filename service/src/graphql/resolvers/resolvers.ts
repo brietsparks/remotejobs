@@ -4,8 +4,8 @@ import { makeOrganizationsResolvers } from './organizations-resolvers';
 import { makeJobsResolvers } from './jobs-resolvers';
 
 export function makeResolvers(providers: Providers) {
-  const organizationsResolvers = makeOrganizationsResolvers(providers.organizationsProvider);
-  const jobsResolvers = makeJobsResolvers(providers.jobsProvider);
+  const organizationsResolvers = makeOrganizationsResolvers(providers);
+  const jobsResolvers = makeJobsResolvers(providers);
 
   return {
     Query: {
@@ -16,6 +16,7 @@ export function makeResolvers(providers: Providers) {
       ...organizationsResolvers.Mutation,
       ...jobsResolvers.Mutation
     },
+    Organization: organizationsResolvers.Organization,
     Job: jobsResolvers.Job
   };
 }

@@ -23,7 +23,7 @@ export async function getJobs(cursor?: string): Promise<CursorPaginationResult<J
       }
   `, {
     params: {
-      pagination: { cursor, limit: 3 }
+      pagination: { cursor, limit: 10 }
     }
   });
 

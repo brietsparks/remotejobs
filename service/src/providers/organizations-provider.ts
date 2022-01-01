@@ -46,6 +46,14 @@ export class OrganizationsProvider {
     return { id };
   }
 
+  getOrganization = async(id: string) => {
+    return this.client
+      .from(organizationsTable.name)
+      .select(organizationsTable.columns)
+      .where({ [organizationsTable.columns.id]: id })
+      .first();
+  }
+
   getOrganizations = async (params: GetOrganizationsParams) => {
     const query = this.client
       .from(organizationsTable.name)

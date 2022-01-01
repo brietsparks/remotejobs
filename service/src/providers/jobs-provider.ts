@@ -25,6 +25,11 @@ export interface GetJobsParams {
   pagination: CursorPaginationParams;
 }
 
+export interface GetJobsOfOrganizationParams {
+  organizationId: string;
+  pagination: CursorPaginationParams;
+}
+
 export class JobsProvider {
   constructor(
     private client: Knex,
@@ -50,6 +55,18 @@ export class JobsProvider {
     const query = this.client
       .from(jobsTable.name)
       .select(jobsTable.columns);
+
+    return new CursorPagination<Job>(params.pagination, {
+      getCursor: job => job.creationTimestamp.getTime().toString(),
+      cursorColumn: jobsTable.columns.creationTimestamp,
+    }).retrievePaginatedItems(query);
+  }
+
+  getJobsOfOrganization = async (params: GetJobsOfOrganizationParams) => {
+    const query = this.client
+      .from(jobsTable.name)
+      .select(jobsTable.columns)
+      .where({ [jobsTable.columns.organizationId]: params.organizationId })
 
     return new CursorPagination<Job>(params.pagination, {
       getCursor: job => job.creationTimestamp.getTime().toString(),

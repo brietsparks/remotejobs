@@ -2,12 +2,12 @@ import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { SSRConfig } from 'next-i18next';
 
-import { OrganizationPageContainer } from '../../../containers';
-import { mockOrganizationData } from '../../../mocks';
+import { OrganizationPageContainer, getOrganizationWithJobs, GetOrganizationWithJobsResult } from '../../../containers';
 import { navPaths } from '../../paths';
 
 export type OrganizationPageProps =
   SSRConfig & {
+  data: GetOrganizationWithJobsResult;
   id: string;
 }
 
@@ -21,7 +21,7 @@ export default function OrganizationPage(props: OrganizationPageProps) {
 
   return (
     <OrganizationPageContainer
-      data={mockOrganizationData()}
+      data={props.data}
       paths={paths}
     />
   );
@@ -32,9 +32,13 @@ export type OrganizationPageUrlParams = {
 }
 
 export const getServerSideProps: GetServerSideProps<OrganizationPageProps, OrganizationPageUrlParams> = async (ctx) => {
+  const id = ctx.params?.slug as string;
+  const data = await getOrganizationWithJobs(id);
+
   return {
     props: {
-      id: ctx.params?.slug as string,
+      id,
+      data,
       ...(await serverSideTranslations(ctx.locale as string, ['common']))
     }
   };

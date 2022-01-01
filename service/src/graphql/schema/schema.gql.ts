@@ -3,6 +3,7 @@ import { gql } from 'apollo-server';
 export const typeDefs = gql`
     type Query {
         organizations(params: OrganizationsParams!): OrganizationsResult!
+        organization(id: String!): Organization
         jobs(params: JobsParams!): JobsResult!
     }
     
@@ -68,6 +69,7 @@ export const typeDefs = gql`
         website: String!
         shortDescription: String!
         longDescription: String
+        jobs(params: JobsParams!): JobsResult!
     }
   
     type Job {
