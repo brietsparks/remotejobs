@@ -4,6 +4,8 @@ import { useTranslation } from 'next-i18next';
 import { LayoutContainer, LayoutContainerPaths } from '../layout';
 import { JobEditorContainer, JobEditorContainerPaths, JobEditorContainerValues } from '../job-editor';
 
+import { updateJob } from './job-editor-page.api';
+
 export interface JobEditorPageProps {
   id: string;
   organizationName: string;
@@ -12,16 +14,18 @@ export interface JobEditorPageProps {
   paths: JobEditorPagePaths;
 }
 
+export type { JobEditorContainerValues };
+
 export type JobEditorPagePaths = LayoutContainerPaths & JobEditorContainerPaths;
 
 export function JobEditorPageContainer(props: JobEditorPageProps) {
   const { t } = useTranslation();
 
   const submit = async (values: JobEditorContainerValues) => {
-    console.log({
+    return updateJob({
       id: props.id,
-      values
-    });
+      ...values,
+    })
   };
 
   const messages = {

@@ -21,6 +21,13 @@ export interface CreateJobParams {
   longDescription?: string;
 }
 
+export interface UpdateJobParams {
+  id: string;
+  title?: string;
+  shortDescription?: string;
+  longDescription?: string;
+}
+
 export interface GetJobsParams {
   pagination: CursorPaginationParams;
 }
@@ -49,6 +56,27 @@ export class JobsProvider {
       });
 
     return { id };
+  }
+
+  updateJob = async (params: UpdateJobParams) => {
+    await this.client
+      .into(jobsTable.name)
+      .update({
+        [jobsTable.columns.title]: params.title,
+        [jobsTable.columns.shortDescription]: params.shortDescription,
+        [jobsTable.columns.longDescription]: params.longDescription
+      })
+      .where({ [jobsTable.columns.id]: params.id })
+
+    return { id: params.id };
+  }
+
+  getJob = async (id: string) => {
+    return this.client
+      .from(jobsTable.name)
+      .select(jobsTable.columns)
+      .where({ [jobsTable.columns.id]: id })
+      .first();
   }
 
   getJobs = async (params: GetJobsParams) => {

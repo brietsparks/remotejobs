@@ -5,6 +5,7 @@ export const typeDefs = gql`
         organizations(params: OrganizationsParams!): OrganizationsResult!
         organization(id: String!): Organization
         jobs(params: JobsParams!): JobsResult!
+        job(id: String!): Job
     }
     
     type Mutation {

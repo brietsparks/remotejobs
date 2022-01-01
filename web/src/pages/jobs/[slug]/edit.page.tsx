@@ -2,11 +2,13 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { JobEditorPageContainer } from '../../../containers';
+import { JobEditorPageContainer, getJob, JobEditorContainerValues } from '../../../containers';
 import { navPaths } from '../../paths';
 
 export interface EditJobPageProps {
   id: string;
+  organizationName: string;
+  values: JobEditorContainerValues;
 }
 
 export default function EditJobPage(props: EditJobPageProps) {
@@ -21,13 +23,9 @@ export default function EditJobPage(props: EditJobPageProps) {
 
   return (
     <JobEditorPageContainer
-      id="id"
-      organizationName="Organization Name"
-      values={{
-        title: 'title',
-        shortDescription: 'shortDescription',
-        longDescription: 'longDescription',
-      }}
+      id={props.id}
+      organizationName={props.organizationName}
+      values={props.values}
       onSuccess={handleSuccess}
       paths={paths}
     />
@@ -39,9 +37,18 @@ export type EditJobPageUrlParams = {
 }
 
 export const getServerSideProps: GetServerSideProps<EditJobPageProps, EditJobPageUrlParams> = async (ctx) => {
+  const id = ctx.params?.slug as string;
+
+  const {
+    organization: { name: organizationName },
+    ...values
+  } = await getJob(id);
+
   return {
     props: {
-      id: ctx.params?.slug as string,
+      id,
+      organizationName,
+      values,
       ...(await serverSideTranslations(ctx.locale as string, ['common']))
     }
   }

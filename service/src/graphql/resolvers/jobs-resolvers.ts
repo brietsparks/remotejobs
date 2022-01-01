@@ -1,6 +1,6 @@
 import { IFieldResolver, IResolverObject } from 'apollo-server';
 
-import { Providers, CursorPaginationParams } from '../../providers';
+import { Providers, CursorPaginationParams, UpdateJobParams } from '../../providers';
 import { RequestContext, NestedParams } from '../types';
 import * as schema from '../schema';
 
@@ -11,6 +11,14 @@ export function makeJobsResolvers(providers: Providers) {
       longDescription: params.longDescription || undefined
     });
   }
+
+  const updateJob: IFieldResolver<unknown, RequestContext, NestedParams<schema.UpdateJobParams>> = async (root, { params }) => {
+    return providers.jobsProvider.updateJob(params as UpdateJobParams);
+  }
+
+  const resolveJob: IFieldResolver<unknown, RequestContext, { id: string }> = (root, { id }) => {
+    return providers.jobsProvider.getJob(id);
+  };
 
   const resolveJobs: IFieldResolver<unknown, RequestContext, NestedParams<schema.JobsParams>> = async (root, { params }) => {
     return providers.jobsProvider.getJobs({
@@ -34,10 +42,12 @@ export function makeJobsResolvers(providers: Providers) {
 
   return {
     Query: {
-      jobs: resolveJobs
+      jobs: resolveJobs,
+      job: resolveJob
     },
     Mutation: {
-      createJob
+      createJob,
+      updateJob
     },
     Job: resolveJobFields
   }

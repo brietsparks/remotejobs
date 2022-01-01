@@ -133,9 +133,15 @@ export type OrganizationsResult = {
 
 export type Query = {
   __typename?: 'Query';
+  job?: Maybe<Job>;
   jobs: JobsResult;
   organization?: Maybe<Organization>;
   organizations: OrganizationsResult;
+};
+
+
+export type QueryJobArgs = {
+  id: Scalars['String'];
 };
 
 
@@ -363,6 +369,7 @@ export type OrganizationsResultResolvers<ContextType = any, ParentType extends R
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  job?: Resolver<Maybe<ResolversTypes['Job']>, ParentType, ContextType, RequireFields<QueryJobArgs, 'id'>>;
   jobs?: Resolver<ResolversTypes['JobsResult'], ParentType, ContextType, RequireFields<QueryJobsArgs, 'params'>>;
   organization?: Resolver<Maybe<ResolversTypes['Organization']>, ParentType, ContextType, RequireFields<QueryOrganizationArgs, 'id'>>;
   organizations?: Resolver<ResolversTypes['OrganizationsResult'], ParentType, ContextType, RequireFields<QueryOrganizationsArgs, 'params'>>;
