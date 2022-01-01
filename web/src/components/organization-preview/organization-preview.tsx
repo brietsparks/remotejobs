@@ -13,15 +13,21 @@ export interface OrganizationPreviewProps {
 export interface OrganizationPreviewData {
   name: string;
   shortDescription: string;
+  recentJobs?: {
+    id: string;
+    title: string;
+  }[];
 }
 
 export interface OrganizationPreviewMessages {
   jobsCount?: string;
+  recentJobs: string;
   view: string;
 }
 
 export interface OrganizationPreviewPaths {
   view: string;
+  viewJob: (jobId: string) => string;
 }
 
 export function OrganizationPreview(props: OrganizationPreviewProps) {
@@ -37,6 +43,19 @@ export function OrganizationPreview(props: OrganizationPreviewProps) {
         <Typography>
           {props.data.shortDescription}
         </Typography>
+
+        <div className={classes.recentJobs}>
+          <Typography>
+            {props.messages.recentJobs}
+          </Typography>
+          {props.data.recentJobs?.map(job => (
+            <Typography key={job.id}>
+              <Link href={props.paths.viewJob(job.id)}>
+                {job.title}
+              </Link>
+            </Typography>
+          ))}
+        </div>
 
         <CardActions className={classes.actions}>
           <Typography>

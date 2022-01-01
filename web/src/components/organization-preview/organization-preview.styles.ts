@@ -7,6 +7,9 @@ export const useOrganizationPreviewStyles = makeStyles(theme => ({
     fontSize: 20,
     fontWeight: 'bold'
   },
+  recentJobs: {
+    marginTop: theme.spacing(3)
+  },
   actions: {
     justifyContent: 'right'
   }

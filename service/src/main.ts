@@ -3,11 +3,14 @@ import { config as configureEnv } from 'dotenv';
 import { createContainer } from './container';
 
 configureEnv();
-const pgUrl = getVar('PG_URL');
+const pgUrl = requireVar('PG_URL');
 const port = getVar('PORT', '3001');
+const nodeEnv = getVar('NODE_ENV')
+const development = nodeEnv === 'development';
 
 const container = createContainer({
-  pgUrl
+  pgUrl,
+  development
 });
 
 const action = process.argv[2];
@@ -25,13 +28,16 @@ if (action === 'db:down') {
   container.db.migrate.down().then(process.exit);
 }
 
-function getVar(name: string, fallback?: string): string {
+
+function requireVar(name: string): string {
   const value = process.env[name];
   if (!value) {
-    if (!fallback) {
-      throw new Error(`env var ${name} missing`);
-    }
-    return fallback;
+    throw new Error(`env var ${name} missing`);
   }
   return value;
+}
+
+function getVar(name: string, fallback = '') {
+  const value = process.env[name];
+  return value || fallback;
 }

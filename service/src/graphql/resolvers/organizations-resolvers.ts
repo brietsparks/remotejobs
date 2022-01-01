@@ -26,6 +26,10 @@ export function makeOrganizationsResolvers(providers: Providers) {
     });
   }
 
+  const resolveRecentJobs: IFieldResolver<Organization, RequestContext, NestedParams<{ limit?: number }>> = async (organization, _, ctx) => {
+    return ctx.loaders.jobsLoader.getRecentJobsOfOrganizations.load(organization.id);
+  }
+
   const resolveJobs: IFieldResolver<Organization, RequestContext, NestedParams<schema.JobsParams>> = async (organization, { params }) => {
     return providers.jobsProvider.getJobsOfOrganization({
       organizationId: organization.id,
@@ -40,6 +44,7 @@ export function makeOrganizationsResolvers(providers: Providers) {
     website: o => o.website,
     shortDescription: o => o.shortDescription,
     longDescription: o => o.longDescription,
+    recentJobs: resolveRecentJobs,
     jobs: resolveJobs
   };
 

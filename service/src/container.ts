@@ -7,6 +7,7 @@ import { makeGraphqlRouter } from './graphql';
 
 export interface ContainerParams {
   pgUrl: string
+  development?: boolean;
 }
 
 export function createContainer(params: ContainerParams) {
@@ -17,6 +18,9 @@ export function createContainer(params: ContainerParams) {
       directory: getMigrationsDirectory()
     }
   });
+  if (params.development) {
+    db.on('query', (q) => console.log(q));
+  }
 
   const providers = makeProviders(db);
 

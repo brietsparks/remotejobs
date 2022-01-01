@@ -112,6 +112,7 @@ export type Organization = {
   jobs: JobsResult;
   longDescription?: Maybe<Scalars['String']>;
   name: Scalars['String'];
+  recentJobs: Array<Maybe<Job>>;
   shortDescription: Scalars['String'];
   website: Scalars['String'];
 };
@@ -357,6 +358,7 @@ export type OrganizationResolvers<ContextType = any, ParentType extends Resolver
   jobs?: Resolver<ResolversTypes['JobsResult'], ParentType, ContextType, RequireFields<OrganizationJobsArgs, 'params'>>;
   longDescription?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  recentJobs?: Resolver<Array<Maybe<ResolversTypes['Job']>>, ParentType, ContextType>;
   shortDescription?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   website?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

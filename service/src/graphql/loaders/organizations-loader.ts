@@ -1,7 +1,6 @@
 import Dataloader from 'dataloader';
 
-import { OrganizationsProvider } from '../../providers';
-import { Organization } from '../schema';
+import { OrganizationsProvider, Organization } from '../../providers';
 
 export interface OrganizationsLoader {
   getOrganizationsByIds: Dataloader<string, Organization>;

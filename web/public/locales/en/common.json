@@ -11,6 +11,7 @@
   "jobShortDescription": "Short Description",
   "jobLongDescription": "Long Description",
   "jobsCount": "{{ count }} jobs",
+  "recentJobs": "Recent Jobs",
   "jobsAtOrganization": "Jobs at {{ organization }}",
   "viewOrganization": "More Info",
   "editOrganization": "Edit",

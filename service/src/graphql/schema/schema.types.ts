@@ -112,6 +112,7 @@ export type Organization = {
   jobs: JobsResult;
   longDescription?: Maybe<Scalars['String']>;
   name: Scalars['String'];
+  recentJobs: Array<Maybe<Job>>;
   shortDescription: Scalars['String'];
   website: Scalars['String'];
 };
@@ -119,6 +120,11 @@ export type Organization = {
 
 export type OrganizationJobsArgs = {
   params: JobsParams;
+};
+
+
+export type OrganizationRecentJobsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
 };
 
 export type OrganizationsParams = {
@@ -133,9 +139,15 @@ export type OrganizationsResult = {
 
 export type Query = {
   __typename?: 'Query';
+  job?: Maybe<Job>;
   jobs: JobsResult;
   organization?: Maybe<Organization>;
   organizations: OrganizationsResult;
+};
+
+
+export type QueryJobArgs = {
+  id: Scalars['String'];
 };
 
 
@@ -351,6 +363,7 @@ export type OrganizationResolvers<ContextType = any, ParentType extends Resolver
   jobs?: Resolver<ResolversTypes['JobsResult'], ParentType, ContextType, RequireFields<OrganizationJobsArgs, 'params'>>;
   longDescription?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  recentJobs?: Resolver<Array<Maybe<ResolversTypes['Job']>>, ParentType, ContextType, RequireFields<OrganizationRecentJobsArgs, never>>;
   shortDescription?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   website?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -363,6 +376,7 @@ export type OrganizationsResultResolvers<ContextType = any, ParentType extends R
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  job?: Resolver<Maybe<ResolversTypes['Job']>, ParentType, ContextType, RequireFields<QueryJobArgs, 'id'>>;
   jobs?: Resolver<ResolversTypes['JobsResult'], ParentType, ContextType, RequireFields<QueryJobsArgs, 'params'>>;
   organization?: Resolver<Maybe<ResolversTypes['Organization']>, ParentType, ContextType, RequireFields<QueryOrganizationArgs, 'id'>>;
   organizations?: Resolver<ResolversTypes['OrganizationsResult'], ParentType, ContextType, RequireFields<QueryOrganizationsArgs, 'params'>>;

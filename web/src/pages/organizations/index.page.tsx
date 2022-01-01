@@ -11,6 +11,7 @@ export interface OrganizationsPageProps {
 export default function OrganizationsPage(props: OrganizationsPageProps) {
   const paths = {
     view: (id: string) => `/organizations/${id}`,
+    viewJob: (jobId: string) => `/jobs/${jobId}`,
     create: 'organizations/create',
     ...navPaths
   };

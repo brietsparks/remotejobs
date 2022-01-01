@@ -25,12 +25,14 @@ export type OrganizationsListItem = OrganizationPreviewData & {
 
 export type OrganizationsListMessages = {
   jobsCount: (count: number) => string|undefined;
+  recentJobs: string;
   view: string;
   create: string;
 };
 
 export interface OrganizationsListPaths {
   view: (id: string) => string;
+  viewJob: (jobId: string) => string;
   create: string;
 }
 
@@ -68,10 +70,12 @@ export function OrganizationsList(props: OrganizationsListProps) {
             data={data}
             messages={{
               jobsCount: props.messages.jobsCount(data.jobsCount),
+              recentJobs: props.messages.recentJobs,
               view: props.messages.view
             }}
             paths={{
-              view: props.paths.view(data.id)
+              view: props.paths.view(data.id),
+              viewJob: props.paths.viewJob
             }}
           />
         </div>

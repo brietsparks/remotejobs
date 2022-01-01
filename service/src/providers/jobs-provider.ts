@@ -37,6 +37,14 @@ export interface GetJobsOfOrganizationParams {
   pagination: CursorPaginationParams;
 }
 
+export interface GetRecentJobsOfOrganization {
+  organizationIds: string[];
+  limit?: number;
+}
+
+export const MAX_RECENT_JOBS_LIMIT = 10;
+export const DEFAULT_RECENT_JOBS_LIMIT = 3;
+
 export class JobsProvider {
   constructor(
     private client: Knex,
@@ -100,5 +108,20 @@ export class JobsProvider {
       getCursor: job => job.creationTimestamp.getTime().toString(),
       cursorColumn: jobsTable.columns.creationTimestamp,
     }).retrievePaginatedItems(query);
+  }
+
+  getRecentJobsOfOrganizations = async (params: GetRecentJobsOfOrganization): Promise<Job[]> => {
+    let limit = DEFAULT_RECENT_JOBS_LIMIT;
+    if (params.limit) {
+      limit = params.limit > MAX_RECENT_JOBS_LIMIT ? MAX_RECENT_JOBS_LIMIT : params.limit;
+    }
+
+    return this.client.unionAll(params.organizationIds.map(
+      organizationId => this.client
+        .from(jobsTable.name)
+        .select(jobsTable.columns)
+        .where({ [jobsTable.columns.organizationId]: organizationId })
+        .limit(limit)
+    ), true);
   }
 }

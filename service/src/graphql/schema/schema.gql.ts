@@ -95,6 +95,7 @@ export const typeDefs = gql`
         website: String!
         shortDescription: String!
         longDescription: String
+        recentJobs: [Job]!
         jobs(params: JobsParams!): JobsResult!
     }
   

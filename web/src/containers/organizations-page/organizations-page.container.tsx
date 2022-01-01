@@ -21,7 +21,8 @@ export function OrganizationsPageContainer(props: OrganizationsPageProps) {
   const messages = {
     view: t('viewOrganization'),
     create: t('createOrganization'),
-    jobsCount: (count: number) => t('jobsCount', { count })
+    jobsCount: (count: number) => t('jobsCount', { count }),
+    recentJobs: t('recentJobs')
   };
 
   return (
