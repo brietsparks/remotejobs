@@ -4,6 +4,8 @@ import { useTranslation } from 'next-i18next';
 import { LayoutContainer, LayoutContainerPaths } from '../layout';
 import { OrganizationEditorContainer, OrganizationEditorContainerPaths, OrganizationEditorContainerValues } from '../organization-editor';
 
+import { createOrganization } from './organization-creator-page.api';
+
 export interface OrganizationCreatorPageContainerProps {
   onSuccess: () => void;
   paths: OrganizationCreatorPageContainerPaths
@@ -14,10 +16,6 @@ export type OrganizationCreatorPageContainerPaths = LayoutContainerPaths & Organ
 export function OrganizationCreatorPageContainer(props: OrganizationCreatorPageContainerProps) {
   const { t } = useTranslation();
 
-  const submit = async (values: OrganizationEditorContainerValues) => {
-    console.log({ values });
-  };
-
   const messages = {
     submit: t('createOrganization')
   };
@@ -26,7 +24,7 @@ export function OrganizationCreatorPageContainer(props: OrganizationCreatorPageC
     <LayoutContainer paths={props.paths}>
       <OrganizationEditorContainer
         onSuccess={props.onSuccess}
-        submit={submit}
+        submit={createOrganization}
         messages={messages}
         paths={props.paths}
       />
