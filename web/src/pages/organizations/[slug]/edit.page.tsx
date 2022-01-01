@@ -2,11 +2,12 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { OrganizationEditorPageContainer } from '../../../containers';
+import { OrganizationEditorPageContainer, getOrganization, OrganizationEditorContainerValues } from '../../../containers';
 import { navPaths } from '../../paths';
 
 export interface EditOrganizationPageProps {
   id: string;
+  values: OrganizationEditorContainerValues
 }
 
 export default function EditOrganizationPage(props: EditOrganizationPageProps) {
@@ -21,13 +22,8 @@ export default function EditOrganizationPage(props: EditOrganizationPageProps) {
 
   return (
     <OrganizationEditorPageContainer
-      id="id"
-      values={{
-        name: 'name',
-        shortDescription: 'shortDescription',
-        longDescription: 'longDescription',
-        website: 'www.url.com'
-      }}
+      id={props.id}
+      values={props.values}
       onSuccess={handleSuccess}
       paths={paths}
     />
@@ -39,9 +35,14 @@ export type EditOrganizationPageUrlParams = {
 }
 
 export const getServerSideProps: GetServerSideProps<EditOrganizationPageProps, EditOrganizationPageUrlParams> = async (ctx) => {
+  const id = ctx.params?.slug as string;
+
+  const values = await getOrganization(id);
+
   return {
     props: {
-      id: ctx.params?.slug as string,
+      id,
+      values,
       ...(await serverSideTranslations(ctx.locale as string, ['common']))
     }
   }

@@ -29,7 +29,7 @@ export interface OrganizationEditorFormPaths {
 export interface OrganizationEditorFormValues {
   name: string;
   shortDescription: string;
-  longDescription: string;
+  longDescription?: string;
   website: string;
 }
 

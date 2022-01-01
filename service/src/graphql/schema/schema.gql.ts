@@ -9,7 +9,9 @@ export const typeDefs = gql`
     
     type Mutation {
         createOrganization(params: CreateOrganizationParams!): CreateOrganizationResult!
+        updateOrganization(params: UpdateOrganizationParams!): UpdateOrganizationResult!
         createJob(params: CreateJobParams!): CreateJobResult!
+        updateJob(params: UpdateJobParams!): UpdateJobResult!
     }
     
     input CursorPaginationParams {
@@ -32,6 +34,18 @@ export const typeDefs = gql`
     type CreateOrganizationResult {
         id: String!
     }
+
+    input UpdateOrganizationParams {
+        id: String!
+        name: String
+        website: String
+        shortDescription: String
+        longDescription: String
+    }
+
+    type UpdateOrganizationResult {
+        id: String!
+    }
     
     input CreateJobParams {
         organizationId: String!
@@ -41,6 +55,17 @@ export const typeDefs = gql`
     }
 
     type CreateJobResult {
+        id: String!
+    }
+    
+    input UpdateJobParams {
+        id: String!
+        title: String
+        shortDescription: String
+        longDescription: String
+    }
+
+    type UpdateJobResult {
         id: String!
     }
     

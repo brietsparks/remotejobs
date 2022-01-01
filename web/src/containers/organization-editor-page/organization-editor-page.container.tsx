@@ -4,6 +4,8 @@ import { useTranslation } from 'next-i18next';
 import { LayoutContainer, LayoutContainerPaths } from '../layout';
 import { OrganizationEditorContainer, OrganizationEditorContainerPaths, OrganizationEditorContainerValues } from '../organization-editor';
 
+import { updateOrganization } from './organization-editor-page.api';
+
 export interface OrganizationEditorPageContainerProps {
   id: string;
   values: OrganizationEditorContainerValues;
@@ -11,15 +13,17 @@ export interface OrganizationEditorPageContainerProps {
   paths: OrganizationEditorPageContainerPaths;
 }
 
+export type { OrganizationEditorContainerValues };
+
 export type OrganizationEditorPageContainerPaths = LayoutContainerPaths & OrganizationEditorContainerPaths;
 
 export function OrganizationEditorPageContainer(props: OrganizationEditorPageContainerProps) {
   const { t } = useTranslation();
 
   const submit = async (values: OrganizationEditorContainerValues) => {
-    console.log({
+    return updateOrganization({
       id: props.id,
-      values
+      ...values
     });
   };
 

@@ -21,6 +21,14 @@ export interface CreateOrganizationParams {
   longDescription?: string;
 }
 
+export interface UpdateOrganizationParams {
+  id: string;
+  name?: string;
+  website?: string;
+  shortDescription?: string;
+  longDescription?: string;
+}
+
 export interface GetOrganizationsParams {
   pagination: CursorPaginationParams;
 }
@@ -44,6 +52,20 @@ export class OrganizationsProvider {
       });
 
     return { id };
+  }
+
+  updateOrganization = async (params: UpdateOrganizationParams) => {
+    await this.client
+      .into(organizationsTable.name)
+      .update({
+        [organizationsTable.columns.name]: params.name,
+        [organizationsTable.columns.website]: params.website,
+        [organizationsTable.columns.shortDescription]: params.shortDescription,
+        [organizationsTable.columns.longDescription]: params.longDescription
+      })
+      .where({ [organizationsTable.columns.id]: params.id });
+
+    return { id: params.id };
   }
 
   getOrganization = async(id: string) => {

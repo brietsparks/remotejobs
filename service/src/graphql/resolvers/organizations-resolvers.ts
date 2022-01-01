@@ -1,6 +1,6 @@
 import { IFieldResolver, IResolverObject } from 'apollo-server';
 
-import { Providers, CursorPaginationParams, Organization } from '../../providers';
+import { Providers, CursorPaginationParams, Organization, UpdateOrganizationParams } from '../../providers';
 import { RequestContext, NestedParams } from '../types';
 import * as schema from '../schema';
 
@@ -11,6 +11,10 @@ export function makeOrganizationsResolvers(providers: Providers) {
       longDescription: params.longDescription || undefined
     });
   }
+
+  const updateOrganization: IFieldResolver<unknown, RequestContext, NestedParams<schema.UpdateOrganizationParams>> = async (root, { params }) => {
+    return providers.organizationsProvider.updateOrganization(params as UpdateOrganizationParams);
+  };
 
   const resolveOrganization: IFieldResolver<unknown, RequestContext, { id: string }> = async (root, { id }) => {
     return providers.organizationsProvider.getOrganization(id);
@@ -46,6 +50,7 @@ export function makeOrganizationsResolvers(providers: Providers) {
     },
     Mutation: {
       createOrganization,
+      updateOrganization
     },
     Organization: resolveOrganizationFields
   }
