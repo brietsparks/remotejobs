@@ -2,11 +2,12 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { JobCreatorPageContainer } from '../../../../containers';
+import { JobCreatorPageContainer, getOrganizationName } from '../../../../containers';
 import { navPaths } from '../../../paths';
 
 export interface CreateJobPageProps {
   organizationId: string;
+  organizationName: string;
 }
 
 export default function CreateJobPage(props: CreateJobPageProps) {
@@ -21,8 +22,8 @@ export default function CreateJobPage(props: CreateJobPageProps) {
 
   return (
     <JobCreatorPageContainer
-      organizationId="organizationId"
-      organizationName="organizationName"
+      organizationId={props.organizationId}
+      organizationName={props.organizationName}
       onSuccess={handleSuccess}
       paths={paths}
     />
@@ -34,9 +35,14 @@ export type CreateJobPageUrlParams = {
 }
 
 export const getServerSideProps: GetServerSideProps<CreateJobPageProps, CreateJobPageUrlParams> = async (ctx) => {
+  const organizationId = ctx.params?.slug as string;
+
+  const organizationName = await getOrganizationName(organizationId);
+
   return {
     props: {
-      organizationId: ctx.params?.slug as string,
+      organizationId,
+      organizationName,
       ...(await serverSideTranslations(ctx.locale as string, ['common']))
     }
   }

@@ -4,6 +4,8 @@ import { useTranslation } from 'next-i18next';
 import { LayoutContainer, LayoutContainerPaths } from '../layout';
 import { JobEditorContainer, JobEditorContainerPaths, JobEditorContainerValues } from '../job-editor';
 
+import { createJob } from './job-creator-page.api';
+
 export interface JobCreatorPageProps {
   organizationId: string;
   organizationName: string;
@@ -17,11 +19,11 @@ export function JobCreatorPageContainer(props: JobCreatorPageProps) {
   const { t } = useTranslation();
 
   const submit = async (values: JobEditorContainerValues) => {
-    console.log({
-      organizationId: props.organizationId,
-      values
+    return createJob({
+      ...values,
+      organizationId: props.organizationId
     });
-  }
+  };
 
   const messages = {
     submit: t('createJob'),
