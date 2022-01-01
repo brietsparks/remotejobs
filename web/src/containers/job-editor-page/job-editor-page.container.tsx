@@ -29,7 +29,7 @@ export function JobEditorPageContainer(props: JobEditorPageProps) {
   };
 
   const messages = {
-    submit: t('createJob')
+    submit: t('saveJob')
   };
 
   return (

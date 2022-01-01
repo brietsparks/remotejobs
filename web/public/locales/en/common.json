@@ -7,7 +7,7 @@
   "editJob": "Edit",
   "saveJob": "Save",
   "cancel": "Cancel",
-  "jobTitle": "Title",
+  "jobTitle": "Job Title",
   "jobShortDescription": "Short Description",
   "jobLongDescription": "Long Description",
   "jobsCount": "{{ count }} jobs",

@@ -68,7 +68,7 @@ export function JobEditorForm(props: JobEditorFormProps) {
   };
 
   return (
-    <Container className={classes.root} role="form">
+    <Container className={classes.root} role="form" maxWidth="sm">
       <Typography>
         <Link href={props.paths.cancel}>{props.messages.cancel}</Link>
       </Typography>
@@ -98,12 +98,16 @@ export function JobEditorForm(props: JobEditorFormProps) {
         label={props.messages.longDescription}
         value={values.longDescription}
         onChange={changeHandler('longDescription')}
+        multiline
+        rows={8}
         {...requiredProps}
       />
 
       <Button
         onClick={submit}
         disabled={!isValid || isPending}
+        color="primary"
+        variant="contained"
       >
         {props.messages.submit}
       </Button>

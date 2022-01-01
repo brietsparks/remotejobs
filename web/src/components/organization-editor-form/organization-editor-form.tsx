@@ -71,7 +71,7 @@ export function OrganizationEditorForm(props: OrganizationEditorFormProps) {
   };
 
   return (
-    <Container className={classes.root} role="form">
+    <Container className={classes.root} role="form" maxWidth="sm">
       <Typography>
         <Link href={props.paths.cancel}>{props.messages.cancel}</Link>
       </Typography>
@@ -105,6 +105,8 @@ export function OrganizationEditorForm(props: OrganizationEditorFormProps) {
         label={props.messages.longDescription}
         value={values.longDescription}
         onChange={changeHandler('longDescription')}
+        multiline
+        rows={8}
       />
 
       <Button
