@@ -1,6 +1,6 @@
 import { request, gql } from '../../graphql';
 import { CursorPaginationResult } from '../../util';
-import { JobsListItem } from '../../components';
+import { JobsListItem } from '../../components/jobs-list';
 
 export async function getJobs(cursor?: string): Promise<CursorPaginationResult<JobsListItem>> {
   const result = await request(gql`

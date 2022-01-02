@@ -6,7 +6,9 @@
     "dev": "nodemon src/main.ts serve",
     "db:up": "ts-node src/main.ts db:up",
     "db:down": "ts-node src/main.ts db:down",
-    "gql": "graphql-codegen --config codegen.yml"
+    "gql": "graphql-codegen --config codegen.yml",
+    "build": "tsc -p tsconfig.release.json",
+    "start": "node build/src/main.js serve"
   },
   "author": "Briet Sparks",
   "license": "ISC",
