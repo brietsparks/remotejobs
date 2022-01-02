@@ -37,6 +37,10 @@ export function makeOrganizationsResolvers(providers: Providers) {
     });
   }
 
+  const resolveJobsCount: IFieldResolver<Organization, RequestContext> = async (organization, _, ctx) => {
+    return ctx.loaders.jobsLoader.getJobsCountsOfOrganizations.load(organization.id);
+  };
+
   const resolveOrganizationFields: IResolverObject = {
     id: o => o.id,
     creationTimestamp: o => o.creationTimestamp,
@@ -45,7 +49,8 @@ export function makeOrganizationsResolvers(providers: Providers) {
     shortDescription: o => o.shortDescription,
     longDescription: o => o.longDescription,
     recentJobs: resolveRecentJobs,
-    jobs: resolveJobs
+    jobs: resolveJobs,
+    jobsCount: resolveJobsCount,
   };
 
   return {

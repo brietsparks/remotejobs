@@ -69,7 +69,7 @@ export function OrganizationsList(props: OrganizationsListProps) {
           <OrganizationPreview
             data={data}
             messages={{
-              jobsCount: props.messages.jobsCount(data.jobsCount),
+              jobsCount: data.jobsCount ? props.messages.jobsCount(data.jobsCount) : undefined,
               recentJobs: props.messages.recentJobs,
               view: props.messages.view
             }}

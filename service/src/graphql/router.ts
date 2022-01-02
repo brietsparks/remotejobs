@@ -12,16 +12,13 @@ export interface GraphqlRouterParams {
   serverConfig?: ApolloServerExpressConfig;
 }
 
-export function makeGraphqlRouter({ providers, serverConfig }: GraphqlRouterParams) {
-  const loaders = makeLoaders(providers);
+export function makeGraphqlRouter({ providers }: GraphqlRouterParams) {
   const resolvers = makeResolvers(providers);
 
-  const context: RequestContext = {
-    loaders
-  }
-
   return new ApolloServer({
-    context,
+    context: (): RequestContext => ({
+      loaders: makeLoaders(providers)
+    }),
     typeDefs,
     resolvers,
   });

@@ -14,6 +14,7 @@ export async function getOrganizations(cursor?: string): Promise<CursorPaginatio
                     id
                     title
                 }
+                jobsCount
             }
             pagination {
                 cursor
@@ -23,7 +24,7 @@ export async function getOrganizations(cursor?: string): Promise<CursorPaginatio
     }
   `, {
     params: {
-      pagination: { cursor, limit: 3 }
+      pagination: { cursor, limit: 10 }
     }
   });
 

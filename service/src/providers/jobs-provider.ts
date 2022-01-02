@@ -12,7 +12,12 @@ export type Job = {
   title: string;
   shortDescription: string;
   longDescription: string;
-}
+};
+
+export type JobsCountOfOrganization = {
+  organizationId: string;
+  count: number;
+};
 
 export interface CreateJobParams {
   organizationId: string;
@@ -121,7 +126,24 @@ export class JobsProvider {
         .from(jobsTable.name)
         .select(jobsTable.columns)
         .where({ [jobsTable.columns.organizationId]: organizationId })
+        .orderBy(jobsTable.columns.creationTimestamp, 'desc')
         .limit(limit)
     ), true);
   }
+
+  getJobsCountsOfOrganizations = async (ids: string[]): Promise<JobsCountOfOrganization[]> => {
+    const rows = await this.client
+      .from(jobsTable.name)
+      .select({
+        organizationId: jobsTable.columns.organizationId,
+        count: this.client.raw('count(*)')
+      })
+      .groupBy(jobsTable.columns.organizationId)
+      .whereIn(jobsTable.columns.organizationId, ids);
+
+    return rows.map(row => ({
+      ...row,
+      count: parseInt(row.count)
+    }));
+  };
 }

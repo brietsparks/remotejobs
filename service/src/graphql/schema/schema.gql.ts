@@ -97,6 +97,7 @@ export const typeDefs = gql`
         longDescription: String
         recentJobs: [Job]!
         jobs(params: JobsParams!): JobsResult!
+        jobsCount: Int!
     }
   
     type Job {

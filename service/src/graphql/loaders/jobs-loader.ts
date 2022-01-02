@@ -4,6 +4,7 @@ import { JobsProvider, Job } from '../../providers';
 
 export interface JobsLoader {
   getRecentJobsOfOrganizations: Dataloader<string, Job[]>;
+  getJobsCountsOfOrganizations: Dataloader<string, number>;
 }
 
 export function makeJobsLoader(provider: JobsProvider): JobsLoader {
@@ -24,8 +25,20 @@ export function makeJobsLoader(provider: JobsProvider): JobsLoader {
     return organizationIds.map(organizationId => jobsByOrganizationId[organizationId]);
   };
 
+  const getJobsCountsOfOrganizations = async (organizationIds: ReadonlyArray<string>) => {
+    const jobsCounts = await provider.getJobsCountsOfOrganizations(organizationIds as string[]);
+
+    const jobCountsByOrganizationId: Record<string, number> = {};
+    for (const jobsCount of jobsCounts) {
+      jobCountsByOrganizationId[jobsCount.organizationId] = jobsCount.count;
+    }
+
+    return organizationIds.map(organizationId => jobCountsByOrganizationId[organizationId] || 0);
+  }
+
   return {
-    getRecentJobsOfOrganizations: new Dataloader(getRecentJobsOfOrganizations)
+    getRecentJobsOfOrganizations: new Dataloader(getRecentJobsOfOrganizations),
+    getJobsCountsOfOrganizations: new Dataloader(getJobsCountsOfOrganizations)
   }
 }
 

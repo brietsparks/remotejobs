@@ -110,6 +110,7 @@ export type Organization = {
   creationTimestamp: Scalars['String'];
   id: Scalars['String'];
   jobs: JobsResult;
+  jobsCount: Scalars['Int'];
   longDescription?: Maybe<Scalars['String']>;
   name: Scalars['String'];
   recentJobs: Array<Maybe<Job>>;
@@ -120,11 +121,6 @@ export type Organization = {
 
 export type OrganizationJobsArgs = {
   params: JobsParams;
-};
-
-
-export type OrganizationRecentJobsArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
 };
 
 export type OrganizationsParams = {
@@ -361,9 +357,10 @@ export type OrganizationResolvers<ContextType = any, ParentType extends Resolver
   creationTimestamp?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   jobs?: Resolver<ResolversTypes['JobsResult'], ParentType, ContextType, RequireFields<OrganizationJobsArgs, 'params'>>;
+  jobsCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   longDescription?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  recentJobs?: Resolver<Array<Maybe<ResolversTypes['Job']>>, ParentType, ContextType, RequireFields<OrganizationRecentJobsArgs, never>>;
+  recentJobs?: Resolver<Array<Maybe<ResolversTypes['Job']>>, ParentType, ContextType>;
   shortDescription?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   website?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
