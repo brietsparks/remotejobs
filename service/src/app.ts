@@ -1,4 +1,4 @@
-import { knex } from 'knex';
+import { knex, Knex } from 'knex';
 import express from 'express';
 
 import { getMigrationsDirectory } from './database';
@@ -7,14 +7,14 @@ import { makeGraphqlRouter } from './graphql';
 import { runFixtures } from './fixtures';
 
 export interface AppParams {
-  pgUrl: string
+  dbConn: Knex.PgConnectionConfig;
   development?: boolean;
 }
 
 export function createApp(params: AppParams) {
   const db = knex({
     client: 'pg',
-    connection: params.pgUrl,
+    connection: params.dbConn,
     migrations: {
       directory: getMigrationsDirectory()
     }
@@ -26,7 +26,10 @@ export function createApp(params: AppParams) {
   const providers = makeProviders(db);
 
   const server = express();
-  const graphqlRouter = makeGraphqlRouter({ providers });
+  const graphqlRouter = makeGraphqlRouter({
+    providers,
+    onError: console.log
+  });
   graphqlRouter.applyMiddleware({ app: server });
 
   server

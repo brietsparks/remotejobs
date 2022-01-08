@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "nodemon src/cmd.ts serve",
+    "dev": "nodemon src/cmd.ts",
     "db:up": "ts-node src/cmd.ts db:up",
     "db:down": "ts-node src/cmd.ts db:down",
     "gql": "graphql-codegen --config codegen.yml",
     "build": "tsc -p tsconfig.release.json",
-    "start": "node build/src/main.js serve"
+    "start": "node build/src/cmd.js"
   },
   "author": "Briet Sparks",
   "license": "ISC",

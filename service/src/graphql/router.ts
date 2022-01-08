@@ -10,12 +10,19 @@ import { makeLoaders } from './loaders';
 export interface GraphqlRouterParams {
   providers: Providers;
   serverConfig?: ApolloServerExpressConfig;
+  onError: (error: Error) => void;
 }
 
-export function makeGraphqlRouter({ providers }: GraphqlRouterParams) {
+export function makeGraphqlRouter({ providers, onError }: GraphqlRouterParams) {
   const resolvers = makeResolvers(providers);
 
   return new ApolloServer({
+    playground: true,
+    introspection: true,
+    formatError: (error) => {
+      onError(error);
+      return new Error('Server Error');
+    },
     context: (): RequestContext => ({
       loaders: makeLoaders(providers)
     }),
