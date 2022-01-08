@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "nodemon src/main.ts serve",
-    "db:up": "ts-node src/main.ts db:up",
-    "db:down": "ts-node src/main.ts db:down",
+    "dev": "nodemon src/cmd.ts serve",
+    "db:up": "ts-node src/cmd.ts db:up",
+    "db:down": "ts-node src/cmd.ts db:down",
     "gql": "graphql-codegen --config codegen.yml",
     "build": "tsc -p tsconfig.release.json",
     "start": "node build/src/main.js serve"

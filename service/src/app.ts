@@ -6,12 +6,12 @@ import { makeProviders } from './providers';
 import { makeGraphqlRouter } from './graphql';
 import { runFixtures } from './fixtures';
 
-export interface ContainerParams {
+export interface AppParams {
   pgUrl: string
   development?: boolean;
 }
 
-export function createContainer(params: ContainerParams) {
+export function createApp(params: AppParams) {
   const db = knex({
     client: 'pg',
     connection: params.pgUrl,

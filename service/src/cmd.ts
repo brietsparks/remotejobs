@@ -1,6 +1,6 @@
 import { config as configureEnv } from 'dotenv';
 
-import { createContainer } from './container';
+import { createApp } from './app';
 
 configureEnv();
 const pgUrl = requireVar('PG_URL');
@@ -8,24 +8,24 @@ const port = getVar('PORT', '3001');
 const nodeEnv = getVar('NODE_ENV')
 const development = nodeEnv === 'development';
 
-const container = createContainer({
+const app = createApp({
   pgUrl,
   development
 });
 
 const action = process.argv[2];
 if (action === 'serve') {
-  container.server.listen(3001, () => {
+  app.server.listen(3001, () => {
     console.log(`listening on port ${port}`)
   })
 }
 
 if (action === 'db:up') {
-  container.db.migrate.up().then(process.exit);
+  app.db.migrate.up().then(process.exit);
 }
 
 if (action === 'db:down') {
-  container.db.migrate.down().then(process.exit);
+  app.db.migrate.down().then(process.exit);
 }
 
 
