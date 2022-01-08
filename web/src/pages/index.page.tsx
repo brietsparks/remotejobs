@@ -1,9 +1,9 @@
-import type { NextPage } from 'next'
+import JobsPage, { getServerSideProps } from './jobs/index.page';
 
-const Home: NextPage = () => {
+export default function LandingPage() {
   return (
-    <div/>
+    <JobsPage/>
   )
 }
 
-export default Home
+export { getServerSideProps };
