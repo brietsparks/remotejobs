@@ -1083,6 +1083,11 @@
     "@types/qs" "*"
     "@types/serve-static" "*"
 
+"@types/faker@^5.5.9":
+  version "5.5.9"
+  resolved "https://registry.yarnpkg.com/@types/faker/-/faker-5.5.9.tgz#588ede92186dc557bff8341d294335d50d255f0c"
+  integrity sha512-uCx6mP3UY5SIO14XlspxsGjgaemrxpssJI0Ol+GfhxtcKpv9pgRZYsS4eeKeHVLje6Qtc8lGszuBI461+gVZBA==
+
 "@types/fs-capacitor@*":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@types/fs-capacitor/-/fs-capacitor-2.0.0.tgz#17113e25817f584f58100fb7a08eed288b81956e"
@@ -2396,6 +2401,10 @@ extract-files@^9.0.0:
   version "9.0.0"
   resolved "https://registry.yarnpkg.com/extract-files/-/extract-files-9.0.0.tgz#8a7744f2437f81f5ed3250ed9f1550de902fe54a"
   integrity sha512-CvdFfHkC95B4bBBk36hcEmvdR2awOdhhVUYH6S/zrVj3477zven/fJMYg7121h4T1xHZC+tetUpubpAhxwI7hQ==
+
+"faker@https://github.com/withshepherd/faker.js.git":
+  version "5.5.4"
+  resolved "https://github.com/withshepherd/faker.js.git#5a9d4f05f235b0be98d42cf5daa12c6326c41d53"
 
 fast-glob@^3.1.1:
   version "3.2.7"

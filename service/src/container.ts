@@ -4,6 +4,7 @@ import express from 'express';
 import { getMigrationsDirectory } from './database';
 import { makeProviders } from './providers';
 import { makeGraphqlRouter } from './graphql';
+import { runFixtures } from './fixtures';
 
 export interface ContainerParams {
   pgUrl: string
@@ -28,8 +29,15 @@ export function createContainer(params: ContainerParams) {
   const graphqlRouter = makeGraphqlRouter({ providers });
   graphqlRouter.applyMiddleware({ app: server });
 
-  server.get('/health', (req, res) => {
-    res.status(200).json({ ok: 1 });
+  server
+    // just for demo purposes
+    .post('/fixtures', async (req, res) => {
+    try {
+      await runFixtures(db, providers);
+      res.status(200).json({ ok: 1 });
+    } catch (error) {
+      res.status(500).send();
+    }
   });
 
   return {

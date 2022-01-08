@@ -14,7 +14,7 @@ export function up(knex: Knex) {
       table.uuid('id').primary();
       table.timestamp('creation_timestamp').notNullable().defaultTo(knex.fn.now());
       table.uuid('organization_id').notNullable();
-      table.string('title').notNullable();
+      table.string('title', 100).notNullable();
       table.string('short_description').notNullable();
       table.text('long_description');
 
